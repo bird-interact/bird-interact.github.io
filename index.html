@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>BIRD-INTERACT</title>
+    <link rel="shortcut icon" href="./img/bird_interact.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap core CSS -->
+    <link href="./style/bootstrap.min.css" rel="stylesheet" />
+    <link href="./style/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="./style/all.css"
+      rel="stylesheet"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+    <!-- Lato Font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom styles for this template -->
+    <link href="./style/clean-blog.min.css" rel="stylesheet" />
+    <link href="./style/bird.css" rel="stylesheet" />
+    <style>
+      /* All fonts changed to Lato */
+      header.masthead .page-heading,
+      header.masthead .post-heading,
+      header.masthead .site-heading {
+        padding: 50px 0 75px;
+      }
+      
+      #main {
+        font-size: 14px;
+      }
+      
+      body {
+        font-family: 'Lato', sans-serif;
+      }
+      
+      #main h1,
+      #main h2,
+      #main h3,
+      #main h4,
+      #main h5,
+      #main h6 {
+        font-weight: 600;
+        margin: 5px 0;
+      }
+      
+      a {
+        color: #17a2b8;
+      }
+      
+      .list-group-item p {
+        margin: 5px 0;
+      }
+      
+      .card {
+        margin-bottom: 10px;
+      }
+      
+      .list-group {
+        margin-bottom: 10px;
+      }
+      
+      .card-header {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        font-size: 1.25rem;
+        background: #eee;
+      }
+      
+      .badge {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+      }
+      
+      code,
+      pre {
+        background: #eee;
+        padding: 1px 3px;
+      }
+      
+      .table td,
+      .table th {
+        padding: 0.42em;
+      }
+      
+      .table {
+        margin-top: 8px;
+      }
+      
+      .far,
+      .fas {
+        font-size: 18px;
+      }
+      
+      .affiliation {
+        font-style: italic;
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        font-size: 0.75rem;
+      }
+      
+      .paperlink {
+        font-size: 0.85em;
+        font-family: 'Lato', sans-serif;
+      }
+      
+      .crossed {
+        position: relative;
+        padding: 0.1rem;
+        overflow: hidden;
+      }
+      
+      .crossed:before,
+      .crossed:after {
+        position: absolute;
+        content: '';
+        background: #dc3545 !important;
+        display: block;
+        width: 20%;
+        height: 2px;
+        transform: rotate(-45deg);
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        border-radius: 1px;
+      }
+      
+      .crossed:after {
+        transform: rotate(45deg);
+      }
+      
+      .supfact {
+        color: #28a745;
+      }
+      
+      span.line {
+        display: inline-block;
+      }
+      
+      .data-paragraph,
+      .data-question,
+      .data-answer {
+        margin-bottom: 8px;
+        transition: height 0.2s;
+      }
+      
+      .data-paragraph .paragraph-title {
+        color: #888888;
+      }
+      
+      .data-paragraph .supfact {
+        background: #bbffcc;
+        border-radius: 3px;
+        color: inherit;
+        transition: background-color 0.2s;
+      }
+      
+      .data-paragraph .hide {
+        background: none !important;
+      }
+      
+      #bird-title {
+        color: #155E95;
+      }
+      
+      #logo-img {
+        display: inline;
+        max-height: 200px;
+        cursor: pointer;
+        transition: all 0.6s;
+      }
+      
+      #logo-img:hover {
+        transform: scale(1.4);
+      }
+      
+      #caption {
+        font-size: 20px;
+        font-family: 'Lato', sans-serif;
+      }
+      
+      #introduction {
+        font-size: 15px;
+        font-family: 'Lato', sans-serif;
+      }
+      
+      #paper {
+        background-color: #34314c;
+        border-color: #34314c;
+      }
+      
+      .column-img {
+        max-width: 100%;
+      }
+      
+      #illustration {
+        font-family: 'Lato', sans-serif;
+      }
+      
+      .dataset-btn {
+        background-color: #1F7872;
+        min-width: 50% !important;
+      }
+      
+      #citation {
+        font-size: 0.75em;
+        overflow: auto;
+        border: 1px solid #999;
+        margin: 0 4px;
+        padding: 8px;
+        border-radius: 2px;
+      }
+      
+      .flex-box {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 100%;
+        padding: 15px;
+      }
+      
+      .flex-box > div {
+        border-radius: 5px;
+        padding: 8px;
+      }
+      
+      #header-color {
+        background-color: #FFFBDE;
+      }
+      
+      #button-group {
+        width: 100%;
+      }
+      
+      .button-row {
+        width: 80%;
+        margin: 0 auto;
+        padding: 5px;
+      }
+      
+      /* Updated: removed width:100% to make the buttons narrower */
+      .btn-d {  
+        color: #fff;
+        font-weight: 400;
+        text-transform: none;
+        background-color: #615EFC;
+        border-radius: 50px; 
+      }
+      
+      .btn-d:hover {
+        background-color: #FF6969;
+      }
+      
+      .btn-b {
+        color: #fff;
+        font-weight: 400;
+        text-transform: none;
+        background-color: #1F7872;
+        border-radius: 50px;
+      }
+      
+      /* The row for train/dev is removed; .btn-round can remain if needed */
+      .btn-round {
+        height: auto;
+        transition: background-color 0.3s;
+      }
+      
+      .btn {
+        padding: 8px;
+      }
+      
+      [data-tooltip]:hover::after {
+        font-variant-caps: normal;
+        content: attr(data-tooltip);
+        position: absolute;
+        border: 1px solid black;
+        background: #eee;
+        padding: 0.25em;
+        border-radius: 2px;
+      }
+      
+      .table-wrapper {
+        display: block;
+        max-width: 100%;
+        padding: 0.5rem;
+      }
+      
+      /* Leaderboard table styling */
+      #ex-table {
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      /* Center all header and cell content */
+      #ex-table th, #ex-table td {
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      /* Custom cell classes */
+      .rank-cell {
+        font-weight: bold;
+        padding: 5px;
+        background: #f8f9fa;
+        border-radius: 4px;
+      }
+      /* Increase model cell width to 60% */
+      .model-cell {
+        width: 60%;
+      }
+      /* Smaller date-cell rectangle */
+      .date-cell {
+        font-size: 0.75em;
+        color: #ffffff;
+        background-color: #574964;
+        padding: 1px 4px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+
+      .leaderboard-stage-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+        gap: 15px;
+      }
+      
+      .overall-reward {
+        background-color: #e0e0e0;  /* 默认灰 */
+        color: #333;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+      }
+      
+      .overall-reward.active {
+        background-color: #574964; /* 高亮时才紫色 */
+        color: white;
+      }
+      
+      .stage-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .stage {
+        padding: 8px 15px;
+        border-radius: 20px;
+        background-color: #e0e0e0;
+        color: #333;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      
+      .stage.completed {
+        background-color: #574964;
+        color: white;
+      }
+      
+      /* 更明显的连接线 */
+      .connector {
+        width: 60px; /* 原来是 30px，可根据实际视觉再调 */
+        height: 4px;
+        background-color: #ccc;
+        margin: 0 5px;
+        transition: background-color 0.3s;
+      }
+
+      /* 激活阶段样式 */
+      .stage.active {
+        background-color: #574964 !important;
+        color: white !important;
+        font-weight: bold;
+      }
+
+      /* 激活连接线样式 */
+      .connector.active {
+        background-color: #574964 !important;
+      }
+
+      .connector.active {
+        background-color: #574964 !important;
+      }
+
+      /* 不要高亮 Overall 和 workflow 同时，分开逻辑处理 */
+      .overall-reward.active {
+        background-color: #574964;
+        color: white;
+      }
+
+      .stage-clickable {
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      .stage-clickable:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      }
+
+
+      #flash-table .model-cell {
+        width: auto;     
+        max-width: 30%;  
+      }
+
+
+      #ex-table th, #ex-table td, #flash-table th, #flash-table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 0.42em;
+      }
+
+
+      #flash-table th:nth-child(1), #flash-table td:nth-child(1) { width: 5%; }  /* Rank */
+      #flash-table th:nth-child(2), #flash-table td:nth-child(2) { width: 30%; } /* Model */
+      #flash-table th:nth-child(3), #flash-table td:nth-child(3) { width: 10%; } /* Pass Rate */
+      #flash-table th:nth-child(4), #flash-table td:nth-child(4) { width: 8%; }  /* Institute */
+      #flash-table th:nth-child(5), #flash-table td:nth-child(5) { width: 5%; }  /* Link */
+      #flash-table th:nth-child(6), #flash-table td:nth-child(6) { width: 12%; } /* Date */
+      #flash-table th:nth-child(7), #flash-table td:nth-child(7) { width: 10%; } /* Tier */
+
+      /* —— 给 a-table 也加上和 ex-table 一样的列宽、固定布局、居中对齐 —— */
+      #a-table th:nth-child(1), #a-table td:nth-child(1) { width: 5%; }   /* Rank */
+      #a-table th:nth-child(2), #a-table td:nth-child(2) { width: 30%; }  /* Model */
+      #a-table th:nth-child(3), #a-table td:nth-child(3) { width: 10%; }  /* Pass Rate 或 Reward */
+      #a-table th:nth-child(4), #a-table td:nth-child(4) { width: 8%; }   /* Institute */
+      #a-table th:nth-child(5), #a-table td:nth-child(5) { width: 5%; }   /* Link */
+      #a-table th:nth-child(6), #a-table td:nth-child(6) { width: 12%; }  /* Date */
+      #a-table th:nth-child(7), #a-table td:nth-child(7) { width: 10%; }  /* Tier */
+
+      #a-table {
+        width: 100%;
+        table-layout: fixed;
+      }
+
+      /* 还要让 a-table 的单元格也居中 */
+      #a-table th, #a-table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 0.42em;
+      }
+
+      #ex-table th:nth-child(1), #ex-table td:nth-child(1) { width: 5%; }  /* Rank */
+      #ex-table th:nth-child(2), #ex-table td:nth-child(2) { width: 30%; } /* Model */
+      #ex-table th:nth-child(3), #ex-table td:nth-child(3) { width: 10%; } /* Pass Rate */
+      #ex-table th:nth-child(4), #ex-table td:nth-child(4) { width: 8%; }  /* Institute */
+      #ex-table th:nth-child(5), #ex-table td:nth-child(5) { width: 5%; }  /* Link */
+      #ex-table th:nth-child(6), #ex-table td:nth-child(6) { width: 12%; } /* Date */
+      #ex-table th:nth-child(7), #ex-table td:nth-child(7) { width: 10%; } /* Tier */
+
+
+      #ex-table, #flash-table {
+        width: 100%;
+        table-layout: fixed; 
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="masthead" id="header-color">
+      <!-- Make this top bar container fluid to stretch full-width -->
+      <div class="container-fluid" style="background-color: #FFFDF6; text-align: left">
+        <img style="margin-top: 5px; padding: 15px" height="70px" src="./logo/bird_fig_main.png" />
+        <img style="margin-top: 5px; padding: 15px" height="70px" src="./logo/google_cloud.png" />
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-md-12 mx-auto">
+            <div class="row site-heading flex-box">
+              <div class="col-lg-3">
+                <img id="logo-img" src="logo/bird_interact.png" alt="logo" />
+              </div>
+              <div class="col-lg-9">
+                <div class="align-middle">
+                  <h1 id="bird-title">BIRD-INTERACT</h1>
+                  <span class="subheading" id="caption">
+                    Re-imagining Text-to-SQL Evaluation via Lens of Dynamic Interactions
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Content (max-width set to 1400px) -->
+    <div class="container" id="main" style="max-width: 1400px;">
+      <div class="row" style="display: flex; gap: 1rem;">
+        <!-- Left column at 35% -->
+        <div style="flex: 0 0 35%; max-width: 35%;">
+          <div class="list-group">
+            <div class="list-group-item" id="introduction">
+              <h4>Hi! BIRD-INTERACT</h4>
+              <img src="https://badges.toozhao.com/badges/01HFXP6JKNBG5AW3Y5B95DK568/blue.svg" />
+              <p>
+                We feel grateful to see <a href="https://bird-bench.github.io/" style="color:#155E95; text-decoration: none;"><strong>BIRD-SQL 2023</strong></a> can bring insights and contributions to Text-to-SQL community in LLM era with supervision of DB & DM experts.
+                We also sincerely thank all feedbacks from the community! Our work has been featured by <a href="https://deepmind.google/technologies/gemini/" style="color:#155E95; text-decoration: none;"><strong>DeepMind</strong></a > and <a href="https://openai.com/index/gpt-4o-fine-tuning/" style="color:#155E95; text-decoration: none;"><strong>OpenAI</strong></a ><br /><br /> 
+                This year, along with collaboration with <strong style="color:#155E95">G</strong><strong style="color:#D84040">o</strong><strong style="color:#DDA853">o</strong><strong style="color:#155E95">g</strong><strong style="color:#578E7E">l</strong><strong style="color:#D84040">e</strong> Cloud, we are launching <strong style="color:#EB5A3C">BIRD-SQL 2025</strong>, which will cover a wide range of professional DBs and their knowledge in the wild applications.<br /><br />
+                BIRD-INTERACT, an interactive text-to-SQL benchmark, <strong>re-imagines Text-to-SQL evaluation via lens of dynamic interactions</strong>.
+                The environment blends a hierarchical knowledge base, database documentation and a function-driven user simulator to recreate authentic enterprise environments across full <strong>CRUD</strong> operations.
+                It offers two rigorous test modes: (1) passive <strong>Conversational Interaction</strong> and (2) active <strong>Agentic Interaction</strong>, spanning 600 annotated BI and management tasks, each guarded by executable test cases.
+                Typical evaluations trigger 1,968-5,496 interaction turns between model and user simulator, while state-of-the-art reasoning models currently solve only <strong style="color:#F97A00">≈24%</strong> of tasks, underscoring the benchmark's challenge.
+                Together, these features position Bird-Interact as a decisive yardstick for advancing interactive, production-ready database assistants. The two test modes supported by Bird-Interact covering most interactions in real-world applications:
+                <!-- Custom list with image bullets and indentation -->
+                <ul style="list-style: none; padding-left: 20px; margin-left: 0;">
+                  <li style="margin-bottom: 8px;">
+                    <span style="display: inline-block; margin-left: 12px;">
+                      <img src="./img/mic_logo.png" style="height: 16px; vertical-align: middle; margin-right: 8px;" />
+                      <strong>c-Interact:</strong> Conversational Interaction which is a passive mode and the workflow is fixed.
+                    </span>
+                  </li>
+                  <li style="margin-bottom: 16px;">
+                    <span style="display: inline-block; margin-left: 12px;">
+                      <img src="./img/mic_logo.png" style="height: 16px; vertical-align: middle; margin-right: 8px;" />
+                      <strong>a-Interact:</strong> Agentic Interaction which is an embodied active mode where the workflow is dynamic and led by models.
+                    </span>
+                  </li>
+                </ul>
+
+                <p>There are two versions of Bird-Interact dataset:</p>
+
+                <ul style="list-style: none; padding-left: 20px; margin-left: 0;">
+                  <li style="margin-bottom: 8px;">
+                    <span style="display: inline-block; margin-left: 12px;">
+                      <img src="./img/mic_logo.png" style="height: 16px; vertical-align: middle; margin-right: 8px;" />
+                      <strong>bird-interact-lite-exp:</strong> A lite version containing <span style="color: #155E95; font-weight: bold;">270</span> tasks specifically for PostgreSQL. This is a good starting point for quick experimentation.
+                    </span>
+                  </li>
+                  <li>
+                    <span style="display: inline-block; margin-left: 12px;">
+                      <img src="./img/mic_logo.png" style="height: 16px; vertical-align: middle; margin-right: 8px;" />
+                      <strong>bird-interact-full:</strong> The full version of Bird-Interact, comprising <span style="color: #155E95; font-weight: bold;">600</span> tasks specifically for PostgreSQL.
+                    </span>
+                  </li>
+                </ul>
+              <div id="button-group">
+                <!-- Only keep the Mini-Dev (500) button -->
+                <div class="button-row">
+                  <a href="" target="_blank">
+                    <button type="button" class="btn btn-d">Paper</button>
+                  </a>
+                </div>
+                <!-- Removed Train/Dev buttons -->
+              </div>
+              <div id="button-group">
+                <!-- Only keep the Mini-Dev (500) button -->
+                <div class="button-row">
+                  <a href="https://huggingface.co/datasets/birdsql/bird-interact-private" target="_blank">
+                    <button type="button" class="btn btn-d">Bird-Interact Lite</button>
+                  </a>
+                </div>
+                <!-- Removed Train/Dev buttons -->
+              </div>
+              <div id="button-group">
+                <!-- Only keep the Mini-Dev (500) button -->
+                <div class="button-row">
+                  <a href="https://huggingface.co/datasets/birdsql/bird-interact-open" target="_blank">
+                    <button type="button" class="btn btn-d">Bird-Interact Open</button>
+                  </a>
+                </div>
+                <!-- Removed Train/Dev buttons -->
+              </div>
+              <div id="button-group">
+                <!-- Only keep the Mini-Dev (500) button -->
+                <div class="button-row">
+                  <a href="https://github.com/bird-bench/BIRD-Interact" target="_blank">
+                    <button type="button" class="btn btn-d">Code</button>
+                  </a>
+                </div>
+                <!-- Removed Train/Dev buttons -->
+              </div>
+            </div>
+            <div class="list-group-item" id="news">
+              <h4>News</h4>
+              <div class="scroll-container">
+                <div class="card card-outline-secondary mb-4" style="text-align: left">
+                  <div class="card-body" style="background-color: #f1f6f9">
+                    <ul style="padding-left: 0">
+                      <li style="list-style-type: none">
+                        <span style="background-color: #B03052; color: white; padding: 2px 4px; border-radius: 5px;">
+                          <strong style="color: #ffe7ce">May. 23, 2025:</strong>
+                        </span>
+                        We have released bird-interact-lite-exp (270 tasks). Check out the data in <a href="https://huggingface.co/datasets/birdsql/bird-interact-private" target="_blank" style="color:#155E95; text-decoration: none;">Hugging Face</a> and the newest code in <a href="https://github.com/bird-bench/BIRD-Interact/tree/main" target="_blank" style="color:#155E95; text-decoration: none;">GitHub</a>. The full set of PostgreSQL will be released later. Have fun! Thanks!
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- LiveSQLBench Notice (under News) -->
+            <div class="list-group-item" id="livesqlbench">
+              <h4>LiveSQLBench Support</h4>
+              <p>
+                BIRD-Interact is built on <a href="https://livesqlbench.ai/" target="_blank"><strong>LiveSQLBench</strong></a>, so all databases and tasks are live and continuously updated. LiveSQLBench (BIRD-SQL Pro v0.5) is a contamination-free, evolving benchmark for evaluating LLMs on real-world text-to-SQL tasks.
+              </p>
+            </div>
+            <div class="list-group-item">
+              <h4>GT SQLs & Test Cases</h4>
+              <p>
+                To mititgate data leakage, please free to email <code>bird.bench25@gmail.com</code> for solution SQLs and test cases.
+                The delivery is quite fast.
+              </p>
+            </div>
+            <div class="list-group-item" id="illustration">
+              <!-- 插入文字描述区域 -->
+              <div style="margin-top: 12px; font-size: 14px; color: #000; font-weight: bold; text-align: left;">
+                <p>
+                  <img src="./img/user_icon.png" alt="user" style="height: 18px; vertical-align: middle; margin: 0 4px;" /> represents the <strong>user simulator</strong>,
+                  and <img src="./img/system_icon.png" alt="system" style="height: 18px; vertical-align: middle; margin: 0 4px;" /> represents the <strong>system evaluated model</strong>. <span style="background-color: #ffff99;"><strong>Highlighted text</strong></span> shows the ambiguity related to the hierarchical knowledge base (HKB).
+                </p>
+              </div>
+              <!-- c-Interact Example -->
+              <h4>c-Interact Example</h4>
+              <video
+                src="./video/case_study.mp4"
+                class="column-img"
+                id="c-example"
+                style="margin: 0 auto"
+                controls
+                autoplay
+                muted
+                loop
+              ></video>
+
+              <!-- a-Interact Example --> 
+              <h4 style="margin-top: 20px;">a-Interact Example</h4>
+              <video
+                src="./video/case_study_a.mp4"
+                class="column-img"
+                id="a-example"
+                style="margin: 0 auto"
+                controls
+                autoplay
+                muted
+                loop
+              ></video>
+            
+            </div>
+            <div class="list-group-item">
+              <h4>Submission</h4>
+              <p>
+                Coming soon! BIRD 2025 will accept a more flexible submission pipelines, please contact <code>bird.bench25@gmail.com</code> with the tag <strong style="color:#CB0404">[bird-interact]</strong> in title, if you have any questions.
+              </p>
+              <div class="button-row">
+                <a href="https://docs.google.com/document/d/1mixk6PCX0hm3Mmes5qtRpAAT477xOEgFZPbtEw6Mfk/edit?usp=sharing" target="_blank">
+                  <button type="button" class="btn btn-d" style="border-radius: 25px;">Submission Guidelines</button>
+                </a>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <h4>Subscribe to BIRD Update</h4>
+              <p>
+                Bird is a long-term research project aimed at bridging the gap between semantic parsing models and the success of database applications. To receive the latest updates of the dataset, you can leave your email address.
+              </p>
+              <form onsubmit="return submitForm();">
+                <input type="email" id="email" name="email" placeholder="Email address" required />
+                <button type="submit">Subscribe</button>
+              </form>
+              <p id="message"></p>
+            </div>
+            <head>
+              <meta charset="utf-8" />
+              <title>Email Subscription</title>
+              <script>
+                function submitForm() {
+                  var email = document.getElementById("email").value;
+                  var url = "https://script.google.com/macros/s/AKfycbynv6Ibnl9gJosprkRmXhbKtllZX8dqrbj_xQkcbZ_NgEDBxwyjz1xyvIvnm_4yPh3ZPA/exec";
+                  var data = "email=" + encodeURIComponent(email);
+
+                  fetch(url, {
+                    method: "POST",
+                    body: data,
+                    headers: {
+                      "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                  })
+                  .then((response) => response.text())
+                  .then((text) => {
+                    document.getElementById("message").innerHTML = "<i>Subscribe Successfully! Thanks for your attention!</i>";
+                  })
+                  .catch((error) => {
+                    console.error("Error:", error);
+                  });
+
+                  return false;
+                }
+              </script>
+            </head>
+            <div class="list-group-item">
+              <h4>Citation</h4>
+              <pre id="citation_1">
+@misc{birdinteract2025,
+  author       = {BIRD Team},
+  title        = {BIRD-Interact: Re-imagine Text-to-SQL Evaluation via Lens of Dynamic Interactions},
+  year         = {2025},
+  howpublished = {https://github.com/bird-bench/BIRD-Interact},
+  note         = {Accessed: 2025-06-01}
+}
+              </pre>
+              <pre id="citation_2">
+@article{li2024can,
+  title={Can llm already serve as a database interface? a big bench for large-scale database grounded text-to-sqls},
+  author={Li, Jinyang and Hui, Binyuan and Qu, Ge and Yang, Jiaxi and Li, Binhua and Li, Bowen and Wang, Bailin and Qin, Bowen and Geng, Ruiying and Huo, Nan and others},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  year={2024}
+}
+              </pre>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right column with leaderboards -->
+        <div style="flex: 1;">
+          <!-- c-Interact Leaderboard -->
+          <div class="card card-outline-secondary mb-4" id="c-leaderboard">
+            <div class="card-header">
+              <span style="font-family: 'Dancing Script', cursive; font-size: 1.4em;">c</span> - Interact Leaderboard
+            </div>
+            <!-- SQL Dialect Filter Tags - INTERACTIVE BUTTONS -->
+            <div class="leaderboard-stage-container">
+              <!-- 独立总览指标 -->
+              <div class="overall-reward stage-clickable" data-dialect="Reward*">📊 Overall-Reward*</div>
+              
+              <!-- 阶段进度条 -->
+              <div class="stage-progress">
+                <div class="stage stage-clickable" data-dialect="Phase1-amb">Phase-1</div>
+                <div class="connector"></div>
+                <div class="stage stage-clickable" data-dialect="Phase1-debug">Phase-1-Debug</div>
+                <div class="connector"></div>
+                <div class="stage stage-clickable" data-dialect="Phase2-FU">Phase-2</div>
+                <div class="connector"></div>
+                <div class="stage stage-clickable" data-dialect="Phase2-debug">Phase-2-Debug</div>
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table id="ex-table" class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Pass Rate (%)</th>
+                        <th scope="col">Institute</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Tier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <!-- JS 会自动填充 -->
+                </tbody>
+              </table>
+              
+              <p>
+                <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
+                <li><strong>Phase-1 pass rate (PR)</strong> means the pass rate of ambiguity resolution phase.</li>
+                <li><strong>Phase-1-Debug PR</strong> means the pass rate of the ambiguity resolution phase with the chance of debugging.</li>
+                <li><strong>Phase-2 PR</strong> means the pass rate of both phase 1 and the follow up question phase.</li>
+                <li><strong>Phase-2-Debug PR</strong> means pass rate of both phase 1 and follow up question phase with the chance of debugging.</li>
+              </p>
+              <strong>Tier Classification (By Ranking):</strong>
+              <ul>
+                <li>🏆 Excellent Chat: The Best!</li>
+                <li>💎 Good Chat: Top 30%</li>
+                <li>🌟 Standard: Top 60%</li>
+                <li>⚪ Basic: Bottom 40%</li>
+              </ul>
+              <p><strong>🧑‍💻 User Simulator:</strong> Gemini-2.0-flash</p>
+            </div>
+          </div>
+
+          <!-- a-Interact Leaderboard -->
+          <div class="card card-outline-secondary mb-4" id="a-leaderboard">
+            <div class="card-header">
+              <span style="font-family: 'Dancing Script', cursive; font-size: 1.4em;">a</span> - Interact Leaderboard
+            </div>
+            <!-- 分表按钮 -->
+            <div class="leaderboard-stage-container">
+              <div class="overall-reward stage-clickable" data-dialect="a-Reward*">📊 Overall-Reward*</div>
+              <div class="stage-progress">
+                <div class="stage stage-clickable" data-dialect="a-Phase1">Phase 1</div>
+                <div class="connector"></div>
+                <div class="stage stage-clickable" data-dialect="a-Phase2">Phase 2</div>
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table id="a-table" class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Rank</th>
+                    <th>Model</th>
+                    <th id="a-metric-header">Reward*</th>
+                    <th>Institute</th>
+                    <th>Link</th>
+                    <th>Date</th>
+                    <th>Tier</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- JS 会自动填充 -->
+                </tbody>
+              </table>
+              
+              <p>
+                <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
+                <li><strong>Phase-1 pass rate</strong> means the pass rate of ambiguity resolution phase.</li>
+                <li><strong>Phase-2 pass rate</strong> means the pass rate of both phase 1 and the follow up question phase.</li>
+              </p>
+              <strong>Tier Classification (By Ranking):</strong>
+              <ul>
+                <li>🏆 Excellent Interaction: The Best!</li>
+                <li>💎 Good Interaction: Top 30%</li>
+                <li>🌟 Standard: Top 60%</li>
+                <li>⚪ Basic: Bottom 40%</li>
+              </ul>
+              <p><strong>🧑‍💻 User Simulator:</strong> Gemini-2.0-flash</p>
+            </div>
+        </div><!-- /.row -->
+        <!-- Updated Interaction-Time Scaling (ITS) Section -->
+        <div class="card card-outline-secondary mb-4">
+          <div class="card-header">Interaction-Time Scaling (ITS)</div>
+          <div class="card-body text-center">
+            <p style="font-size: 14px; color: #000; text-align: left; font-weight: bold; max-width: 800px; margin: 0 auto 15px;">
+              Interaction-Time Scaling (ITS) refers to a model’s ability to continuously increase its end performance through multi-turn interactions. When this interactive performance surpasses the model’s idealized one-shot performance on a fully specified, unambiguous task, we say it satisfies a scaling law. As user patience grows and interaction turns accumulate, performance keeps improving, demonstrating that the model can sustain effective communication over extended dialogue.
+            </p>
+            <img src="./img/interaction_scaling_law.png" alt="Interaction Scaling Law" class="img-fluid" style="max-width: 100%; height: auto;" />
+          </div>
+        </div>
+      </div>
+      
+      <hr />
+      
+      <!-- Bootstrap core JavaScript -->
+      <script src="./js/jquery.min.js"></script>
+      <script src="./js/bootstrap.bundle.min.js"></script>
+      
+      <!-- Custom scripts for this template -->
+      <script src="./js/clean-blog.min.js"></script>
+      
+      <!-- 改动后的 Leaderboard 逻辑脚本 -->
+      <script>
+        // mock 数据：c-Interact
+        const leaderboardData = {
+          'Reward*': [
+            { rank: 1, model: "o3-mini", passRate: "33.04", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
+            { rank: 2, model: "GPT-4o", passRate: "30.33", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
+            { rank: 3, model: "Gemini-2.0-flash", passRate: "27.41", institute: "google", date: "2025-04-20", tier: "💎 Good Chat" },
+            { rank: 4, model: "Claude-3.7-sonnet", passRate: "26.60", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 5, model: "DeepSeek-R1", passRate: "21.74", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 6, model: "Qwen3", passRate: "20.33", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+            { rank: 7, model: "DeepSeek V3", passRate: "15.85", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+          ],
+          'Phase1-amb': [
+            { rank: 1, model: "o3-mini", passRate: "35.19", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
+            { rank: 2, model: "Claude-3.7-sonnet", passRate: "29.63", institute: "anthropic", date: "2025-04-20", tier: "💎 Good Chat" },
+            { rank: 3, model: "GPT-4o", passRate: "29.63", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
+            { rank: 4, model: "Gemini-2.0-flash", passRate: "27.78", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 5, model: "DeepSeek-R1", passRate: "21.48", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 6, model: "Qwen3", passRate: "21.48", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+            { rank: 7, model: "DeepSeek V3", passRate: "15.56", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+          ],
+          'Phase1-debug': [
+            { rank: 1, model: "o3-mini", passRate: "37.41", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+            { rank: 2, model: "GPT-4o", passRate: "36.67", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+            { rank: 3, model: "Claude-3.7-sonnet", passRate: "32.59", institute: "anthropic", date: "2025-04-20", tier: "💎 Good" },
+            { rank: 4, model: "Gemini-2.0-flash", passRate: "32.22", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 5, model: "DeepSeek-R1", passRate: "25.93", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 6, model: "Qwen3", passRate: "24.07", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+            { rank: 7, model: "DeepSeek V3", passRate: "19.26", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+          ],
+          'Phase2-FU': [
+            { rank: 1, model: "o3-mini", passRate: "24.07", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+            { rank: 2, model: "GPT-4o", passRate: "19.26", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+            { rank: 3, model: "Gemini-2.0-flash", passRate: "18.15", institute: "google", date: "2025-04-20", tier: "💎 Good" },
+            { rank: 4, model: "DeepSeek V3", passRate: "12.96", institute: "deepseek", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 5, model: "Claude-3.7-sonnet", passRate: "11.85", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 6, model: "Qwen3", passRate: "11.85", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+            { rank: 7, model: "DeepSeek-R1", passRate: "9.63", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" }
+          ],
+          'Phase2-debug': [
+            { rank: 1, model: "o3-mini", passRate: "24.44", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+            { rank: 2, model: "GPT-4o", passRate: "20.74", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+            { rank: 3, model: "Gemini-2.0-flash", passRate: "19.63", institute: "google", date: "2025-04-20", tier: "💎 Good" },
+            { rank: 4, model: "Claude-3.7-sonnet", passRate: "15.93", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 5, model: "DeepSeek-R1", passRate: "15.93", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 6, model: "Qwen3", passRate: "14.07", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+            { rank: 7, model: "DeepSeek V3", passRate: "10.74", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+          ]
+        };
+
+        const aLeaderboardData = {
+          // —— 更新后：按 “Reward*” 从高到低排序 —— 
+          'a-Reward*': [
+            { rank: 1, model: "Claude-3.7-sonnet", passRate: "29.19", institute: "anthropic",        date: "2025-04-20", tier: "🏆 Excellent Interaction"   },
+            { rank: 2, model: "o3-mini",             passRate: "21.07", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction"  },
+            { rank: 3, model: "DeepSeek V3",         passRate: "19.19", institute: "deepseek",          date: "2025-04-20", tier: "💎 Good Interaction" },
+            { rank: 4, model: "Qwen3",               passRate: "18.74", institute: "qwen",              date: "2025-04-20", tier: "🌟 Standard"    },
+            { rank: 5, model: "GPT-4o",              passRate: "18.37", institute: "openai",            date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 6, model: "Gemini-2.0-flash",    passRate: "17.26", institute: "google",            date: "2025-04-20", tier: "⚪ Basic"    },
+            { rank: 7, model: "DeepSeek R1",         passRate: "17.07", institute: "deepseek-reason",  date: "2025-04-20", tier: "⚪ Basic"    }
+          ],
+        
+          // —— 更新后：按 “Phase1” 从高到低排序 —— 
+          'a-Phase1': [
+            { rank: 1, model: "Claude-3.7-sonnet", passRate: "34.07", institute: "anthropic",        date: "2025-04-20", tier: "🏆 Excellent Interaction"   },
+            { rank: 2, model: "o3-mini",             passRate: "25.19", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction"  },
+            { rank: 3, model: "DeepSeek V3",         passRate: "22.96", institute: "deepseek",          date: "2025-04-20", tier: "💎 Good Interaction" },
+            { rank: 4, model: "GPT-4o",              passRate: "22.59", institute: "openai",            date: "2025-04-20", tier: "🌟 Standard"    },
+            { rank: 5, model: "Qwen3",               passRate: "20.74", institute: "qwen",              date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 6, model: "Gemini-2.0-flash",    passRate: "20.37", institute: "google",            date: "2025-04-20", tier: "⚪ Basic"    },
+            { rank: 7, model: "DeepSeek R1",         passRate: "19.63", institute: "deepseek-reason",  date: "2025-04-20", tier: "⚪ Basic"    }
+          ],
+        
+          // —— 更新后：按 “Phase2” 从高到低排序 —— 
+          'a-Phase2': [
+            { rank: 1, model: "Claude-3.7-sonnet", passRate: "17.78", institute: "anthropic",        date: "2025-04-20", tier: "🏆 Excellent Interaction"   },
+            { rank: 2, model: "Qwen3",               passRate: "14.07", institute: "qwen",              date: "2025-04-20", tier: "💎 Good Interaction"  },
+            { rank: 3, model: "o3-mini",             passRate: "11.48", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
+            { rank: 4, model: "DeepSeek R1",         passRate: "11.11", institute: "deepseek-reason",  date: "2025-04-20", tier: "🌟 Standard"    },
+            { rank: 5, model: "DeepSeek V3",         passRate: "10.37", institute: "deepseek",          date: "2025-04-20", tier: "🌟 Standard" },
+            { rank: 6, model: "Gemini-2.0-flash",    passRate: "10.00", institute: "google",            date: "2025-04-20", tier: "⚪ Basic"    },
+            { rank: 7, model: "GPT-4o",              passRate: "8.52",  institute: "openai",            date: "2025-04-20", tier: "⚪ Basic"    }
+          ]
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+          // ==========================
+          // 1) c-Interact 部分
+          // ==========================
+          {
+            const cContainer = document.querySelector('#c-leaderboard');
+            const cStageButtons = cContainer.querySelectorAll('.stage-clickable');
+            const cTbody   = cContainer.querySelector('#ex-table tbody');
+            const cHeaders = cContainer.querySelectorAll('#ex-table thead th');
+
+            let cActiveFilter = 'Reward*';
+            updateCLeaderboardTable(cActiveFilter);
+            updateCStageHighlight(cActiveFilter);
+
+            cStageButtons.forEach(btn => {
+              btn.addEventListener('click', function () {
+                cActiveFilter = this.getAttribute('data-dialect');
+                updateCLeaderboardTable(cActiveFilter);
+                updateCStageHighlight(cActiveFilter);
+              });
+            });
+
+            function updateCStageHighlight(dialect) {
+              const stageOrder = ['Phase1-amb','Phase1-debug','Phase2-FU','Phase2-debug'];
+              const overallBtn = cContainer.querySelector('.overall-reward');
+              const allStages  = cContainer.querySelectorAll('.stage-clickable.stage');
+              const connectors = cContainer.querySelectorAll('.connector');
+
+              overallBtn.classList.remove('active');
+              allStages.forEach(el => el.classList.remove('active'));
+              connectors.forEach(c => c.classList.remove('active'));
+
+              if (dialect === 'Reward*') {
+                overallBtn.classList.add('active');
+              } else {
+                const idx = stageOrder.indexOf(dialect);
+                if (idx !== -1) {
+                  allStages.forEach(el => {
+                    const d = el.getAttribute('data-dialect');
+                    if (stageOrder.indexOf(d) <= idx) {
+                      el.classList.add('active');
+                    }
+                  });
+                  connectors.forEach((line,i) => {
+                    if (i < idx) line.classList.add('active');
+                  });
+                }
+              }
+            }
+
+            function updateCLeaderboardTable(dialect) {
+              if (dialect === 'Reward*') {
+                cHeaders[2].textContent = 'Reward*';
+              } else {
+                cHeaders[2].textContent = 'Pass Rate (%)';
+              }
+              cTbody.innerHTML = '';
+              const data = leaderboardData[dialect] || [];
+              data.forEach(entry => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td class="rank-cell">${entry.rank}</td>
+                  <td class="model-cell">${entry.model}</td>
+                  <td>${entry.passRate}</td>
+                  <td>
+                    <img src="./img/institute_img/${entry.institute}.png"
+                         alt="${entry.institute}"
+                         style="max-height:20px;vertical-align:middle;" />
+                  </td>
+                  <td></td>
+                  <td><span class="date-cell">${entry.date}</span></td>
+                  <td>${entry.tier}</td>
+                `;
+                cTbody.appendChild(tr);
+              });
+            }
+          }
+
+          // ==========================
+          // 2) a-Interact 部分
+          // ==========================
+          {
+            const aContainer    = document.querySelector('#a-leaderboard');
+            const aStageButtons = aContainer.querySelectorAll('.stage-clickable');
+            const aTbody        = aContainer.querySelector('#a-table tbody');
+            const aHeader       = aContainer.querySelector('#a-metric-header');
+
+            let aActiveFilter = 'a-Reward*';
+            updateALeaderboardTable(aActiveFilter);
+            updateAStageHighlight(aActiveFilter);
+
+            aStageButtons.forEach(btn => {
+              btn.addEventListener('click', function () {
+                aActiveFilter = this.getAttribute('data-dialect');
+                updateALeaderboardTable(aActiveFilter);
+                updateAStageHighlight(aActiveFilter);
+              });
+            });
+
+            function updateAStageHighlight(dialect) {
+              const simpleOrder = ['a-Phase1','a-Phase2'];
+              const overallBtn  = aContainer.querySelector('.overall-reward');
+              const allStages   = aContainer.querySelectorAll('.stage-clickable.stage');
+              const connectors  = aContainer.querySelectorAll('.connector');
+
+              overallBtn.classList.remove('active');
+              allStages.forEach(el => el.classList.remove('active'));
+              connectors.forEach(c => c.classList.remove('active'));
+
+              if (dialect === 'a-Reward*') {
+                overallBtn.classList.add('active');
+              } else {
+                const idx = simpleOrder.indexOf(dialect);
+                if (idx !== -1) {
+                  allStages.forEach(el => {
+                    const d = el.getAttribute('data-dialect');
+                    if (simpleOrder.indexOf(d) <= idx) {
+                      el.classList.add('active');
+                    }
+                  });
+                  connectors.forEach((line,i) => {
+                    if (i < idx) line.classList.add('active');
+                  });
+                }
+              }
+            }
+
+            function updateALeaderboardTable(dialect) {
+              if (dialect === 'a-Reward*') {
+                aHeader.textContent = 'Reward*';
+              } else {
+                aHeader.textContent = 'Pass Rate (%)';
+              }
+              aTbody.innerHTML = '';
+              const data = aLeaderboardData[dialect] || [];
+              data.forEach(entry => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td class="rank-cell">${entry.rank}</td>
+                  <td class="model-cell">${entry.model}</td>
+                  <td>${entry.passRate}</td>
+                  <td>
+                    <img src="./img/institute_img/${entry.institute}.png"
+                         alt="${entry.institute}"
+                         style="max-height:20px;vertical-align:middle;" />
+                  </td>
+                  <td></td>
+                  <td><span class="date-cell">${entry.date}</span></td>
+                  <td>${entry.tier}</td>
+                `;
+                aTbody.appendChild(tr);
+              });
+            }
+          }
+        });
+      </script>
+    </div><!-- /.container -->
+  </body>
+</html>

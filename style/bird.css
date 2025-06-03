@@ -1,0 +1,451 @@
+header.masthead .page-heading,
+header.masthead .post-heading,
+header.masthead .site-heading {
+    padding: 50px 0 75px;
+}
+
+#main {
+    font-size: 14px;
+    padding: 0 15px;
+}
+
+/* Adjust column widths for better layout */
+@media (min-width: 992px) {
+    .col-lg-4 {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+    .col-lg-8 {
+        flex: 0 0 70%;
+        max-width: 70%;
+    }
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#main h1,
+#main h2,
+#main h3,
+#main h4,
+#main h5,
+#main h6 {
+    font-weight: 600;
+    margin: 5px 0;
+}
+
+a {
+    color: #17a2b8;
+}
+
+.list-group-item p {
+    margin: 5px 0;
+}
+
+.card {
+    margin-bottom: 10px;
+}
+
+.list-group {
+    margin-bottom: 10px;
+}
+
+.card-header {
+    font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+    font-size: 1.25rem;
+    background: #eee;
+}
+
+.badge {
+    font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+}
+
+code,
+pre {
+    background: #eee;
+    padding: 1px 3px;
+}
+
+.table td,
+.table th {
+    padding: .75rem;
+}
+
+.table {
+    margin-top: 8px;
+    width: 100%;
+}
+
+/* Add these styles to your existing CSS within the <style> tag */
+
+/* Column width controls */
+#ex-table th:nth-child(1), /* Rank column */
+#ex-table td:nth-child(1) {
+    width: 5%;
+}
+
+#ex-table th:nth-child(2), /* Model column */
+#ex-table td:nth-child(2) {
+    width: 40%;
+}
+
+#ex-table th:nth-child(3), /* Pass Rate column */
+#ex-table td:nth-child(3) {
+    width: 15%;
+}
+
+#ex-table th:nth-child(4), /* Institute column */
+#ex-table td:nth-child(4) {
+    width: 10%;
+}
+
+#ex-table th:nth-child(5), /* Link column */
+#ex-table td:nth-child(5) {
+    width: 5%;
+}
+
+#ex-table th:nth-child(6), /* Date column */
+#ex-table td:nth-child(6) {
+    width: 10%;
+}
+
+#ex-table th:nth-child(7), /* Tier column */
+#ex-table td:nth-child(7) {
+    width: 20%;
+}
+
+/* Alternatively, you can use classes */
+.rank-column {
+    width: 5%;
+}
+.model-column {
+    width: 30%;
+}
+.pass-rate-column {
+    width: 10%;
+}
+.institute-column {
+    width: 25%;
+}
+.link-column {
+    width: 5%;
+}
+.date-column {
+    width: 10%;
+}
+.tier-column {
+    width: 15%;
+}
+
+.far,
+.fas {
+    font-size: 18px;
+}
+
+.affiliation {
+    font-style: italic;
+    font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+    font-size: .75rem;
+}
+
+.paperlink {
+    font-size: .85em;
+}
+
+.crossed {
+    position: relative;
+    padding: .1rem;
+    overflow: hidden;
+}
+
+.crossed:before,
+.crossed:after {
+    position: absolute;
+    content: '';
+    background: #dc3545 !important;
+    display: block;
+    width: 20%;
+    height: 2px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 1px;
+}
+
+.crossed:after {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.supfact {
+    color: #28a745
+}
+
+span.line {
+    display: inline-block;
+}
+
+.data-paragraph,
+.data-question,
+.data-answer {
+    margin-bottom: 8px;
+    transition: height .2s;
+}
+
+.data-paragraph .paragraph-title {
+    color: #888888;
+}
+
+.data-paragraph .supfact {
+    background: #bbffcc;
+    border-radius: 3px;
+    color: inherit;
+    transition: background-color .2s;
+}
+
+.data-paragraph .hide {
+    background: none !important;
+}
+
+#bird-title {
+    color: #2E5077
+}
+
+::selection {
+    background-color: #37AFE1; /* 选中文字的背景色 */
+    color: #ffffff;           /* 选中文字的前景（文字）颜色 */
+}
+
+#logo-img {
+    display: inline;
+    max-height: 200px;
+    cursor: pointer;
+    transition: all 0.6s;
+}
+
+#logo-img:hover {
+    transform: scale(1.4);
+}
+
+#caption {
+    font-size: 20px;
+    font-family: Helvetica, sans-serif;
+    color: #074799;
+}
+
+#introduction {
+    font-size: 15px;
+    font-family: sans-serif;
+}
+
+#paper {
+    background-color: #34314c;
+    border-color: #34314c;
+}
+
+.column-img {
+    max-width: 100%;
+}
+
+#illustration {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.dataset-btn {
+    background-color: #1F7872;
+    min-width: 50% !important;
+}
+
+#citation {
+    font-size: 0.75em;
+    overflow: auto;
+    border: 1px solid #999;
+    margin: 0 4px;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+.flex-box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    padding: 15px;
+}
+
+.flex-box>div {
+    border-radius: 5px;
+    padding: 8px;
+}
+
+#header-color {
+    background-color: #53595F;
+}
+
+#button-group {
+    width: 100%;
+}
+
+.button-row {
+    width: 0%;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.btn-a {
+    color: #fff;
+    font-weight: 400;
+    width: 100%;
+    text-transform: none;
+    background-color: #34314c;
+}
+
+.btn-b {
+    color: #fff;
+    font-weight: 400;
+    width: 100%;
+    text-transform: none;
+    background-color: #1F7872;
+    border-radius: 50px;
+}
+
+.btn-d {  
+    color: #fff;
+    font-weight: 400;
+    width: 80%;
+    text-transform: none;
+    background-color: #615EFC;
+    border-radius: 50px;
+    display: block;       /* Make the button behave like a block-level element */
+    margin: 0 auto;       /* Center the block horizontally */
+}
+
+.btn-d:hover {
+    background-color: #FF6969;
+}
+
+#button-row-b {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-b {
+    width: calc(50% - 5px);
+}
+
+.btn-round {
+    width: calc(50% - 5px);
+    height: calc(50% - 5px);
+    transition: background-color 0.3s;
+}
+
+.btn-b:hover {
+    background-color: #CD6688;
+}
+
+.btn {
+    padding: 8px;
+}
+
+[data-tooltip]:hover::after {
+    font-variant-caps: normal;
+    content: attr(data-tooltip);
+    position: absolute;
+    border: 1px solid black;
+    background: #eee;
+    padding: .25em;
+    border-radius: 2px;
+}
+
+.table-wrapper {
+    display: block;
+    max-width: 100%;
+    padding: 0.5rem 0;
+    margin: 0;
+}
+
+#ex-table,
+#ves-table {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+#ex-table {
+    counter-reset: tableCounterEX;
+}
+
+#ex-table>tbody>tr:nth-child(2)>.counter-cell::before {
+    content: "🏆" counter(tableCounterEX);
+    counter-increment: tableCounterEX;
+}
+
+#ex-table>tbody>tr:nth-child(3)>.counter-cell::before {
+    content: "🥈" counter(tableCounterEX);
+    counter-increment: tableCounterEX;
+}
+
+#ex-table>tbody>tr:nth-child(4)>.counter-cell::before {
+    content: "🥉" counter(tableCounterEX);
+    counter-increment: tableCounterEX;
+}
+
+#ex-table>tbody>tr>.counter-cell::before {
+    content: counter(tableCounterEX);
+    counter-increment: tableCounterEX;
+}
+
+#ves-table {
+    counter-reset: tableCounterVES;
+}
+
+#ves-table>tbody>tr:nth-child(2)>.counter-cell::before {
+    content: "🏆" counter(tableCounterVES);
+    counter-increment: tableCounterVES;
+}
+
+#ves-table>tbody>tr:nth-child(3)>.counter-cell::before {
+    content: "🥈" counter(tableCounterVES);
+    counter-increment: tableCounterVES;
+}
+
+#ves-table>tbody>tr:nth-child(4)>.counter-cell::before {
+    content: "🥉" counter(tableCounterVES);
+    counter-increment: tableCounterVES;
+}
+
+#ves-table>tbody>tr>.counter-cell::before {
+    content: counter(tableCounterVES);
+    counter-increment: tableCounterVES;
+}
+
+.counter-cell .badge {
+    display: block;
+}
+
+.card.card-outline-secondary {
+    margin: 0;
+    padding: 0;
+}
+
+.card-header {
+    padding: 1rem;
+}
+
+.date-cell {
+    font-size: 0.85em;
+    color: #ffffff;
+    background-color: #495057;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
