@@ -411,90 +411,28 @@
         gap: 8px;
       }
       
+      /* Enhanced Reward Button Styling */
       .overall-reward {
-        background-color: #e0e0e0;
-        color: #333;
-        padding: 6px 14px;
-        border-radius: 18px;
-        font-weight: bold;
-        font-size: 13px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transition: all 0.3s;
-      }
-      
-      .overall-reward.active {
-        background-color: #574964;
-        color: white;
-      }
-      
-      .stage-progress {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      
-      .stage {
-        padding: 6px 12px;
-        border-radius: 16px;
-        background-color: #e0e0e0;
-        color: #333;
-        font-size: 12px;
-        font-weight: 500;
-        white-space: nowrap;
-      }
-      
-      .stage.completed {
-        background-color: #574964;
-        color: white;
-      }
-      
-      .connector {
-        width: 40px;
-        height: 3px;
-        background-color: #ccc;
-        margin: 0 4px;
-        transition: background-color 0.3s;
-      }
-
-      .stage.active {
-        background-color: #574964 !important;
-        color: white !important;
-        font-weight: bold;
-      }
-
-      .connector.active {
-        background-color: #574964 !important;
-      }
-
-      .stage-clickable {
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-      }
-      
-      .stage-clickable:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 5px rgba(0,0,0,0.2);
-      }
-
-      /* 新增：美化的配置显示 */
-      .current-config {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 15px 20px;
-        border-radius: 12px;
-        margin-top: 15px;
-        margin-bottom: 0;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: bold;
         font-size: 13px;
-        text-align: center;
-        font-weight: 400;
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        border: none;
+        transition: all 0.3s;
         position: relative;
         overflow: hidden;
       }
+      
+      .overall-reward.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      }
 
-      .current-config::before {
+      .overall-reward::before {
         content: '';
         position: absolute;
         top: 0;
@@ -505,13 +443,112 @@
         transition: left 0.5s;
       }
 
-      .current-config:hover::before {
+      .overall-reward:hover::before {
         left: 100%;
       }
 
-      .current-config:hover {
+      .overall-reward:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      }
+      
+      .stage-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      /* Enhanced Stage Button Styling - Apply same effects as overall-reward */
+      .stage {
+        padding: 6px 12px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+        color: #333;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .stage.completed {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      }
+      
+      .stage.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        font-weight: bold;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+      }
+
+      /* Add shimmer effect to all stage buttons */
+      .stage::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+      }
+
+      .stage:hover::before {
+        left: 100%;
+      }
+
+      .stage:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .stage.active:hover {
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5) !important;
+      }
+      
+      .connector {
+        width: 40px;
+        height: 3px;
+        background-color: #ccc;
+        margin: 0 4px;
+        transition: background-color 0.3s;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .connector.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
+      }
+
+      .stage-clickable {
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      .stage-clickable:hover {
+        transform: scale(1.05) translateY(-2px);
+      }
+
+      /* 朴素的配置显示 */
+      .current-config {
+        background: #f8f9fa;
+        color: #495057;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-top: 15px;
+        margin-bottom: 0;
+        font-size: 13px;
+        text-align: center;
+        font-weight: 400;
+        border: 1px solid #dee2e6;
       }
 
       /* Responsive design */
@@ -1070,34 +1107,28 @@
               { rank: 7, model: "GPT-5-chat", passRate: "7.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ]
           },
-
+          
           'full-gpt-4o-a-interact': {
             'Reward*': [
-              { rank: 1, model: "deepseek-chat", passRate: "19.17", institute: "deepseek", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "deepseek-r1", passRate: "18.45", institute: "deepseek-reason", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 3, model: "claude-3-7-sonnet", passRate: "17.33", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "gpt-4o-2024-11-20", passRate: "16.48", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "o3-mini", passRate: "16.43", institute: "openai_reasoning", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "qwen3-235b-a22b", passRate: "16.42", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "gemini-2-0-flash-001", passRate: "15.17", institute: "google", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "claude-3-7-sonnet", passRate: "17.33", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "gpt-4o-2024-11-20", passRate: "16.48", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 3, model: "o3-mini", passRate: "16.43", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "qwen3-235b-a22b", passRate: "16.42", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "gemini-2-0-flash-001", passRate: "15.17", institute: "google", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "deepseek-chat", passRate: "23.67", institute: "deepseek", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "claude-3-7-sonnet", passRate: "22.83", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 3, model: "deepseek-r1", passRate: "22.00", institute: "deepseek-reason", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "gpt-4o-2024-11-20", passRate: "21.83", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "o3-mini", passRate: "19.83", institute: "openai_reasoning", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "qwen3-235b-a22b", passRate: "19.17", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "gemini-2-0-flash-001", passRate: "18.17", institute: "google", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "claude-3-7-sonnet", passRate: "22.83", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "gpt-4o-2024-11-20", passRate: "21.83", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 3, model: "o3-mini", passRate: "19.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "qwen3-235b-a22b", passRate: "19.17", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "gemini-2-0-flash-001", passRate: "18.17", institute: "google", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "deepseek-r1", passRate: "10.17", institute: "deepseek-reason", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "qwen3-235b-a22b", passRate: "10.00", institute: "qwen", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 3, model: "deepseek-chat", passRate: "8.67", institute: "deepseek", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "o3-mini", passRate: "8.50", institute: "openai_reasoning", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "gemini-2-0-flash-001", passRate: "8.17", institute: "google", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "claude-3-7-sonnet", passRate: "4.50", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "gpt-4o-2024-11-20", passRate: "4.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "qwen3-235b-a22b", passRate: "10.00", institute: "qwen", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "o3-mini", passRate: "8.50", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 3, model: "gemini-2-0-flash-001", passRate: "8.17", institute: "google", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "claude-3-7-sonnet", passRate: "4.50", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "gpt-4o-2024-11-20", passRate: "4.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ]
           },
 
