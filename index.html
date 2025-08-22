@@ -843,7 +843,7 @@
             <div class="leaderboard-stage-container" id="stage-container">
               <!-- Overall/Reward button - shown when performance=reward -->
               <div class="overall-reward stage-clickable active" data-dialect="Reward*" id="overall-btn">
-                <span id="overall-text">📊 Overall</span>
+                <span id="overall-text">📊 Normalized Reward</span>
               </div>
               
               <!-- c-interact stages -->
@@ -1210,11 +1210,11 @@
           if (currentFilters.mode === 'c-interact') {
             cStages.style.display = 'flex';
             aStages.style.display = 'none';
-            overallText.textContent = '📊 Overall';
+            overallText.textContent = '📊 Normalized Reward';
           } else {
             cStages.style.display = 'none';
             aStages.style.display = 'flex';
-            overallText.textContent = '📊 Overall';
+            overallText.textContent = '📊 Normalized Reward';
           }
           
           updateStageHighlight();
