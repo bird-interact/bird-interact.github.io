@@ -293,15 +293,28 @@
       }
       
       /* Leaderboard table styling */
-      #ex-table {
+      #leaderboard-table {
         max-width: 100%;
         margin: 0 auto;
+        width: 100%;
+        table-layout: fixed;
       }
+      
       /* Center all header and cell content */
-      #ex-table th, #ex-table td {
+      #leaderboard-table th, #leaderboard-table td {
         text-align: center;
         vertical-align: middle;
+        padding: 0.42em;
       }
+      
+      /* Column widths */
+      #leaderboard-table th:nth-child(1), #leaderboard-table td:nth-child(1) { width: 5%; }  /* Rank */
+      #leaderboard-table th:nth-child(2), #leaderboard-table td:nth-child(2) { width: 30%; } /* Model */
+      #leaderboard-table th:nth-child(3), #leaderboard-table td:nth-child(3) { width: 10%; } /* Metric */
+      #leaderboard-table th:nth-child(4), #leaderboard-table td:nth-child(4) { width: 8%; }  /* Institute */
+      #leaderboard-table th:nth-child(5), #leaderboard-table td:nth-child(5) { width: 5%; }  /* Link */
+      #leaderboard-table th:nth-child(6), #leaderboard-table td:nth-child(6) { width: 12%; } /* Date */
+      #leaderboard-table th:nth-child(7), #leaderboard-table td:nth-child(7) { width: 10%; } /* Tier */
       
       /* Custom cell classes */
       .rank-cell {
@@ -310,11 +323,11 @@
         background: #f8f9fa;
         border-radius: 4px;
       }
-      /* Increase model cell width to 60% */
+      
       .model-cell {
-        width: 60%;
+        width: 30%;
       }
-      /* Smaller date-cell rectangle */
+      
       .date-cell {
         font-size: 0.75em;
         color: #ffffff;
@@ -322,6 +335,54 @@
         padding: 1px 4px;
         border-radius: 5px;
         display: inline-block;
+      }
+
+      /* Filter Controls */
+      .filter-container {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #dee2e6;
+      }
+
+      .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .filter-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 150px;
+      }
+
+      .filter-label {
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #495057;
+        font-size: 14px;
+      }
+
+      .filter-select {
+        padding: 8px 12px;
+        border: 2px solid #574964;
+        border-radius: 25px;
+        background: white;
+        font-family: 'Lato', sans-serif;
+        font-size: 14px;
+        min-width: 140px;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .filter-select:focus {
+        border-color: #615EFC;
+        box-shadow: 0 0 0 3px rgba(97, 94, 252, 0.1);
       }
 
       .leaderboard-stage-container {
@@ -333,7 +394,7 @@
       }
       
       .overall-reward {
-        background-color: #e0e0e0;  /* 默认灰 */
+        background-color: #e0e0e0;
         color: #333;
         padding: 10px 20px;
         border-radius: 25px;
@@ -344,7 +405,7 @@
       }
       
       .overall-reward.active {
-        background-color: #574964; /* 高亮时才紫色 */
+        background-color: #574964;
         color: white;
       }
       
@@ -370,35 +431,22 @@
         color: white;
       }
       
-      /* 更明显的连接线 */
       .connector {
-        width: 60px; /* 原来是 30px，可根据实际视觉再调 */
+        width: 60px;
         height: 4px;
         background-color: #ccc;
         margin: 0 5px;
         transition: background-color 0.3s;
       }
 
-      /* 激活阶段样式 */
       .stage.active {
         background-color: #574964 !important;
         color: white !important;
         font-weight: bold;
       }
 
-      /* 激活连接线样式 */
       .connector.active {
         background-color: #574964 !important;
-      }
-
-      .connector.active {
-        background-color: #574964 !important;
-      }
-
-      /* 不要高亮 Overall 和 workflow 同时，分开逻辑处理 */
-      .overall-reward.active {
-        background-color: #574964;
-        color: white;
       }
 
       .stage-clickable {
@@ -411,66 +459,8 @@
         box-shadow: 0 0 5px rgba(0,0,0,0.2);
       }
 
-
-      #flash-table .model-cell {
-        width: auto;     
-        max-width: 30%;  
-      }
-
-
-      #ex-table th, #ex-table td, #flash-table th, #flash-table td {
-        text-align: center;
-        vertical-align: middle;
-        padding: 0.42em;
-      }
-
-
-      #flash-table th:nth-child(1), #flash-table td:nth-child(1) { width: 5%; }  /* Rank */
-      #flash-table th:nth-child(2), #flash-table td:nth-child(2) { width: 30%; } /* Model */
-      #flash-table th:nth-child(3), #flash-table td:nth-child(3) { width: 10%; } /* Pass Rate */
-      #flash-table th:nth-child(4), #flash-table td:nth-child(4) { width: 8%; }  /* Institute */
-      #flash-table th:nth-child(5), #flash-table td:nth-child(5) { width: 5%; }  /* Link */
-      #flash-table th:nth-child(6), #flash-table td:nth-child(6) { width: 12%; } /* Date */
-      #flash-table th:nth-child(7), #flash-table td:nth-child(7) { width: 10%; } /* Tier */
-
-      /* —— 给 a-table 也加上和 ex-table 一样的列宽、固定布局、居中对齐 —— */
-      #a-table th:nth-child(1), #a-table td:nth-child(1) { width: 5%; }   /* Rank */
-      #a-table th:nth-child(2), #a-table td:nth-child(2) { width: 30%; }  /* Model */
-      #a-table th:nth-child(3), #a-table td:nth-child(3) { width: 10%; }  /* Pass Rate 或 Reward */
-      #a-table th:nth-child(4), #a-table td:nth-child(4) { width: 8%; }   /* Institute */
-      #a-table th:nth-child(5), #a-table td:nth-child(5) { width: 5%; }   /* Link */
-      #a-table th:nth-child(6), #a-table td:nth-child(6) { width: 12%; }  /* Date */
-      #a-table th:nth-child(7), #a-table td:nth-child(7) { width: 10%; }  /* Tier */
-
-      #a-table {
-        width: 100%;
-        table-layout: fixed;
-      }
-
-      /* 还要让 a-table 的单元格也居中 */
-      #a-table th, #a-table td {
-        text-align: center;
-        vertical-align: middle;
-        padding: 0.42em;
-      }
-
-      #ex-table th:nth-child(1), #ex-table td:nth-child(1) { width: 5%; }  /* Rank */
-      #ex-table th:nth-child(2), #ex-table td:nth-child(2) { width: 30%; } /* Model */
-      #ex-table th:nth-child(3), #ex-table td:nth-child(3) { width: 10%; } /* Pass Rate */
-      #ex-table th:nth-child(4), #ex-table td:nth-child(4) { width: 8%; }  /* Institute */
-      #ex-table th:nth-child(5), #ex-table td:nth-child(5) { width: 5%; }  /* Link */
-      #ex-table th:nth-child(6), #ex-table td:nth-child(6) { width: 12%; } /* Date */
-      #ex-table th:nth-child(7), #ex-table td:nth-child(7) { width: 10%; } /* Tier */
-
-
-      #ex-table, #flash-table {
-        width: 100%;
-        table-layout: fixed; 
-      }
-
-      /* 小屏下（≤768px）响应式调整 */
+      /* Responsive design */
       @media (max-width: 768px) {
-        /* 1. 主内容区 一行两列改为上下堆叠 */
         #main .row {
           display: block !important;
         }
@@ -481,7 +471,6 @@
           margin-bottom: 1rem;
         }
 
-        /* 2. 顶部 logo 图 自动缩放 */
         header.masthead .container-fluid img {
           max-width: 100%;
           height: auto;
@@ -489,7 +478,6 @@
           margin: 0.5rem auto;
         }
 
-        /* 3. 所有视频和图片宽度 100% */
         .column-img,
         video.column-img,
         img.img-fluid {
@@ -497,12 +485,10 @@
           height: auto !important;
         }
 
-        /* 4. 表格横向滚动 */
         .table-wrapper {
           overflow-x: auto;
         }
 
-        /* 5. 按钮组、表单元素拉满宽度 */
         .button-row {
           width: 100% !important;
           padding: 0.25rem;
@@ -518,6 +504,38 @@
         form button {
           width: 100%;
         }
+
+        .filter-row {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .filter-group {
+          width: 100%;
+          max-width: 200px;
+        }
+
+        .filter-select {
+          width: 100%;
+        }
+      }
+
+      /* Empty state styling */
+      .empty-table-message {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6c757d;
+        font-style: italic;
+      }
+
+      .current-config {
+        background: #e3f2fd;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: #1565c0;
+        text-align: center;
       }
     </style>
   </head>
@@ -565,7 +583,7 @@
                 BIRD-INTERACT, an interactive text-to-SQL benchmark, <strong>re-imagines Text-to-SQL evaluation via lens of dynamic interactions</strong>.
                 The environment blends a hierarchical knowledge base, database documentation and a function-driven user simulator to recreate authentic enterprise environments across full <strong>CRUD</strong> operations.
                 It offers two rigorous test modes: (1) passive <strong>Conversational Interaction</strong> and (2) active <strong>Agentic Interaction</strong>, spanning 600 annotated tasks including Business Intelligence (BI), CRUD operations and etc., each guarded by executable test cases.
-                Typical evaluations trigger 1,968-5,496 interaction turns between model and user simulator, while state-of-the-art reasoning models currently solve only <strong style="color:#F97A00">≈24%</strong> and <strong style="color:#F97A00">≈18%</strong> of tasks, underscoring the benchmark's challenge.
+                Typical evaluations trigger 4,374-12,214 interaction turns between model and user simulator, while state-of-the-art reasoning models currently solve only <strong style="color:#F97A00">≈24%</strong> and <strong style="color:#F97A00">≈18%</strong> of tasks in Lite version; and <strong style="color:#F97A00">≈16%</strong> of tasks in Full version, underscoring the benchmark's challenge.
                 Together, these features position Bird-Interact as a decisive yardstick for advancing interactive, production-ready database assistants. The two test modes supported by Bird-Interact covering most interactions in real-world applications:
                 <!-- Custom list with image bullets and indentation -->
                 <ul style="list-style: none; padding-left: 20px; margin-left: 0;">
@@ -595,45 +613,37 @@
                   <li>
                     <span style="display: inline-block; margin-left: 12px;">
                       <img src="./img/mic_logo.png" style="height: 16px; vertical-align: middle; margin-right: 8px;" />
-                      <strong>bird-interact-full:</strong> The full version of Bird-Interact, comprising <span style="color: #155E95; font-weight: bold;">600</span> tasks specifically for PostgreSQL. (Coming Soon!)
+                      <strong>bird-interact-full:</strong> The full version of Bird-Interact, comprising <span style="color: #155E95; font-weight: bold;">600</span> tasks specifically for PostgreSQL.
                     </span>
                   </li>
                 </ul>
               <div id="button-group">
-                <!-- Only keep the Mini-Dev (500) button -->
                 <div class="button-row">
                   <a href="" target="_blank">
                     <button type="button" class="btn btn-d">Paper</button>
                   </a>
                 </div>
-                <!-- Removed Train/Dev buttons -->
               </div>
               <div id="button-group">
-                <!-- Only keep the Mini-Dev (500) button -->
                 <div class="button-row">
                   <a href="https://huggingface.co/datasets/birdsql/bird-interact-lite" target="_blank">
                     <button type="button" class="btn btn-d">Bird-Interact Lite</button>
                   </a>
                 </div>
-                <!-- Removed Train/Dev buttons -->
               </div>
               <div id="button-group">
-                <!-- Only keep the Mini-Dev (500) button -->
                 <div class="button-row">
                   <a href="https://huggingface.co/datasets/birdsql/bird-interact-full" target="_blank">
                     <button type="button" class="btn btn-d">Bird-Interact Full</button>
                   </a>
                 </div>
-                <!-- Removed Train/Dev buttons -->
               </div>
               <div id="button-group">
-                <!-- Only keep the Mini-Dev (500) button -->
                 <div class="button-row">
                   <a href="https://github.com/bird-bench/BIRD-Interact" target="_blank">
                     <button type="button" class="btn btn-d">Code</button>
                   </a>
                 </div>
-                <!-- Removed Train/Dev buttons -->
               </div>
             </div>
             <div class="list-group-item" id="news">
@@ -668,7 +678,7 @@
               </p>
             </div>
             <div class="list-group-item" id="illustration">
-              <!-- 插入文字描述区域 -->
+              <!-- Text description area -->
               <div style="margin-top: 12px; font-size: 14px; color: #000; font-weight: bold; text-align: left;">
                 <p>
                   <img src="./img/user_icon.png" alt="user" style="height: 18px; vertical-align: middle; margin: 0 4px;" /> represents the <strong>user simulator</strong>,
@@ -777,20 +787,67 @@
           </div>
         </div>
         
-        <!-- Right column with leaderboards -->
+        <!-- Right column with unified leaderboard -->
         <div style="flex: 1;">
-          <!-- c-Interact Leaderboard -->
-          <div class="card card-outline-secondary mb-4" id="c-leaderboard">
+          <!-- Unified Leaderboard with Filters -->
+          <div class="card card-outline-secondary mb-4" id="unified-leaderboard">
             <div class="card-header">
-              <span style="font-family: 'Dancing Script', cursive; font-size: 1.4em;">c</span> - Interact Leaderboard
+              BIRD-INTERACT Leaderboard
             </div>
-            <!-- SQL Dialect Filter Tags - INTERACTIVE BUTTONS -->
-            <div class="leaderboard-stage-container">
-              <!-- 独立总览指标 -->
-              <div class="overall-reward stage-clickable" data-dialect="Reward*">📊 Overall-Reward*</div>
+            
+            <!-- Filter Controls -->
+            <div class="filter-container">
+              <div class="filter-row">
+                <div class="filter-group">
+                  <div class="filter-label">Dataset</div>
+                  <select id="dataset-filter" class="filter-select">
+                    <option value="lite">Lite (270 tasks)</option>
+                    <option value="full" selected>Full (600 tasks)</option>
+                  </select>
+                </div>
+                
+                <div class="filter-group">
+                  <div class="filter-label">User Simulator</div>
+                  <select id="simulator-filter" class="filter-select">
+                    <option value="gemini-2.0-flash">Gemini-2.0-flash</option>
+                    <option value="gpt-4o" selected>GPT-4o</option>
+                    <option value="bird-chat-8b">Bird-chat-8B</option>
+                  </select>
+                </div>
+                
+                <div class="filter-group">
+                  <div class="filter-label">Action Mode</div>
+                  <select id="mode-filter" class="filter-select">
+                    <option value="c-interact" selected>c-Interact</option>
+                    <option value="a-interact">a-Interact</option>
+                  </select>
+                </div>
+                
+                <div class="filter-group">
+                  <div class="filter-label">Performance</div>
+                  <select id="performance-filter" class="filter-select">
+                    <option value="reward" selected>Reward*</option>
+                    <option value="success-rate">Success Rate</option>
+                  </select>
+                </div>
+              </div>
               
-              <!-- 阶段进度条 -->
-              <div class="stage-progress">
+            </div>
+            
+            <!-- Current Configuration Display -->
+            <div class="current-config" id="current-config">
+              Current: Full Dataset • GPT-4o • c-Interact • Reward*
+            </div>
+
+            <!-- Stage Selection -->
+            <div class="leaderboard-stage-container" id="stage-container">
+              <!-- Overall/Reward button - shown when performance=reward -->
+              <div class="overall-reward stage-clickable active" data-dialect="Reward*" id="overall-btn">
+                <span id="overall-text">📊 Overall</span>
+              </div>
+              
+              <!-- c-interact stages -->
+              <div class="stage-progress" id="c-stages" style="display: flex;">
                 <div class="stage stage-clickable" data-dialect="Phase1-amb">Phase-1</div>
                 <div class="connector"></div>
                 <div class="stage stage-clickable" data-dialect="Phase1-debug">Phase-1-Debug</div>
@@ -799,98 +856,63 @@
                 <div class="connector"></div>
                 <div class="stage stage-clickable" data-dialect="Phase2-debug">Phase-2-Debug</div>
               </div>
-            </div>
-            <div class="table-wrapper">
-              <table id="ex-table" class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Rank</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Pass Rate (%)</th>
-                        <th scope="col">Institute</th>
-                        <th scope="col">Link</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Tier</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <!-- JS 会自动填充 -->
-                </tbody>
-              </table>
               
-              <p>
-                <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
-                <li><strong>Phase-1 pass rate (PR)</strong> means the pass rate of ambiguity resolution phase.</li>
-                <li><strong>Phase-1-Debug PR</strong> means the pass rate of the ambiguity resolution phase with the chance of debugging.</li>
-                <li><strong>Phase-2 PR</strong> means the pass rate of both phase 1 and the follow up question phase.</li>
-                <li><strong>Phase-2-Debug PR</strong> means pass rate of both phase 1 and follow up question phase with the chance of debugging.</li>
-              </p>
-              <strong>Tier Classification (By Ranking):</strong>
-              <ul>
-                <li>🏆 Excellent Chat: The Best!</li>
-                <li>💎 Good Chat: Top 30%</li>
-                <li>🌟 Standard: Top 60%</li>
-                <li>⚪ Basic: Bottom 40%</li>
-              </ul>
-              <p><strong>🧑‍💻 User Simulator:</strong> Gemini-2.0-flash with avg total cost of 1.91 USD.</p>
-            </div>
-          </div>
-
-          <!-- a-Interact Leaderboard -->
-          <div class="card card-outline-secondary mb-4" id="a-leaderboard">
-            <div class="card-header">
-              <span style="font-family: 'Dancing Script', cursive; font-size: 1.4em;">a</span> - Interact Leaderboard
-            </div>
-            <!-- 分表按钮 -->
-            <div class="leaderboard-stage-container">
-              <div class="overall-reward stage-clickable" data-dialect="a-Reward*">📊 Overall-Reward*</div>
-              <div class="stage-progress">
+              <!-- a-interact stages -->
+              <div class="stage-progress" id="a-stages" style="display: none;">
                 <div class="stage stage-clickable" data-dialect="a-Phase1">Phase 1</div>
-                <div class="connector"></div>
+                <div class="connector" id="a-connector"></div>
                 <div class="stage stage-clickable" data-dialect="a-Phase2">Phase 2</div>
               </div>
             </div>
+
             <div class="table-wrapper">
-              <table id="a-table" class="table">
+              <table id="leaderboard-table" class="table">
                 <thead class="thead-light">
                   <tr>
-                    <th>Rank</th>
-                    <th>Model</th>
-                    <th id="a-metric-header">Reward*</th>
-                    <th>Institute</th>
-                    <th>Link</th>
-                    <th>Date</th>
-                    <th>Tier</th>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Model</th>
+                    <th scope="col" id="metric-header">Reward*</th>
+                    <th scope="col">Institute</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Tier</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <!-- JS 会自动填充 -->
+                <tbody id="leaderboard-tbody">
+                  <!-- JS will populate this -->
                 </tbody>
               </table>
               
-              <p>
-                <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
-                <li><strong>Phase-1 pass rate</strong> means the pass rate of ambiguity resolution phase.</li>
-                <li><strong>Phase-2 pass rate</strong> means the pass rate of both phase 1 and the follow up question phase.</li>
-              </p>
-              <strong>Tier Classification (By Ranking):</strong>
-              <ul>
-                <li>🏆 Excellent Interaction: The Best!</li>
-                <li>💎 Good Interaction: Top 30%</li>
-                <li>🌟 Standard: Top 60%</li>
-                <li>⚪ Basic: Bottom 40%</li>
-              </ul>
-              <p><strong>🧑‍💻 User Simulator:</strong> Gemini-2.0-flash with avg total cost of 1.56 USD.</p>
+              <!-- Description based on current mode -->
+              <div id="table-description">
+                <p>
+                  <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
+                  <li><strong>Phase-1 pass rate (PR)</strong> means the pass rate of ambiguity resolution phase.</li>
+                  <li><strong>Phase-1-Debug PR</strong> means the pass rate of the ambiguity resolution phase with the chance of debugging.</li>
+                  <li><strong>Phase-2 PR</strong> means the pass rate of both phase 1 and the follow up question phase.</li>
+                  <li><strong>Phase-2-Debug PR</strong> means pass rate of both phase 1 and follow up question phase with the chance of debugging.</li>
+                </p>
+                <strong>Tier Classification (By Ranking):</strong>
+                <ul id="tier-description">
+                  <li>🏆 Excellent Chat: The Best!</li>
+                  <li>💎 Good Chat: Top 30%</li>
+                  <li>🌟 Standard: Top 60%</li>
+                  <li>⚪ Basic: Bottom 40%</li>
+                </ul>
+                <p><strong>🧑‍💻 User Simulator:</strong> <span id="simulator-cost">Gemini-2.0-flash.</span></p>
+              </div>
             </div>
-        </div><!-- /.row -->
-        <!-- Updated Interaction-Time Scaling (ITS) Section -->
-        <div class="card card-outline-secondary mb-4">
-          <div class="card-header">Interaction-Time Scaling (ITS)</div>
-          <div class="card-body text-center">
-            <p style="font-size: 14px; color: #000; text-align: left; font-weight: normal; max-width: 800px; margin: 0 auto 15px;">
-              Interaction-Time Scaling (ITS) refers to a model’s ability to continuously increase its end performance through multi-turn interactions. When this interactive performance surpasses the model’s idealized single-turn performance on a fully specified, unambiguous task, we say it satisfies the <strong>ITS law</strong>. As user patience grows and interaction turns accumulate, performance keeps improving, demonstrating that the model can sustain effective communication over extended dialogue. Currently, we only find claude-3-7-sonnet satisfies the ITS law.
-            </p>
-            <img class="img-fluid" src="./img/interaction_scaling_law.png" alt="Interaction Scaling Law" style="max-width: 100%; height: auto;" />
+          </div>
+
+          <!-- Interaction-Time Scaling (ITS) Section -->
+          <div class="card card-outline-secondary mb-4">
+            <div class="card-header">Interaction-Time Scaling (ITS)</div>
+            <div class="card-body text-center">
+              <p style="font-size: 14px; color: #000; text-align: left; font-weight: normal; max-width: 800px; margin: 0 auto 15px;">
+                Interaction-Time Scaling (ITS) refers to a model's ability to continuously increase its end performance through multi-turn interactions. When this interactive performance surpasses the model's idealized single-turn performance on a fully specified, unambiguous task, we say it satisfies the <strong>ITS law</strong>. As user patience grows and interaction turns accumulate, performance keeps improving, demonstrating that the model can sustain effective communication over extended dialogue. Currently, we only find claude-3-7-sonnet satisfies the ITS law.
+              </p>
+              <img class="img-fluid" src="./img/interaction_scaling_law.png" alt="Interaction Scaling Law" style="max-width: 100%; height: auto;" />
+            </div>
           </div>
         </div>
       </div>
@@ -904,248 +926,468 @@
       <!-- Custom scripts for this template -->
       <script src="./js/clean-blog.min.js"></script>
       
-      <!-- 改动后的 Leaderboard 逻辑脚本 -->
+      <!-- Updated Leaderboard Logic Script -->
       <script>
-        // mock 数据：c-Interact
-        const leaderboardData = {
-          'Reward*': [
-            { rank: 1, model: "o3-mini", passRate: "33.04", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
-            { rank: 2, model: "GPT-4o", passRate: "30.33", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
-            { rank: 3, model: "Gemini-2.0-flash", passRate: "27.41", institute: "google", date: "2025-04-20", tier: "💎 Good Chat" },
-            { rank: 4, model: "Claude-3.7-sonnet", passRate: "26.60", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 5, model: "DeepSeek-R1", passRate: "21.74", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 6, model: "Qwen3", passRate: "20.33", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-            { rank: 7, model: "DeepSeek-V3", passRate: "15.85", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          ],
-          'Phase1-amb': [
-            { rank: 1, model: "o3-mini", passRate: "35.19", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
-            { rank: 2, model: "Claude-3.7-sonnet", passRate: "29.63", institute: "anthropic", date: "2025-04-20", tier: "💎 Good Chat" },
-            { rank: 3, model: "GPT-4o", passRate: "29.63", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
-            { rank: 4, model: "Gemini-2.0-flash", passRate: "27.78", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 5, model: "DeepSeek-R1", passRate: "21.48", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 6, model: "Qwen3", passRate: "21.48", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-            { rank: 7, model: "DeepSeek-V3", passRate: "15.56", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          ],
-          'Phase1-debug': [
-            { rank: 1, model: "o3-mini", passRate: "37.41", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-            { rank: 2, model: "GPT-4o", passRate: "36.67", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-            { rank: 3, model: "Claude-3.7-sonnet", passRate: "32.59", institute: "anthropic", date: "2025-04-20", tier: "💎 Good" },
-            { rank: 4, model: "Gemini-2.0-flash", passRate: "32.22", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 5, model: "DeepSeek-R1", passRate: "25.93", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 6, model: "Qwen3", passRate: "24.07", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-            { rank: 7, model: "DeepSeek-V3", passRate: "19.26", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          ],
-          'Phase2-FU': [
-            { rank: 1, model: "o3-mini", passRate: "24.07", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-            { rank: 2, model: "GPT-4o", passRate: "19.26", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-            { rank: 3, model: "Gemini-2.0-flash", passRate: "18.15", institute: "google", date: "2025-04-20", tier: "💎 Good" },
-            { rank: 4, model: "DeepSeek-R1", passRate: "12.96", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 5, model: "Claude-3.7-sonnet", passRate: "11.85", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 6, model: "Qwen3", passRate: "11.85", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-            { rank: 7, model: "DeepSeek-V3", passRate: "9.63", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          ],
-          'Phase2-debug': [
-            { rank: 1, model: "o3-mini", passRate: "24.44", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-            { rank: 2, model: "GPT-4o", passRate: "20.74", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-            { rank: 3, model: "Gemini-2.0-flash", passRate: "19.63", institute: "google", date: "2025-04-20", tier: "💎 Good" },
-            { rank: 4, model: "Claude-3.7-sonnet", passRate: "15.93", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 5, model: "DeepSeek-R1", passRate: "15.93", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 6, model: "Qwen3", passRate: "14.07", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-            { rank: 7, model: "DeepSeek-V3", passRate: "10.74", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          ]
+        // Complete dataset structure with all combinations - FIXED DATA MAPPING
+        const allLeaderboardData = {
+          // lite + gemini-2.0-flash + c-interact: Contains the original c-interact data
+          'lite-gemini-2.0-flash-c-interact': {
+            'Reward*': [
+              { rank: 1, model: "o3-mini", passRate: "33.04", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "GPT-4o", passRate: "30.33", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
+              { rank: 3, model: "Gemini-2.0-flash", passRate: "27.41", institute: "google", date: "2025-04-20", tier: "💎 Good Chat" },
+              { rank: 4, model: "Claude-3.7-sonnet", passRate: "26.60", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "DeepSeek-R1", passRate: "21.74", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen3", passRate: "20.33", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", passRate: "15.85", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+            ],
+            'Phase1-amb': [
+              { rank: 1, model: "o3-mini", passRate: "35.19", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-sonnet", passRate: "29.63", institute: "anthropic", date: "2025-04-20", tier: "💎 Good Chat" },
+              { rank: 3, model: "GPT-4o", passRate: "29.63", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
+              { rank: 4, model: "Gemini-2.0-flash", passRate: "27.78", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "DeepSeek-R1", passRate: "21.48", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen3", passRate: "21.48", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", passRate: "15.56", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+            ],
+            'Phase1-debug': [
+              { rank: 1, model: "o3-mini", passRate: "37.41", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+              { rank: 2, model: "GPT-4o", passRate: "36.67", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 3, model: "Claude-3.7-sonnet", passRate: "32.59", institute: "anthropic", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 4, model: "Gemini-2.0-flash", passRate: "32.22", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "DeepSeek-R1", passRate: "25.93", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen3", passRate: "24.07", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", passRate: "19.26", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+            ],
+            'Phase2-FU': [
+              { rank: 1, model: "o3-mini", passRate: "24.07", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+              { rank: 2, model: "GPT-4o", passRate: "19.26", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 3, model: "Gemini-2.0-flash", passRate: "18.15", institute: "google", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 4, model: "DeepSeek-R1", passRate: "12.96", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "Claude-3.7-sonnet", passRate: "11.85", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen3", passRate: "11.85", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", passRate: "9.63", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+            ],
+            'Phase2-debug': [
+              { rank: 1, model: "o3-mini", passRate: "24.44", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+              { rank: 2, model: "GPT-4o", passRate: "20.74", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 3, model: "Gemini-2.0-flash", passRate: "19.63", institute: "google", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 4, model: "Claude-3.7-sonnet", passRate: "15.93", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "DeepSeek-R1", passRate: "15.93", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen3", passRate: "14.07", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", passRate: "10.74", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+            ]
+          },
+          
+          'full-gpt-4o-c-interact': {
+            'Reward*': [
+              { rank: 1, model: "Gemini-2.5-pro", passRate: "20.92", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "o3-mini", passRate: "20.27", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-sonnet-4", passRate: "18.35", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Deepseek-chat-v3.1", passRate: "15.15", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Claude-3.7-sonnet", passRate: "13.87", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "GPT-5", passRate: "12.58", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5-chat", passRate: "9.65", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+            ],
+            'Phase1-amb': [
+              { rank: 1, model: "Gemini-2.5-pro", passRate: "18.83", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "o3-mini", passRate: "18.50", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Deepseek-chat-v3.1", passRate: "17.00", institute: "deepseek", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Claude-sonnet-4", passRate: "15.67", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "GPT-5", passRate: "13.83", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Claude-3.7-sonnet", passRate: "12.50", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5-chat", passRate: "10.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+            ],
+            'Phase1-debug': [
+              { rank: 1, model: "Gemini-2.5-pro", passRate: "25.00", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "o3-mini", passRate: "24.00", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-sonnet-4", passRate: "22.33", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Deepseek-chat-v3.1", passRate: "18.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Claude-3.7-sonnet", passRate: "18.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "GPT-5", passRate: "14.50", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5-chat", passRate: "11.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+            ],
+            'Phase2-FU': [
+              { rank: 1, model: "o3-mini", passRate: "14.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Gemini-2.5-pro", passRate: "13.83", institute: "google", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-sonnet-4", passRate: "12.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "GPT-5", passRate: "8.33", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Deepseek-chat-v3.1", passRate: "8.00", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Claude-3.7-sonnet", passRate: "7.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5-chat", passRate: "6.33", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+            ],
+            'Phase2-debug': [
+              { rank: 1, model: "Gemini-2.5-pro", passRate: "16.33", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "o3-mini", passRate: "15.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-sonnet-4", passRate: "14.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "GPT-5", passRate: "8.67", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Deepseek-chat-v3.1", passRate: "8.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Claude-3.7-sonnet", passRate: "8.33", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5-chat", passRate: "7.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+            ]
+          },
+
+          // lite + gemini-2.0-flash + a-interact: Contains the original a-interact data
+          'lite-gemini-2.0-flash-a-interact': {
+            'Reward*': [
+              { rank: 1, model: "Claude-3.7-sonnet", passRate: "29.19", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "o3-mini", passRate: "21.07", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 3, model: "DeepSeek-V3", passRate: "19.19", institute: "deepseek", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 4, model: "Qwen3", passRate: "18.74", institute: "qwen", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "GPT-4o", passRate: "18.37", institute: "openai", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Gemini-2.0-flash", passRate: "17.26", institute: "google", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek R1", passRate: "17.07", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" }
+            ],
+            'a-Phase1': [
+              { rank: 1, model: "Claude-3.7-sonnet", passRate: "34.07", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "o3-mini", passRate: "25.19", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 3, model: "DeepSeek-V3", passRate: "22.96", institute: "deepseek", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 4, model: "GPT-4o", passRate: "22.59", institute: "openai", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "Qwen3", passRate: "20.74", institute: "qwen", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Gemini-2.0-flash", passRate: "20.37", institute: "google", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek R1", passRate: "19.63", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" }
+            ],
+            'a-Phase2': [
+              { rank: 1, model: "Claude-3.7-sonnet", passRate: "17.78", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "Qwen3", passRate: "14.07", institute: "qwen", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 3, model: "o3-mini", passRate: "11.48", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 4, model: "DeepSeek R1", passRate: "11.11", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "DeepSeek-V3", passRate: "10.37", institute: "deepseek", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Gemini-2.0-flash", passRate: "10.00", institute: "google", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "GPT-4o", passRate: "8.52", institute: "openai", date: "2025-04-20", tier: "⚪ Basic" }
+            ]
+          }
+
+          // All other combinations will show empty tables as placeholders
+          
         };
 
-        const aLeaderboardData = {
-          // —— 更新后：按 “Reward*” 从高到低排序 —— 
-          'a-Reward*': [
-            { rank: 1, model: "Claude-3.7-sonnet", passRate: "29.19", institute: "anthropic",        date: "2025-04-20", tier: "🏆 Excellent Interaction"   },
-            { rank: 2, model: "o3-mini",             passRate: "21.07", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction"  },
-            { rank: 3, model: "DeepSeek-V3",         passRate: "19.19", institute: "deepseek",          date: "2025-04-20", tier: "💎 Good Interaction" },
-            { rank: 4, model: "Qwen3",               passRate: "18.74", institute: "qwen",              date: "2025-04-20", tier: "🌟 Standard"    },
-            { rank: 5, model: "GPT-4o",              passRate: "18.37", institute: "openai",            date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 6, model: "Gemini-2.0-flash",    passRate: "17.26", institute: "google",            date: "2025-04-20", tier: "⚪ Basic"    },
-            { rank: 7, model: "DeepSeek R1",         passRate: "17.07", institute: "deepseek-reason",  date: "2025-04-20", tier: "⚪ Basic"    }
-          ],
-        
-          // —— 更新后：按 “Phase1” 从高到低排序 —— 
-          'a-Phase1': [
-            { rank: 1, model: "Claude-3.7-sonnet", passRate: "34.07", institute: "anthropic",        date: "2025-04-20", tier: "🏆 Excellent Interaction"   },
-            { rank: 2, model: "o3-mini",             passRate: "25.19", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction"  },
-            { rank: 3, model: "DeepSeek-V3",         passRate: "22.96", institute: "deepseek",          date: "2025-04-20", tier: "💎 Good Interaction" },
-            { rank: 4, model: "GPT-4o",              passRate: "22.59", institute: "openai",            date: "2025-04-20", tier: "🌟 Standard"    },
-            { rank: 5, model: "Qwen3",               passRate: "20.74", institute: "qwen",              date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 6, model: "Gemini-2.0-flash",    passRate: "20.37", institute: "google",            date: "2025-04-20", tier: "⚪ Basic"    },
-            { rank: 7, model: "DeepSeek R1",         passRate: "19.63", institute: "deepseek-reason",  date: "2025-04-20", tier: "⚪ Basic"    }
-          ],
-        
-          // —— 更新后：按 “Phase2” 从高到低排序 —— 
-          'a-Phase2': [
-            { rank: 1, model: "Claude-3.7-sonnet", passRate: "17.78", institute: "anthropic",        date: "2025-04-20", tier: "🏆 Excellent Interaction"   },
-            { rank: 2, model: "Qwen3",               passRate: "14.07", institute: "qwen",              date: "2025-04-20", tier: "💎 Good Interaction"  },
-            { rank: 3, model: "o3-mini",             passRate: "11.48", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
-            { rank: 4, model: "DeepSeek R1",         passRate: "11.11", institute: "deepseek-reason",  date: "2025-04-20", tier: "🌟 Standard"    },
-            { rank: 5, model: "DeepSeek-V3",         passRate: "10.37", institute: "deepseek",          date: "2025-04-20", tier: "🌟 Standard" },
-            { rank: 6, model: "Gemini-2.0-flash",    passRate: "10.00", institute: "google",            date: "2025-04-20", tier: "⚪ Basic"    },
-            { rank: 7, model: "GPT-4o",              passRate: "8.52",  institute: "openai",            date: "2025-04-20", tier: "⚪ Basic"    }
-          ]
+        // Configuration for different modes
+        const modeConfigs = {
+          'c-interact': {
+            rewardStages: ['Reward*'],
+            successStages: ['Phase1-amb', 'Phase1-debug', 'Phase2-FU', 'Phase2-debug'],
+            defaultRewardStage: 'Reward*',
+            defaultSuccessStage: 'Phase1-amb',
+            tierLabels: ['🏆 Excellent Chat', '💎 Good Chat', '🌟 Standard', '⚪ Basic'],
+            costs: {
+              'gemini-2.0-flash': '1.91 USD',
+              'gpt-4o': '2.45 USD',
+              'bird-chat-8b': '0.85 USD'
+            }
+          },
+          'a-interact': {
+            rewardStages: ['Reward*'],
+            successStages: ['a-Phase1', 'a-Phase2'],
+            defaultRewardStage: 'Reward*',
+            defaultSuccessStage: 'a-Phase1',
+            tierLabels: ['🏆 Excellent Interaction', '💎 Good Interaction', '🌟 Standard', '⚪ Basic'],
+            costs: {
+              'gemini-2.0-flash': '1.56 USD',
+              'gpt-4o': '2.12 USD',
+              'bird-chat-8b': '0.72 USD'
+            }
+          }
         };
+
+        // Global state
+        let currentFilters = {
+          dataset: 'full',
+          simulator: 'gpt-4o',
+          mode: 'c-interact',
+          performance: 'reward'
+        };
+        let currentStage = 'Reward*';
 
         document.addEventListener('DOMContentLoaded', function () {
-          // ==========================
-          // 1) c-Interact 部分
-          // ==========================
-          {
-            const cContainer = document.querySelector('#c-leaderboard');
-            const cStageButtons = cContainer.querySelectorAll('.stage-clickable');
-            const cTbody   = cContainer.querySelector('#ex-table tbody');
-            const cHeaders = cContainer.querySelectorAll('#ex-table thead th');
-
-            let cActiveFilter = 'Reward*';
-            updateCLeaderboardTable(cActiveFilter);
-            updateCStageHighlight(cActiveFilter);
-
-            cStageButtons.forEach(btn => {
-              btn.addEventListener('click', function () {
-                cActiveFilter = this.getAttribute('data-dialect');
-                updateCLeaderboardTable(cActiveFilter);
-                updateCStageHighlight(cActiveFilter);
-              });
-            });
-
-            function updateCStageHighlight(dialect) {
-              const stageOrder = ['Phase1-amb','Phase1-debug','Phase2-FU','Phase2-debug'];
-              const overallBtn = cContainer.querySelector('.overall-reward');
-              const allStages  = cContainer.querySelectorAll('.stage-clickable.stage');
-              const connectors = cContainer.querySelectorAll('.connector');
-
-              overallBtn.classList.remove('active');
-              allStages.forEach(el => el.classList.remove('active'));
-              connectors.forEach(c => c.classList.remove('active'));
-
-              if (dialect === 'Reward*') {
-                overallBtn.classList.add('active');
-              } else {
-                const idx = stageOrder.indexOf(dialect);
-                if (idx !== -1) {
-                  allStages.forEach(el => {
-                    const d = el.getAttribute('data-dialect');
-                    if (stageOrder.indexOf(d) <= idx) {
-                      el.classList.add('active');
-                    }
-                  });
-                  connectors.forEach((line,i) => {
-                    if (i < idx) line.classList.add('active');
-                  });
-                }
-              }
-            }
-
-            function updateCLeaderboardTable(dialect) {
-              if (dialect === 'Reward*') {
-                cHeaders[2].textContent = 'Reward*';
-              } else {
-                cHeaders[2].textContent = 'Pass Rate (%)';
-              }
-              cTbody.innerHTML = '';
-              const data = leaderboardData[dialect] || [];
-              data.forEach(entry => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                  <td class="rank-cell">${entry.rank}</td>
-                  <td class="model-cell">${entry.model}</td>
-                  <td>${entry.passRate}</td>
-                  <td>
-                    <img src="./img/institute_img/${entry.institute}.png"
-                         alt="${entry.institute}"
-                         style="max-height:20px;vertical-align:middle;" />
-                  </td>
-                  <td></td>
-                  <td><span class="date-cell">${entry.date}</span></td>
-                  <td>${entry.tier}</td>
-                `;
-                cTbody.appendChild(tr);
-              });
-            }
-          }
-
-          // ==========================
-          // 2) a-Interact 部分
-          // ==========================
-          {
-            const aContainer    = document.querySelector('#a-leaderboard');
-            const aStageButtons = aContainer.querySelectorAll('.stage-clickable');
-            const aTbody        = aContainer.querySelector('#a-table tbody');
-            const aHeader       = aContainer.querySelector('#a-metric-header');
-
-            let aActiveFilter = 'a-Reward*';
-            updateALeaderboardTable(aActiveFilter);
-            updateAStageHighlight(aActiveFilter);
-
-            aStageButtons.forEach(btn => {
-              btn.addEventListener('click', function () {
-                aActiveFilter = this.getAttribute('data-dialect');
-                updateALeaderboardTable(aActiveFilter);
-                updateAStageHighlight(aActiveFilter);
-              });
-            });
-
-            function updateAStageHighlight(dialect) {
-              const simpleOrder = ['a-Phase1','a-Phase2'];
-              const overallBtn  = aContainer.querySelector('.overall-reward');
-              const allStages   = aContainer.querySelectorAll('.stage-clickable.stage');
-              const connectors  = aContainer.querySelectorAll('.connector');
-
-              overallBtn.classList.remove('active');
-              allStages.forEach(el => el.classList.remove('active'));
-              connectors.forEach(c => c.classList.remove('active'));
-
-              if (dialect === 'a-Reward*') {
-                overallBtn.classList.add('active');
-              } else {
-                const idx = simpleOrder.indexOf(dialect);
-                if (idx !== -1) {
-                  allStages.forEach(el => {
-                    const d = el.getAttribute('data-dialect');
-                    if (simpleOrder.indexOf(d) <= idx) {
-                      el.classList.add('active');
-                    }
-                  });
-                  connectors.forEach((line,i) => {
-                    if (i < idx) line.classList.add('active');
-                  });
-                }
-              }
-            }
-
-            function updateALeaderboardTable(dialect) {
-              if (dialect === 'a-Reward*') {
-                aHeader.textContent = 'Reward*';
-              } else {
-                aHeader.textContent = 'Pass Rate (%)';
-              }
-              aTbody.innerHTML = '';
-              const data = aLeaderboardData[dialect] || [];
-              data.forEach(entry => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                  <td class="rank-cell">${entry.rank}</td>
-                  <td class="model-cell">${entry.model}</td>
-                  <td>${entry.passRate}</td>
-                  <td>
-                    <img src="./img/institute_img/${entry.institute}.png"
-                         alt="${entry.institute}"
-                         style="max-height:20px;vertical-align:middle;" />
-                  </td>
-                  <td></td>
-                  <td><span class="date-cell">${entry.date}</span></td>
-                  <td>${entry.tier}</td>
-                `;
-                aTbody.appendChild(tr);
-              });
-            }
-          }
+          // Initialize filters
+          initializeFilters();
+          
+          // Setup filter change listeners
+          setupFilterListeners();
+          
+          // Setup stage selection listeners
+          setupStageListeners();
+          
+          // Initial load
+          updateModeDisplay();
+          updateConfiguration();
+          updateLeaderboard();
         });
+
+        function initializeFilters() {
+          document.getElementById('dataset-filter').value = currentFilters.dataset;
+          document.getElementById('simulator-filter').value = currentFilters.simulator;
+          document.getElementById('mode-filter').value = currentFilters.mode;
+          document.getElementById('performance-filter').value = currentFilters.performance;
+        }
+
+        function setupFilterListeners() {
+          document.getElementById('dataset-filter').addEventListener('change', function() {
+            currentFilters.dataset = this.value;
+            updateConfiguration();
+            updateLeaderboard();
+          });
+
+          document.getElementById('simulator-filter').addEventListener('change', function() {
+            currentFilters.simulator = this.value;
+            updateConfiguration();
+            updateLeaderboard();
+          });
+
+          document.getElementById('mode-filter').addEventListener('change', function() {
+            currentFilters.mode = this.value;
+            // Reset to appropriate default stage when mode changes
+            if (this.value === 'c-interact') {
+              currentStage = currentFilters.performance === 'reward' ? 'Reward*' : 'Phase1-amb';
+            } else {
+              currentStage = currentFilters.performance === 'reward' ? 'Reward*' : 'a-Phase1';
+            }
+            updateModeDisplay();
+            updateConfiguration();
+            updateLeaderboard();
+          });
+
+          document.getElementById('performance-filter').addEventListener('change', function() {
+            currentFilters.performance = this.value;
+            // Reset to default stage when performance changes
+            if (this.value === 'reward') {
+              currentStage = 'Reward*';
+            } else {
+              currentStage = currentFilters.mode === 'c-interact' ? 'Phase1-amb' : 'a-Phase1';
+            }
+            updateStageHighlight();
+            updateConfiguration();
+            updateLeaderboard();
+          });
+        }
+
+        function setupStageListeners() {
+          document.querySelectorAll('.stage-clickable').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const clickedStage = this.getAttribute('data-dialect');
+              
+              // Check if the clicked stage matches current performance filter
+              if (currentFilters.performance === 'reward' && clickedStage.includes('Reward')) {
+                currentStage = clickedStage;
+              } else if (currentFilters.performance === 'success-rate' && !clickedStage.includes('Reward')) {
+                currentStage = clickedStage;
+              } else if (currentFilters.performance === 'reward' && !clickedStage.includes('Reward')) {
+                // If reward is selected but user clicks a phase, switch to success-rate
+                currentFilters.performance = 'success-rate';
+                document.getElementById('performance-filter').value = 'success-rate';
+                currentStage = clickedStage;
+                updateConfiguration();
+              } else if (currentFilters.performance === 'success-rate' && clickedStage.includes('Reward')) {
+                // If success-rate is selected but user clicks reward, switch to reward
+                currentFilters.performance = 'reward';
+                document.getElementById('performance-filter').value = 'reward';
+                currentStage = clickedStage;
+                updateConfiguration();
+              }
+              
+              updateStageHighlight();
+              updateLeaderboard();
+            });
+          });
+        }
+
+        function updateConfiguration() {
+          const config = document.getElementById('current-config');
+          const datasetText = currentFilters.dataset === 'lite' ? 'Lite Dataset' : 'Full Dataset';
+          const simulatorText = currentFilters.simulator.charAt(0).toUpperCase() + currentFilters.simulator.slice(1).replace('-', '-');
+          const modeText = currentFilters.mode === 'c-interact' ? 'c-Interact' : 'a-Interact';
+          const performanceText = currentFilters.performance === 'reward' ? 'Reward*' : 'Success Rate';
+          
+          config.textContent = `Current: ${datasetText} • ${simulatorText} • ${modeText} • ${performanceText}`;
+        }
+
+        function updateModeDisplay() {
+          const cStages = document.getElementById('c-stages');
+          const aStages = document.getElementById('a-stages');
+          const overallText = document.getElementById('overall-text');
+          
+          if (currentFilters.mode === 'c-interact') {
+            cStages.style.display = 'flex';
+            aStages.style.display = 'none';
+            overallText.textContent = '📊 Overall';
+          } else {
+            cStages.style.display = 'none';
+            aStages.style.display = 'flex';
+            overallText.textContent = '📊 Overall';
+          }
+          
+          updateStageHighlight();
+        }
+
+        function updateStageHighlight() {
+          const config = modeConfigs[currentFilters.mode];
+          const overallBtn = document.querySelector('.overall-reward');
+          const allStages = document.querySelectorAll('.stage-clickable.stage');
+          const connectors = document.querySelectorAll('.connector');
+
+          // Reset all highlights
+          overallBtn.classList.remove('active');
+          allStages.forEach(el => el.classList.remove('active'));
+          connectors.forEach(c => c.classList.remove('active'));
+
+          // Show/hide stages based on action mode and performance filter
+          if (currentFilters.mode === 'c-interact') {
+            // For c-interact, show the complex progression
+            if (currentFilters.performance === 'reward') {
+              // Show only Overall button
+              overallBtn.style.display = 'block';
+              allStages.forEach(el => el.style.display = 'none');
+              connectors.forEach(conn => conn.style.display = 'none');
+              if (currentStage.includes('Reward')) {
+                overallBtn.classList.add('active');
+              }
+            } else {
+              // Show phase progression
+              overallBtn.style.display = 'none';
+              allStages.forEach(el => {
+                const dialect = el.getAttribute('data-dialect');
+                if (!dialect.includes('a-')) {
+                  el.style.display = 'block';
+                } else {
+                  el.style.display = 'none';
+                }
+              });
+              
+              // Show connectors between visible stages
+              connectors.forEach(conn => conn.style.display = 'block');
+              
+              // Highlight progression
+              const cStageOrder = config.successStages;
+              const idx = cStageOrder.indexOf(currentStage);
+              if (idx !== -1) {
+                allStages.forEach(el => {
+                  const dialect = el.getAttribute('data-dialect');
+                  if (cStageOrder.indexOf(dialect) <= idx) {
+                    el.classList.add('active');
+                  }
+                });
+                connectors.forEach((line, i) => {
+                  if (i < idx) line.classList.add('active');
+                });
+              }
+            }
+          } else {
+            // For a-interact, show simplified progression
+            if (currentFilters.performance === 'reward') {
+              // Show only Overall button
+              overallBtn.style.display = 'block';
+              allStages.forEach(el => el.style.display = 'none');
+              connectors.forEach(conn => conn.style.display = 'none');
+              if (currentStage.includes('Reward')) {
+                overallBtn.classList.add('active');
+              }
+            } else {
+              // Show only a-interact phases (Phase 1 → Phase 2)
+              overallBtn.style.display = 'none';
+              allStages.forEach(el => {
+                const dialect = el.getAttribute('data-dialect');
+                if (dialect.includes('a-Phase')) {
+                  el.style.display = 'block';
+                } else {
+                  el.style.display = 'none';
+                }
+              });
+              
+              // Show the a-interact connector
+              const aConnector = document.getElementById('a-connector');
+              connectors.forEach((conn, i) => {
+                if (conn === aConnector) {
+                  conn.style.display = 'block';
+                } else {
+                  conn.style.display = 'none';
+                }
+              });
+              
+              // Highlight progression for a-interact
+              const aStageOrder = config.successStages;
+              const idx = aStageOrder.indexOf(currentStage);
+              if (idx !== -1) {
+                allStages.forEach(el => {
+                  const dialect = el.getAttribute('data-dialect');
+                  if (aStageOrder.indexOf(dialect) <= idx) {
+                    el.classList.add('active');
+                  }
+                });
+                if (idx > 0 && aConnector) {
+                  aConnector.classList.add('active');
+                }
+              }
+            }
+          }
+        }
+
+        function updateLeaderboard() {
+          // FIXED: Build correct data key without performance suffix
+          const dataKey = `${currentFilters.dataset}-${currentFilters.simulator}-${currentFilters.mode}`;
+          const data = allLeaderboardData[dataKey];
+          const tbody = document.getElementById('leaderboard-tbody');
+          const metricHeader = document.getElementById('metric-header');
+          
+          // Update metric header based on performance filter
+          if (currentFilters.performance === 'reward') {
+            metricHeader.textContent = 'Reward*';
+          } else {
+            metricHeader.textContent = 'Pass Rate (%)';
+          }
+          
+          // Clear existing rows
+          tbody.innerHTML = '';
+          
+          if (data && data[currentStage]) {
+            // Populate with actual data
+            data[currentStage].forEach(entry => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td class="rank-cell">${entry.rank}</td>
+                <td class="model-cell">${entry.model}</td>
+                <td>${entry.passRate}</td>
+                <td>
+                  <img src="./img/institute_img/${entry.institute}.png"
+                       alt="${entry.institute}"
+                       style="max-height:20px;vertical-align:middle;" />
+                </td>
+                <td></td>
+                <td><span class="date-cell">${entry.date}</span></td>
+                <td>${entry.tier}</td>
+              `;
+              tbody.appendChild(tr);
+            });
+          } else {
+            // Show placeholder message
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td colspan="7" class="empty-table-message">
+                Data for this combination will be available soon.<br>
+                <small>Dataset: ${currentFilters.dataset} • Simulator: ${currentFilters.simulator} • Mode: ${currentFilters.mode} • Performance: ${currentFilters.performance}</small>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          }
+          
+          // Update descriptions
+          updateDescriptions();
+        }
+
+        function updateDescriptions() {
+          const config = modeConfigs[currentFilters.mode];
+          const tierDescription = document.getElementById('tier-description');
+          const simulatorCost = document.getElementById('simulator-cost');
+          
+          // Update tier descriptions
+          tierDescription.innerHTML = config.tierLabels.map(label => `<li>${label}</li>`).join('');
+          
+          // Update simulator cost
+          const cost = config.costs[currentFilters.simulator];
+          const simulatorName = currentFilters.simulator.charAt(0).toUpperCase() + currentFilters.simulator.slice(1).replace('-', '-');
+          simulatorCost.textContent = `${simulatorName}.`;
+        }
       </script>
-    </div><!-- /.container -->
+    </div><!-- /.container --> <!-- /. with avg total cost of ${cost} -->
   </body>
 </html>
