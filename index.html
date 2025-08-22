@@ -961,7 +961,7 @@
               
               <!-- Current Configuration Display - moved here -->
               <div class="current-config" id="current-config">
-                Current: Full Dataset • Gpt-4o • c-Interact • Reward*
+                Current: Full Dataset • GPT-4o • c-Interact • Reward*
               </div>
               
               <!-- Description based on current mode -->
@@ -980,7 +980,7 @@
                   <li>🌟 Standard: Top 60%</li>
                   <li>⚪ Basic: Bottom 40%</li>
                 </ul>
-                <p><strong>🧑‍💻 User Simulator:</strong> <span id="simulator-cost">Gemini-2.0-flash.</span></p>
+                <p><strong>🧑‍💻 User Simulator:</strong> <span id="simulator-cost">GPT-4o.</span></p>
               </div>
             </div>
           </div>
@@ -1107,7 +1107,7 @@
               { rank: 7, model: "GPT-5-chat", passRate: "7.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ]
           },
-          
+
           'full-gpt-4o-a-interact': {
             'Reward*': [
               { rank: 1, model: "claude-3-7-sonnet", passRate: "17.33", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
@@ -1300,7 +1300,17 @@
         function updateConfiguration() {
           const config = document.getElementById('current-config');
           const datasetText = currentFilters.dataset === 'lite' ? 'Lite Dataset (270 tasks)' : 'Full Dataset (600 tasks)';
-          const simulatorText = currentFilters.simulator.charAt(0).toUpperCase() + currentFilters.simulator.slice(1).replace('-', '-');
+          
+          // Fix simulator name formatting
+          let simulatorText = currentFilters.simulator;
+          if (simulatorText === 'gpt-4o') {
+            simulatorText = 'GPT-4o';
+          } else if (simulatorText === 'gemini-2.0-flash') {
+            simulatorText = 'Gemini-2.0-Flash';
+          } else if (simulatorText === 'bird-chat-8b') {
+            simulatorText = 'Bird-Chat-8B';
+          }
+          
           const modeText = currentFilters.mode === 'c-interact' ? 'c-Interact' : 'a-Interact';
           const performanceText = currentFilters.performance === 'reward' ? 'Reward*' : 'Success Rate';
           
@@ -1494,9 +1504,16 @@
           // Update tier descriptions
           tierDescription.innerHTML = config.tierLabels.map(label => `<li>${label}</li>`).join('');
           
-          // Update simulator cost
+          // Update simulator cost with proper formatting
           const cost = config.costs[currentFilters.simulator];
-          const simulatorName = currentFilters.simulator.charAt(0).toUpperCase() + currentFilters.simulator.slice(1).replace('-', '-');
+          let simulatorName = currentFilters.simulator;
+          if (simulatorName === 'gpt-4o') {
+            simulatorName = 'GPT-4o';
+          } else if (simulatorName === 'gemini-2.0-flash') {
+            simulatorName = 'Gemini-2.0-Flash';
+          } else if (simulatorName === 'bird-chat-8b') {
+            simulatorName = 'Bird-Chat-8B';
+          }
           simulatorCost.textContent = `${simulatorName}.`;
         }
       </script>
