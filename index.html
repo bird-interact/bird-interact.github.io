@@ -309,8 +309,8 @@
       
       /* Column widths */
       #leaderboard-table th:nth-child(1), #leaderboard-table td:nth-child(1) { width: 5%; }  /* Rank */
-      #leaderboard-table th:nth-child(2), #leaderboard-table td:nth-child(2) { width: 30%; } /* Model */
-      #leaderboard-table th:nth-child(3), #leaderboard-table td:nth-child(3) { width: 10%; } /* Metric */
+      #leaderboard-table th:nth-child(2), #leaderboard-table td:nth-child(2) { width: 25%; } /* Model */
+      #leaderboard-table th:nth-child(3), #leaderboard-table td:nth-child(3) { width: 15%; } /* Metric */
       #leaderboard-table th:nth-child(4), #leaderboard-table td:nth-child(4) { width: 8%; }  /* Institute */
       #leaderboard-table th:nth-child(5), #leaderboard-table td:nth-child(5) { width: 5%; }  /* Link */
       #leaderboard-table th:nth-child(6), #leaderboard-table td:nth-child(6) { width: 12%; } /* Date */
@@ -325,7 +325,7 @@
       }
       
       .model-cell {
-        width: 30%;
+        width: 25%;
       }
       
       .date-cell {
@@ -337,19 +337,19 @@
         display: inline-block;
       }
 
-      /* Filter Controls */
+      /* Enhanced Filter Controls */
       .filter-container {
         background: #f8f9fa;
-        padding: 20px;
+        padding: 16px 20px;
         border-radius: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         border: 1px solid #dee2e6;
       }
 
       .filter-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 18px;
         align-items: center;
         justify-content: center;
       }
@@ -358,26 +358,28 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-width: 150px;
+        min-width: 140px;
       }
 
       .filter-label {
         font-weight: bold;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         color: #495057;
         font-size: 14px;
+        text-align: center;
       }
 
       .filter-select {
-        padding: 8px 12px;
+        padding: 8px 14px;
         border: 2px solid #574964;
-        border-radius: 25px;
+        border-radius: 22px;
         background: white;
         font-family: 'Lato', sans-serif;
         font-size: 14px;
-        min-width: 140px;
+        min-width: 130px;
         outline: none;
         transition: all 0.3s ease;
+        text-align: center;
       }
 
       .filter-select:focus {
@@ -389,17 +391,17 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 20px 0;
-        gap: 15px;
+        margin: 8px 0 8px 0;
+        gap: 8px;
       }
       
       .overall-reward {
         background-color: #e0e0e0;
         color: #333;
-        padding: 10px 20px;
-        border-radius: 25px;
+        padding: 6px 14px;
+        border-radius: 18px;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 13px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         transition: all 0.3s;
       }
@@ -417,11 +419,11 @@
       }
       
       .stage {
-        padding: 8px 15px;
-        border-radius: 20px;
+        padding: 6px 12px;
+        border-radius: 16px;
         background-color: #e0e0e0;
         color: #333;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
         white-space: nowrap;
       }
@@ -432,10 +434,10 @@
       }
       
       .connector {
-        width: 60px;
-        height: 4px;
+        width: 40px;
+        height: 3px;
         background-color: #ccc;
-        margin: 0 5px;
+        margin: 0 4px;
         transition: background-color 0.3s;
       }
 
@@ -457,6 +459,18 @@
       .stage-clickable:hover {
         transform: scale(1.05);
         box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      }
+
+      /* 新增：紧凑的配置显示 */
+      .current-config {
+        background: #e3f2fd;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-size: 12px;
+        color: #1565c0;
+        text-align: center;
       }
 
       /* Responsive design */
@@ -507,12 +521,12 @@
 
         .filter-row {
           flex-direction: column;
-          gap: 15px;
+          gap: 10px;
         }
 
         .filter-group {
           width: 100%;
-          max-width: 200px;
+          max-width: 160px;
         }
 
         .filter-select {
@@ -526,16 +540,6 @@
         padding: 40px 20px;
         color: #6c757d;
         font-style: italic;
-      }
-
-      .current-config {
-        background: #e3f2fd;
-        padding: 10px 15px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        font-size: 14px;
-        color: #1565c0;
-        text-align: center;
       }
     </style>
   </head>
@@ -831,12 +835,6 @@
                   </select>
                 </div>
               </div>
-              
-            </div>
-            
-            <!-- Current Configuration Display -->
-            <div class="current-config" id="current-config">
-              Current: Full Dataset • GPT-4o • c-Interact • Reward*
             </div>
 
             <!-- Stage Selection -->
@@ -883,14 +881,19 @@
                 </tbody>
               </table>
               
+              <!-- Current Configuration Display - moved here -->
+              <div class="current-config" id="current-config">
+                Current: Full Dataset • Gpt-4o • c-Interact • Reward*
+              </div>
+              
               <!-- Description based on current mode -->
               <div id="table-description">
                 <p>
                   <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
-                  <li><strong>Phase-1 pass rate (PR)</strong> means the pass rate of ambiguity resolution phase.</li>
-                  <li><strong>Phase-1-Debug PR</strong> means the pass rate of the ambiguity resolution phase with the chance of debugging.</li>
-                  <li><strong>Phase-2 PR</strong> means the pass rate of both phase 1 and the follow up question phase.</li>
-                  <li><strong>Phase-2-Debug PR</strong> means pass rate of both phase 1 and follow up question phase with the chance of debugging.</li>
+                  <li><strong>Phase-1 success rate (SR)</strong> means the success rate of ambiguity resolution phase.</li>
+                  <li><strong>Phase-1-Debug SR</strong> means the success rate of the ambiguity resolution phase with the chance of debugging.</li>
+                  <li><strong>Phase-2 SR</strong> means the success rate of both phase 1 and the follow up question phase.</li>
+                  <li><strong>Phase-2-Debug SR</strong> means success rate of both phase 1 and follow up question phase with the chance of debugging.</li>
                 </p>
                 <strong>Tier Classification (By Ranking):</strong>
                 <ul id="tier-description">
@@ -1333,7 +1336,7 @@
           if (currentFilters.performance === 'reward') {
             metricHeader.textContent = 'Reward*';
           } else {
-            metricHeader.textContent = 'Pass Rate (%)';
+            metricHeader.textContent = 'Success Rate (%)';
           }
           
           // Clear existing rows
@@ -1388,6 +1391,6 @@
           simulatorCost.textContent = `${simulatorName}.`;
         }
       </script>
-    </div><!-- /.container --> <!-- /. with avg total cost of ${cost} -->
+    </div><!-- /.container -->
   </body>
 </html>
