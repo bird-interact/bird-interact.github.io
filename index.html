@@ -539,8 +539,8 @@
 
       /* 朴素的配置显示 */
       .current-config {
-        background: #f8f9fa;
-        color: #495057;
+        background: #f0f8ff;
+        color: #2c5282;
         padding: 12px 16px;
         border-radius: 8px;
         margin-top: 15px;
@@ -548,7 +548,7 @@
         font-size: 13px;
         text-align: center;
         font-weight: 400;
-        border: 1px solid #dee2e6;
+        border: 1px solid #bee3f8;
       }
 
       /* Responsive design */
@@ -1065,70 +1065,98 @@
               { rank: 1, model: "Gemini-2.5-pro", passRate: "20.92", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
               { rank: 2, model: "o3-mini", passRate: "20.27", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
               { rank: 3, model: "Claude-sonnet-4", passRate: "18.35", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "Deepseek-chat-v3.1", passRate: "15.15", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "Claude-3.7-sonnet", passRate: "13.87", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "GPT-5", passRate: "12.58", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "GPT-5-chat", passRate: "9.65", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 4, model: "Qwen3_coder", passRate: "17.75", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Deepseek-chat-v3.1", passRate: "15.15", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Claude-3.7-sonnet", passRate: "13.87", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5", passRate: "12.58", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-chat", passRate: "9.65", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'Phase1-amb': [
               { rank: 1, model: "Gemini-2.5-pro", passRate: "18.83", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
               { rank: 2, model: "o3-mini", passRate: "18.50", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 3, model: "Deepseek-chat-v3.1", passRate: "17.00", institute: "deepseek", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "Claude-sonnet-4", passRate: "15.67", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "GPT-5", passRate: "13.83", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "Claude-3.7-sonnet", passRate: "12.50", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "GPT-5-chat", passRate: "10.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 3, model: "Qwen3_coder", passRate: "18.50", institute: "qwen", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Deepseek-chat-v3.1", passRate: "17.00", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Claude-sonnet-4", passRate: "15.67", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "GPT-5", passRate: "13.83", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "Claude-3.7-sonnet", passRate: "12.50", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-chat", passRate: "10.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'Phase1-debug': [
               { rank: 1, model: "Gemini-2.5-pro", passRate: "25.00", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
               { rank: 2, model: "o3-mini", passRate: "24.00", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
               { rank: 3, model: "Claude-sonnet-4", passRate: "22.33", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "Deepseek-chat-v3.1", passRate: "18.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "Claude-3.7-sonnet", passRate: "18.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "GPT-5", passRate: "14.50", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "GPT-5-chat", passRate: "11.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 4, model: "Qwen3_coder", passRate: "22.00", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Deepseek-chat-v3.1", passRate: "18.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Claude-3.7-sonnet", passRate: "18.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5", passRate: "14.50", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-chat", passRate: "11.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'Phase2-FU': [
               { rank: 1, model: "o3-mini", passRate: "14.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
               { rank: 2, model: "Gemini-2.5-pro", passRate: "13.83", institute: "google", date: "2025-08-22", tier: "💎 Good Chat" },
               { rank: 3, model: "Claude-sonnet-4", passRate: "12.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "GPT-5", passRate: "8.33", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "Deepseek-chat-v3.1", passRate: "8.00", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "Claude-3.7-sonnet", passRate: "7.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "GPT-5-chat", passRate: "6.33", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 4, model: "Qwen3_coder", passRate: "8.83", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "GPT-5", passRate: "8.33", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Deepseek-chat-v3.1", passRate: "8.00", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "Claude-3.7-sonnet", passRate: "7.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-chat", passRate: "6.33", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'Phase2-debug': [
               { rank: 1, model: "Gemini-2.5-pro", passRate: "16.33", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
               { rank: 2, model: "o3-mini", passRate: "15.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
               { rank: 3, model: "Claude-sonnet-4", passRate: "14.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "GPT-5", passRate: "8.67", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "Deepseek-chat-v3.1", passRate: "8.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "Claude-3.7-sonnet", passRate: "8.33", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "GPT-5-chat", passRate: "7.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 4, model: "Qwen3_coder", passRate: "10.83", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "GPT-5", passRate: "8.67", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Deepseek-chat-v3.1", passRate: "8.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "Claude-3.7-sonnet", passRate: "8.33", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-chat", passRate: "7.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+            ]
+          },
+
+          'lite-gpt-4o-c-interact': {
+            'Reward*': [
+              { rank: 1, model: "o3-mini", passRate: "27.67", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-sonnet", passRate: "24.44", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+            ],
+            'Phase1-amb': [
+              { rank: 1, model: "o3-mini", passRate: "30.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-sonnet", passRate: "28.15", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+            ],
+            'Phase1-debug': [
+              { rank: 1, model: "o3-mini", passRate: "31.48", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-sonnet", passRate: "29.26", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+            ],
+            'Phase2-FU': [
+              { rank: 1, model: "o3-mini", passRate: "19.26", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-sonnet", passRate: "11.11", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+            ],
+            'Phase2-debug': [
+              { rank: 1, model: "o3-mini", passRate: "20.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-sonnet", passRate: "14.44", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
             ]
           },
 
           'full-gpt-4o-a-interact': {
             'Reward*': [
-              { rank: 1, model: "claude-3-7-sonnet", passRate: "17.33", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "gpt-4o-2024-11-20", passRate: "16.48", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 3, model: "o3-mini", passRate: "16.43", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "qwen3-235b-a22b", passRate: "16.42", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 1, model: "anthropic-claude-3-7-sonnet", passRate: "17.45", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "openai-gpt-4o-2024-11-20", passRate: "16.95", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 3, model: "openai-o3-mini", passRate: "16.43", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "qwen-qwen3-235b-a22b", passRate: "16.42", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
               { rank: 5, model: "gemini-2-0-flash-001", passRate: "15.17", institute: "google", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "claude-3-7-sonnet", passRate: "22.83", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "gpt-4o-2024-11-20", passRate: "21.83", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 3, model: "o3-mini", passRate: "19.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "qwen3-235b-a22b", passRate: "19.17", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 1, model: "anthropic-claude-3-7-sonnet", passRate: "21.00", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "openai-gpt-4o-2024-11-20", passRate: "21.00", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 3, model: "openai-o3-mini", passRate: "19.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "qwen-qwen3-235b-a22b", passRate: "19.17", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
               { rank: 5, model: "gemini-2-0-flash-001", passRate: "18.17", institute: "google", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "qwen3-235b-a22b", passRate: "10.00", institute: "qwen", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "o3-mini", passRate: "8.50", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 3, model: "gemini-2-0-flash-001", passRate: "8.17", institute: "google", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "claude-3-7-sonnet", passRate: "4.50", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "gpt-4o-2024-11-20", passRate: "4.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "qwen-qwen3-235b-a22b", passRate: "10.00", institute: "qwen", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "anthropic-claude-3-7-sonnet", passRate: "9.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 3, model: "openai-o3-mini", passRate: "8.50", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "gemini-2-0-flash-001", passRate: "8.17", institute: "google", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "openai-gpt-4o-2024-11-20", passRate: "7.50", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ]
           },
 
