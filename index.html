@@ -307,14 +307,15 @@
         padding: 0.42em;
       }
       
-      /* Column widths */
+      /* Column widths - updated to include User Simulator column */
       #leaderboard-table th:nth-child(1), #leaderboard-table td:nth-child(1) { width: 5%; }  /* Rank */
-      #leaderboard-table th:nth-child(2), #leaderboard-table td:nth-child(2) { width: 25%; } /* Model */
-      #leaderboard-table th:nth-child(3), #leaderboard-table td:nth-child(3) { width: 15%; } /* Metric */
-      #leaderboard-table th:nth-child(4), #leaderboard-table td:nth-child(4) { width: 8%; }  /* Institute */
-      #leaderboard-table th:nth-child(5), #leaderboard-table td:nth-child(5) { width: 5%; }  /* Link */
-      #leaderboard-table th:nth-child(6), #leaderboard-table td:nth-child(6) { width: 12%; } /* Date */
-      #leaderboard-table th:nth-child(7), #leaderboard-table td:nth-child(7) { width: 10%; } /* Tier */
+      #leaderboard-table th:nth-child(2), #leaderboard-table td:nth-child(2) { width: 22%; } /* Model */
+      #leaderboard-table th:nth-child(3), #leaderboard-table td:nth-child(3) { width: 12%; } /* User Simulator */
+      #leaderboard-table th:nth-child(4), #leaderboard-table td:nth-child(4) { width: 12%; } /* Metric */
+      #leaderboard-table th:nth-child(5), #leaderboard-table td:nth-child(5) { width: 8%; }  /* Institute */
+      #leaderboard-table th:nth-child(6), #leaderboard-table td:nth-child(6) { width: 5%; }  /* Link */
+      #leaderboard-table th:nth-child(7), #leaderboard-table td:nth-child(7) { width: 10%; } /* Date */
+      #leaderboard-table th:nth-child(8), #leaderboard-table td:nth-child(8) { width: 10%; } /* Tier */
       
       /* Custom cell classes */
       .rank-cell {
@@ -325,7 +326,7 @@
       }
       
       .model-cell {
-        width: 25%;
+        width: 22%;
       }
       
       .date-cell {
@@ -1028,9 +1029,11 @@
                 <div class="filter-group">
                   <div class="filter-label">User Simulator</div>
                   <select id="simulator-filter" class="filter-select">
+                    <option value="all" selected>All</option>
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
-                    <option value="gpt-4o" selected>GPT-4o</option>
+                    <option value="gpt-4o">GPT-4o</option>
                     <option value="bird-chat-8b">Bird-chat-8B</option>
+                    <option value="DIY">DIY</option>
                   </select>
                 </div>
                 
@@ -1076,6 +1079,7 @@
                   <tr>
                     <th scope="col">Rank</th>
                     <th scope="col">Model</th>
+                    <th scope="col">User Simulator</th>
                     <th scope="col" id="metric-header">Reward*</th>
                     <th scope="col">Institute</th>
                     <th scope="col">Link</th>
@@ -1090,7 +1094,7 @@
               
               <!-- Current Configuration Display - moved here -->
               <div class="current-config" id="current-config">
-                Current: Full Dataset • GPT-4o • c-Interact • Reward*
+                Current: Full Dataset • All Simulators • c-Interact • Reward*
               </div>
               
               <!-- Description based on current mode -->
@@ -1109,7 +1113,7 @@
                   <li>🌟 Standard: Top 60%</li>
                   <li>⚪ Basic: Bottom 40%</li>
                 </ul>
-                <p><strong>🧑‍💻 User Simulator:</strong> <span id="simulator-cost">GPT-4o.</span></p>
+                <p><strong>🧑‍💻 User Simulator:</strong> <span id="simulator-cost">All simulators combined.</span></p>
               </div>
             </div>
           </div>
@@ -1138,281 +1142,200 @@
       
       <!-- Updated Leaderboard Logic Script -->
       <script>
-        // Complete dataset structure with all combinations - FIXED DATA MAPPING
+        // Complete dataset structure with all combinations
         const allLeaderboardData = {
-          // lite + Gemini-2.0-Flash + c-interact: Contains the original c-interact data
           'lite-Gemini-2.0-Flash-c-interact': {
             'Reward*': [
-              { rank: 1, model: "O3-Mini", passRate: "32.93", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "GPT-4o", passRate: "29.67", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
-              { rank: 3, model: "Gemini-2.0-Flash", passRate: "27.63", institute: "google", date: "2025-04-20", tier: "💎 Good Chat" },
-              { rank: 4, model: "Claude-Sonnet-3.7", passRate: "26.10", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 5, model: "DeepSeek-R1", passRate: "22.10", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 6, model: "Qwen-3", passRate: "21.17", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-              { rank: 7, model: "DeepSeek-V3", passRate: "17.00", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+              { rank: 1, model: "O3-Mini", simulator: "Gemini-2.0-Flash", passRate: "32.93", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "GPT-4o", simulator: "Gemini-2.0-Flash", passRate: "29.67", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
+              { rank: 3, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", passRate: "27.63", institute: "google", date: "2025-04-20", tier: "💎 Good Chat" },
+              { rank: 4, model: "Claude-Sonnet-3.7", simulator: "Gemini-2.0-Flash", passRate: "26.10", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "DeepSeek-R1", simulator: "Gemini-2.0-Flash", passRate: "22.10", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen-3", simulator: "Gemini-2.0-Flash", passRate: "21.17", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", passRate: "17.00", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
             ],
             'Phase1-amb': [
-              { rank: 1, model: "O3-Mini", passRate: "35.00", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "GPT-4o", passRate: "29.00", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
-              { rank: 3, model: "Claude-Sonnet-3.7", passRate: "29.00", institute: "anthropic", date: "2025-04-20", tier: "💎 Good Chat" },
-              { rank: 4, model: "Gemini-2.0-Flash", passRate: "27.33", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 5, model: "DeepSeek-R1", passRate: "22.00", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 6, model: "Qwen-3", passRate: "22.33", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-              { rank: 7, model: "DeepSeek-V3", passRate: "17.00", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+              { rank: 1, model: "O3-Mini", simulator: "Gemini-2.0-Flash", passRate: "35.00", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "GPT-4o", simulator: "Gemini-2.0-Flash", passRate: "29.00", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-Sonnet-3.7", simulator: "Gemini-2.0-Flash", passRate: "29.00", institute: "anthropic", date: "2025-04-20", tier: "💎 Good Chat" },
+              { rank: 4, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", passRate: "27.33", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "DeepSeek-R1", simulator: "Gemini-2.0-Flash", passRate: "22.00", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen-3", simulator: "Gemini-2.0-Flash", passRate: "22.33", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", passRate: "17.00", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
             ],
             'Phase1-debug': [
-              { rank: 1, model: "O3-Mini", passRate: "37.33", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-              { rank: 2, model: "GPT-4o", passRate: "36.00", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-              { rank: 3, model: "Gemini-2.0-Flash", passRate: "32.33", institute: "google", date: "2025-04-20", tier: "💎 Good" },
-              { rank: 4, model: "Claude-Sonnet-3.7", passRate: "32.00", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 5, model: "DeepSeek-R1", passRate: "26.33", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 6, model: "Qwen-3", passRate: "25.00", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-              { rank: 7, model: "DeepSeek-V3", passRate: "20.33", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+              { rank: 1, model: "O3-Mini", simulator: "Gemini-2.0-Flash", passRate: "37.33", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+              { rank: 2, model: "GPT-4o", simulator: "Gemini-2.0-Flash", passRate: "36.00", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 3, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", passRate: "32.33", institute: "google", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 4, model: "Claude-Sonnet-3.7", simulator: "Gemini-2.0-Flash", passRate: "32.00", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "DeepSeek-R1", simulator: "Gemini-2.0-Flash", passRate: "26.33", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen-3", simulator: "Gemini-2.0-Flash", passRate: "25.00", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", passRate: "20.33", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
             ],
             'Phase2-FU': [
-              { rank: 1, model: "O3-Mini", passRate: "24.00", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-              { rank: 2, model: "Gemini-2.0-Flash", passRate: "18.67", institute: "google", date: "2025-04-20", tier: "💎 Good" },
-              { rank: 3, model: "GPT-4o", passRate: "18.67", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-              { rank: 4, model: "DeepSeek-R1", passRate: "13.33", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 5, model: "Qwen-3", passRate: "12.67", institute: "qwen", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 6, model: "Claude-Sonnet-3.7", passRate: "11.67", institute: "anthropic", date: "2025-04-20", tier: "⚪ Basic" },
-              { rank: 7, model: "DeepSeek-V3", passRate: "10.33", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+              { rank: 1, model: "O3-Mini", simulator: "Gemini-2.0-Flash", passRate: "24.00", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+              { rank: 2, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", passRate: "18.67", institute: "google", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 3, model: "GPT-4o", simulator: "Gemini-2.0-Flash", passRate: "18.67", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 4, model: "DeepSeek-R1", simulator: "Gemini-2.0-Flash", passRate: "13.33", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "Qwen-3", simulator: "Gemini-2.0-Flash", passRate: "12.67", institute: "qwen", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Claude-Sonnet-3.7", simulator: "Gemini-2.0-Flash", passRate: "11.67", institute: "anthropic", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", passRate: "10.33", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
             ],
             'Phase2-debug': [
-              { rank: 1, model: "O3-Mini", passRate: "24.33", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-              { rank: 2, model: "Gemini-2.0-Flash", passRate: "20.67", institute: "google", date: "2025-04-20", tier: "💎 Good" },
-              { rank: 3, model: "GPT-4o", passRate: "20.00", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-              { rank: 4, model: "DeepSeek-R1", passRate: "16.00", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 5, model: "Claude-Sonnet-3.7", passRate: "15.67", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 6, model: "Qwen-3", passRate: "14.67", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-              { rank: 7, model: "DeepSeek-V3", passRate: "12.00", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
+              { rank: 1, model: "O3-Mini", simulator: "Gemini-2.0-Flash", passRate: "24.33", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
+              { rank: 2, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", passRate: "20.67", institute: "google", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 3, model: "GPT-4o", simulator: "Gemini-2.0-Flash", passRate: "20.00", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
+              { rank: 4, model: "DeepSeek-R1", simulator: "Gemini-2.0-Flash", passRate: "16.00", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "Claude-Sonnet-3.7", simulator: "Gemini-2.0-Flash", passRate: "15.67", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Qwen-3", simulator: "Gemini-2.0-Flash", passRate: "14.67", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", passRate: "12.00", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
             ]
           },
-          // 'lite-Gemini-2.0-Flash-c-interact': {
-          //   'Reward*': [
-          //     { rank: 1, model: "O3-Mini", passRate: "33.04", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
-          //     { rank: 2, model: "GPT-4o", passRate: "30.33", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
-          //     { rank: 3, model: "Gemini-2.0-Flash", passRate: "27.41", institute: "google", date: "2025-04-20", tier: "💎 Good Chat" },
-          //     { rank: 4, model: "Claude-3.7-Sonnet", passRate: "26.60", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 5, model: "DeepSeek-R1", passRate: "21.74", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 6, model: "Qwen-3-235B", passRate: "20.33", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-          //     { rank: 7, model: "DeepSeek-V3", passRate: "15.85", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          //   ],
-          //   'Phase1-amb': [
-          //     { rank: 1, model: "O3-Mini", passRate: "35.19", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent Chat" },
-          //     { rank: 2, model: "Claude-3.7-Sonnet", passRate: "29.63", institute: "anthropic", date: "2025-04-20", tier: "💎 Good Chat" },
-          //     { rank: 3, model: "GPT-4o", passRate: "29.63", institute: "openai", date: "2025-04-20", tier: "💎 Good Chat" },
-          //     { rank: 4, model: "Gemini-2.0-Flash", passRate: "27.78", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 5, model: "DeepSeek-R1", passRate: "21.48", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 6, model: "Qwen-3-235B", passRate: "21.48", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-          //     { rank: 7, model: "DeepSeek-V3", passRate: "15.56", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          //   ],
-          //   'Phase1-debug': [
-          //     { rank: 1, model: "O3-Mini", passRate: "37.41", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-          //     { rank: 2, model: "GPT-4o", passRate: "36.67", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-          //     { rank: 3, model: "Claude-3.7-Sonnet", passRate: "32.59", institute: "anthropic", date: "2025-04-20", tier: "💎 Good" },
-          //     { rank: 4, model: "Gemini-2.0-Flash", passRate: "32.22", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 5, model: "DeepSeek-R1", passRate: "25.93", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 6, model: "Qwen-3-235B", passRate: "24.07", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-          //     { rank: 7, model: "DeepSeek-V3", passRate: "19.26", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          //   ],
-          //   'Phase2-FU': [
-          //     { rank: 1, model: "O3-Mini", passRate: "24.07", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-          //     { rank: 2, model: "GPT-4o", passRate: "19.26", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-          //     { rank: 3, model: "Gemini-2.0-Flash", passRate: "18.15", institute: "google", date: "2025-04-20", tier: "💎 Good" },
-          //     { rank: 4, model: "DeepSeek-R1", passRate: "12.96", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 5, model: "Claude-3.7-Sonnet", passRate: "11.85", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 6, model: "Qwen-3-235B", passRate: "11.85", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-          //     { rank: 7, model: "DeepSeek-V3", passRate: "9.63", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          //   ],
-          //   'Phase2-debug': [
-          //     { rank: 1, model: "O3-Mini", passRate: "24.44", institute: "openai_reasoning", date: "2025-04-20", tier: "🏆 Excellent" },
-          //     { rank: 2, model: "GPT-4o", passRate: "20.74", institute: "openai", date: "2025-04-20", tier: "💎 Good" },
-          //     { rank: 3, model: "Gemini-2.0-Flash", passRate: "19.63", institute: "google", date: "2025-04-20", tier: "💎 Good" },
-          //     { rank: 4, model: "Claude-3.7-Sonnet", passRate: "15.93", institute: "anthropic", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 5, model: "DeepSeek-R1", passRate: "15.93", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 6, model: "Qwen-3-235B", passRate: "14.07", institute: "qwen", date: "2025-04-20", tier: "⚪ Basic" },
-          //     { rank: 7, model: "DeepSeek-V3", passRate: "10.74", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" }
-          //   ]
-          // },
           
           'full-gpt-4o-c-interact': {
             'Reward*': [
-              { rank: 1, model: "Gemini-2.5-Pro", passRate: "20.92", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "O3-Mini", passRate: "20.27", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 3, model: "Claude-Sonnet-4", passRate: "18.35", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "Qwen-3-Coder-480B", passRate: "17.75", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "Deepseek-Chat-v3.1", passRate: "15.15", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "Claude-3.7-Sonnet", passRate: "13.87", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "GPT-5", passRate: "12.58", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 8, model: "GPT-5-Chat", passRate: "9.65", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "Gemini-2.5-Pro", simulator: "GPT-4o", passRate: "20.92", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "O3-Mini", simulator: "GPT-4o", passRate: "20.27", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", passRate: "18.35", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", passRate: "17.75", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Deepseek-Chat-v3.1", simulator: "GPT-4o", passRate: "15.15", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "13.87", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5", simulator: "GPT-4o", passRate: "12.58", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-Chat", simulator: "GPT-4o", passRate: "9.65", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'Phase1-amb': [
-              { rank: 1, model: "Gemini-2.5-Pro", passRate: "18.83", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "O3-Mini", passRate: "18.50", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 3, model: "Qwen-3-Coder-480B", passRate: "18.50", institute: "qwen", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "Deepseek-Chat-v3.1", passRate: "17.00", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "Claude-Sonnet-4", passRate: "15.67", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "GPT-5", passRate: "13.83", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "Claude-3.7-Sonnet", passRate: "12.50", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 8, model: "GPT-5-Chat", passRate: "10.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "Gemini-2.5-Pro", simulator: "GPT-4o", passRate: "18.83", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "O3-Mini", simulator: "GPT-4o", passRate: "18.50", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", passRate: "18.50", institute: "qwen", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Deepseek-Chat-v3.1", simulator: "GPT-4o", passRate: "17.00", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Claude-Sonnet-4", simulator: "GPT-4o", passRate: "15.67", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "GPT-5", simulator: "GPT-4o", passRate: "13.83", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "12.50", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-Chat", simulator: "GPT-4o", passRate: "10.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'Phase1-debug': [
-              { rank: 1, model: "Gemini-2.5-Pro", passRate: "25.00", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "O3-Mini", passRate: "24.00", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 3, model: "Claude-Sonnet-4", passRate: "22.33", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "Qwen-3-Coder-480B", passRate: "22.00", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "Deepseek-Chat-v3.1", passRate: "18.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "Claude-3.7-Sonnet", passRate: "18.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "GPT-5", passRate: "14.50", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 8, model: "GPT-5-Chat", passRate: "11.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "Gemini-2.5-Pro", simulator: "GPT-4o", passRate: "25.00", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "O3-Mini", simulator: "GPT-4o", passRate: "24.00", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", passRate: "22.33", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", passRate: "22.00", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "Deepseek-Chat-v3.1", simulator: "GPT-4o", passRate: "18.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "18.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "GPT-5", simulator: "GPT-4o", passRate: "14.50", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-Chat", simulator: "GPT-4o", passRate: "11.17", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'Phase2-FU': [
-              { rank: 1, model: "O3-Mini", passRate: "14.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "Gemini-2.5-Pro", passRate: "13.83", institute: "google", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 3, model: "Claude-Sonnet-4", passRate: "12.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "Qwen-3-Coder-480B", passRate: "8.83", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "GPT-5", passRate: "8.33", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "Deepseek-Chat-v3.1", passRate: "8.00", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "Claude-3.7-Sonnet", passRate: "7.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 8, model: "GPT-5-Chat", passRate: "6.33", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "O3-Mini", simulator: "GPT-4o", passRate: "14.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Gemini-2.5-Pro", simulator: "GPT-4o", passRate: "13.83", institute: "google", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", passRate: "12.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", passRate: "8.83", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "GPT-5", simulator: "GPT-4o", passRate: "8.33", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Deepseek-Chat-v3.1", simulator: "GPT-4o", passRate: "8.00", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "7.00", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-Chat", simulator: "GPT-4o", passRate: "6.33", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'Phase2-debug': [
-              { rank: 1, model: "Gemini-2.5-Pro", passRate: "16.33", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "O3-Mini", passRate: "15.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 3, model: "Claude-Sonnet-4", passRate: "14.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
-              { rank: 4, model: "Qwen-3-Coder-480B", passRate: "10.83", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 5, model: "GPT-5", passRate: "8.67", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 6, model: "Deepseek-Chat-v3.1", passRate: "8.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "Claude-3.7-Sonnet", passRate: "8.33", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 8, model: "GPT-5-Chat", passRate: "7.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "Gemini-2.5-Pro", simulator: "GPT-4o", passRate: "16.33", institute: "google", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "O3-Mini", simulator: "GPT-4o", passRate: "15.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", passRate: "14.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" },
+              { rank: 4, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", passRate: "10.83", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 5, model: "GPT-5", simulator: "GPT-4o", passRate: "8.67", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 6, model: "Deepseek-Chat-v3.1", simulator: "GPT-4o", passRate: "8.50", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "8.33", institute: "anthropic", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-5-Chat", simulator: "GPT-4o", passRate: "7.00", institute: "openai", date: "2025-08-22", tier: "⚪ Basic" }
             ]
           },
 
           'lite-gpt-4o-c-interact': {
             'Reward*': [
-              { rank: 1, model: "O3-Mini", passRate: "27.67", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "Claude-3.7-Sonnet", passRate: "24.44", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+              { rank: 1, model: "O3-Mini", simulator: "GPT-4o", passRate: "27.67", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "24.44", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
             ],
             'Phase1-amb': [
-              { rank: 1, model: "O3-Mini", passRate: "30.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "Claude-3.7-Sonnet", passRate: "28.15", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+              { rank: 1, model: "O3-Mini", simulator: "GPT-4o", passRate: "30.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "28.15", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
             ],
             'Phase1-debug': [
-              { rank: 1, model: "O3-Mini", passRate: "31.48", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "Claude-3.7-Sonnet", passRate: "29.26", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+              { rank: 1, model: "O3-Mini", simulator: "GPT-4o", passRate: "31.48", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "29.26", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
             ],
             'Phase2-FU': [
-              { rank: 1, model: "O3-Mini", passRate: "19.26", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "Claude-3.7-Sonnet", passRate: "11.11", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+              { rank: 1, model: "O3-Mini", simulator: "GPT-4o", passRate: "19.26", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "11.11", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
             ],
             'Phase2-debug': [
-              { rank: 1, model: "O3-Mini", passRate: "20.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
-              { rank: 2, model: "Claude-3.7-Sonnet", passRate: "14.44", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
+              { rank: 1, model: "O3-Mini", simulator: "GPT-4o", passRate: "20.00", institute: "openai_reasoning", date: "2025-08-22", tier: "🏆 Excellent Chat" },
+              { rank: 2, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "14.44", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Chat" }
             ]
           },
 
           'full-gpt-4o-a-interact': {
             'Reward*': [
-              { rank: 1, model: "GPT-5", passRate: "25.52", institute: "openai", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "Claude-Sonnet-4", passRate: "23.28", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 3, model: "Claude-3.7-Sonnet", passRate: "17.45", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "Gemini-2-5-Pro", passRate: "17.33", institute: "google", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 5, model: "GPT-4o", passRate: "16.95", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 6, model: "O3-Mini", passRate: "16.43", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 7, model: "Qwen-3-235B", passRate: "16.42", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 8, model: "Gemini-2.0-Flash", passRate: "15.17", institute: "google", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 9, model: "Deepseek-Chat-V3.1", passRate: "13.47", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 10, model: "Qwen-3-Coder-480B", passRate: "10.58", institute: "qwen", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "GPT-5", simulator: "GPT-4o", passRate: "25.52", institute: "openai", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "Claude-Sonnet-4", simulator: "GPT-4o", passRate: "23.28", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 3, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "17.45", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "Gemini-2-5-Pro", simulator: "GPT-4o", passRate: "17.33", institute: "google", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 5, model: "GPT-4o", simulator: "GPT-4o", passRate: "16.95", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 6, model: "O3-Mini", simulator: "GPT-4o", passRate: "16.43", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 7, model: "Qwen-3-235B", simulator: "GPT-4o", passRate: "16.42", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "Gemini-2.0-Flash", simulator: "GPT-4o", passRate: "15.17", institute: "google", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 9, model: "Deepseek-Chat-V3.1", simulator: "GPT-4o", passRate: "13.47", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 10, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", passRate: "10.58", institute: "qwen", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "GPT-5", passRate: "29.17", institute: "openai", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "Claude-Sonnet-4", passRate: "27.83", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 3, model: "Claude-3.7-Sonnet", passRate: "21.00", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "GPT-4o", passRate: "21.00", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 5, model: "Gemini-2-5-Pro", passRate: "20.33", institute: "google", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 6, model: "O3-Mini", passRate: "19.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 7, model: "Qwen-3-235B", passRate: "19.17", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 8, model: "Gemini-2.0-Flash", passRate: "18.17", institute: "google", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 9, model: "Deepseek-Chat-V3.1", passRate: "17.17", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 10, model: "Qwen-3-Coder-480B", passRate: "13.33", institute: "qwen", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "GPT-5", simulator: "GPT-4o", passRate: "29.17", institute: "openai", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "Claude-Sonnet-4", simulator: "GPT-4o", passRate: "27.83", institute: "anthropic", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 3, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "21.00", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "GPT-4o", simulator: "GPT-4o", passRate: "21.00", institute: "openai", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 5, model: "Gemini-2-5-Pro", simulator: "GPT-4o", passRate: "20.33", institute: "google", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 6, model: "O3-Mini", simulator: "GPT-4o", passRate: "19.83", institute: "openai_reasoning", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 7, model: "Qwen-3-235B", simulator: "GPT-4o", passRate: "19.17", institute: "qwen", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "Gemini-2.0-Flash", simulator: "GPT-4o", passRate: "18.17", institute: "google", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 9, model: "Deepseek-Chat-V3.1", simulator: "GPT-4o", passRate: "17.17", institute: "deepseek", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 10, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", passRate: "13.33", institute: "qwen", date: "2025-08-22", tier: "⚪ Basic" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "GPT-5", passRate: "17.00", institute: "openai", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "Claude-Sonnet-4", passRate: "12.67", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 3, model: "Gemini-2-5-Pro", passRate: "10.33", institute: "google", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 4, model: "Qwen-3-235B", passRate: "10.00", institute: "qwen", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 5, model: "Claude-3.7-Sonnet", passRate: "9.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
-              { rank: 6, model: "O3-Mini", passRate: "8.50", institute: "openai_reasoning", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 7, model: "Gemini-2.0-Flash", passRate: "8.17", institute: "google", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 8, model: "GPT-4o", passRate: "7.50", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
-              { rank: 9, model: "Deepseek-Chat-V3.1", passRate: "4.83", institute: "deepseek", date: "2025-08-22", tier: "⚪ Basic" },
-              { rank: 10, model: "Qwen-3-Coder-480B", passRate: "4.17", institute: "qwen", date: "2025-08-22", tier: "⚪ Basic" }
+              { rank: 1, model: "GPT-5", simulator: "GPT-4o", passRate: "17.00", institute: "openai", date: "2025-08-22", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "Claude-Sonnet-4", simulator: "GPT-4o", passRate: "12.67", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 3, model: "Gemini-2-5-Pro", simulator: "GPT-4o", passRate: "10.33", institute: "google", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 4, model: "Qwen-3-235B", simulator: "GPT-4o", passRate: "10.00", institute: "qwen", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 5, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", passRate: "9.17", institute: "anthropic", date: "2025-08-22", tier: "💎 Good Interaction" },
+              { rank: 6, model: "O3-Mini", simulator: "GPT-4o", passRate: "8.50", institute: "openai_reasoning", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 7, model: "Gemini-2.0-Flash", simulator: "GPT-4o", passRate: "8.17", institute: "google", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 8, model: "GPT-4o", simulator: "GPT-4o", passRate: "7.50", institute: "openai", date: "2025-08-22", tier: "🌟 Standard" },
+              { rank: 9, model: "Deepseek-Chat-V3.1", simulator: "GPT-4o", passRate: "4.83", institute: "deepseek", date: "2025-08-22", tier: "⚪ Basic" },
+              { rank: 10, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", passRate: "4.17", institute: "qwen", date: "2025-08-22", tier: "⚪ Basic" }
             ]
           },
 
-          // lite + Gemini-2.0-Flash + a-interact: Contains the original a-interact data
           'lite-Gemini-2.0-Flash-a-interact': {
             'Reward*': [
-              { rank: 1, model: "Claude-Sonnet-3.7", passRate: "29.10", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "O3-Mini", passRate: "21.57", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
-              { rank: 3, model: "Qwen-3", passRate: "19.60", institute: "qwen", date: "2025-04-20", tier: "💎 Good Interaction" },
-              { rank: 4, model: "DeepSeek-V3", passRate: "19.23", institute: "deepseek", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 5, model: "GPT-4o", passRate: "19.03", institute: "openai", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 6, model: "DeepSeek-R1", passRate: "18.40", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" },
-              { rank: 7, model: "Gemini-2.0-Flash", passRate: "17.80", institute: "google", date: "2025-04-20", tier: "⚪ Basic" }
+              { rank: 1, model: "Claude-Sonnet-3.7", simulator: "Gemini-2.0-Flash", passRate: "29.10", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "O3-Mini", simulator: "Gemini-2.0-Flash", passRate: "21.57", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 3, model: "Qwen-3", simulator: "Gemini-2.0-Flash", passRate: "19.60", institute: "qwen", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 4, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", passRate: "19.23", institute: "deepseek", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "GPT-4o", simulator: "Gemini-2.0-Flash", passRate: "19.03", institute: "openai", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "DeepSeek-R1", simulator: "Gemini-2.0-Flash", passRate: "18.40", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", passRate: "17.80", institute: "google", date: "2025-04-20", tier: "⚪ Basic" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "Claude-Sonnet-3.7", passRate: "34.00", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "O3-Mini", passRate: "25.67", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
-              { rank: 3, model: "DeepSeek-V3", passRate: "23.33", institute: "deepseek", date: "2025-04-20", tier: "💎 Good Interaction" },
-              { rank: 4, model: "GPT-4o", passRate: "23.33", institute: "openai", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 5, model: "Qwen-3", passRate: "22.00", institute: "qwen", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 6, model: "Gemini-2.0-Flash", passRate: "21.00", institute: "google", date: "2025-04-20", tier: "⚪ Basic" },
-              { rank: 7, model: "DeepSeek-R1", passRate: "21.00", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" }
+              { rank: 1, model: "Claude-Sonnet-3.7", simulator: "Gemini-2.0-Flash", passRate: "34.00", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "O3-Mini", simulator: "Gemini-2.0-Flash", passRate: "25.67", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 3, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", passRate: "23.33", institute: "deepseek", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 4, model: "GPT-4o", simulator: "Gemini-2.0-Flash", passRate: "23.33", institute: "openai", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "Qwen-3", simulator: "Gemini-2.0-Flash", passRate: "22.00", institute: "qwen", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", passRate: "21.00", institute: "google", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "DeepSeek-R1", simulator: "Gemini-2.0-Flash", passRate: "21.00", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "Claude-Sonnet-3.7", passRate: "17.67", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
-              { rank: 2, model: "Qwen-3", passRate: "14.00", institute: "qwen", date: "2025-04-20", tier: "💎 Good Interaction" },
-              { rank: 3, model: "DeepSeek-R1", passRate: "12.33", institute: "deepseek-reason", date: "2025-04-20", tier: "💎 Good Interaction" },
-              { rank: 4, model: "O3-Mini", passRate: "12.00", institute: "openai_reasoning", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 5, model: "Gemini-2.0-Flash", passRate: "10.33", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
-              { rank: 6, model: "DeepSeek-V3", passRate: "9.67", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" },
-              { rank: 7, model: "GPT-4o", passRate: "9.00", institute: "openai", date: "2025-04-20", tier: "⚪ Basic" }
+              { rank: 1, model: "Claude-Sonnet-3.7", simulator: "Gemini-2.0-Flash", passRate: "17.67", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
+              { rank: 2, model: "Qwen-3", simulator: "Gemini-2.0-Flash", passRate: "14.00", institute: "qwen", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 3, model: "DeepSeek-R1", simulator: "Gemini-2.0-Flash", passRate: "12.33", institute: "deepseek-reason", date: "2025-04-20", tier: "💎 Good Interaction" },
+              { rank: 4, model: "O3-Mini", simulator: "Gemini-2.0-Flash", passRate: "12.00", institute: "openai_reasoning", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 5, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", passRate: "10.33", institute: "google", date: "2025-04-20", tier: "🌟 Standard" },
+              { rank: 6, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", passRate: "9.67", institute: "deepseek", date: "2025-04-20", tier: "⚪ Basic" },
+              { rank: 7, model: "GPT-4o", simulator: "Gemini-2.0-Flash", passRate: "9.00", institute: "openai", date: "2025-04-20", tier: "⚪ Basic" }
             ]
           }
-          // 'lite-Gemini-2.0-Flash-a-interact': {
-          //   'Reward*': [
-          //     { rank: 1, model: "Claude-3.7-Sonnet", passRate: "29.19", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
-          //     { rank: 2, model: "O3-Mini", passRate: "21.07", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
-          //     { rank: 3, model: "DeepSeek-V3", passRate: "19.19", institute: "deepseek", date: "2025-04-20", tier: "💎 Good Interaction" },
-          //     { rank: 4, model: "Qwen-3-235B", passRate: "18.74", institute: "qwen", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 5, model: "GPT-4o", passRate: "18.37", institute: "openai", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 6, model: "Gemini-2.0-Flash", passRate: "17.26", institute: "google", date: "2025-04-20", tier: "⚪ Basic" },
-          //     { rank: 7, model: "DeepSeek-R1", passRate: "17.07", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" }
-          //   ],
-          //   'a-Phase1': [
-          //     { rank: 1, model: "Claude-3.7-Sonnet", passRate: "34.07", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
-          //     { rank: 2, model: "O3-Mini", passRate: "25.19", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
-          //     { rank: 3, model: "DeepSeek-V3", passRate: "22.96", institute: "deepseek", date: "2025-04-20", tier: "💎 Good Interaction" },
-          //     { rank: 4, model: "GPT-4o", passRate: "22.59", institute: "openai", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 5, model: "Qwen-3-235B", passRate: "20.74", institute: "qwen", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 6, model: "Gemini-2.0-Flash", passRate: "20.37", institute: "google", date: "2025-04-20", tier: "⚪ Basic" },
-          //     { rank: 7, model: "DeepSeek-R1", passRate: "19.63", institute: "deepseek-reason", date: "2025-04-20", tier: "⚪ Basic" }
-          //   ],
-          //   'a-Phase2': [
-          //     { rank: 1, model: "Claude-3.7-Sonnet", passRate: "17.78", institute: "anthropic", date: "2025-04-20", tier: "🏆 Excellent Interaction" },
-          //     { rank: 2, model: "Qwen-3-235B", passRate: "14.07", institute: "qwen", date: "2025-04-20", tier: "💎 Good Interaction" },
-          //     { rank: 3, model: "O3-Mini", passRate: "11.48", institute: "openai_reasoning", date: "2025-04-20", tier: "💎 Good Interaction" },
-          //     { rank: 4, model: "DeepSeek-R1", passRate: "11.11", institute: "deepseek-reason", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 5, model: "DeepSeek-V3", passRate: "10.37", institute: "deepseek", date: "2025-04-20", tier: "🌟 Standard" },
-          //     { rank: 6, model: "Gemini-2.0-Flash", passRate: "10.00", institute: "google", date: "2025-04-20", tier: "⚪ Basic" },
-          //     { rank: 7, model: "GPT-4o", passRate: "8.52", institute: "openai", date: "2025-04-20", tier: "⚪ Basic" }
-          //   ]
-          // }
-
-          // All other combinations will show empty tables as placeholders
-          
         };
 
         // Configuration for different modes
@@ -1424,9 +1347,11 @@
             defaultSuccessStage: 'Phase1-amb',
             tierLabels: ['🏆 Excellent Chat', '💎 Good Chat', '🌟 Standard', '⚪ Basic'],
             costs: {
-              'Gemini-2.0-Flash': '1.91 USD',
-              'gpt-4o': '2.45 USD',
-              'bird-chat-8b': '0.85 USD'
+              'all': 'Combined results from all simulators',
+              'Gemini-2.0-Flash': 'Gemini-2.0-Flash simulator',
+              'gpt-4o': 'GPT-4o simulator',
+              'bird-chat-8b': 'Bird-chat-8B simulator',
+              'DIY': 'DIY simulator (data coming soon)'
             }
           },
           'a-interact': {
@@ -1436,9 +1361,11 @@
             defaultSuccessStage: 'a-Phase1',
             tierLabels: ['🏆 Excellent Interaction', '💎 Good Interaction', '🌟 Standard', '⚪ Basic'],
             costs: {
-              'Gemini-2.0-Flash': '1.56 USD',
-              'gpt-4o': '2.12 USD',
-              'bird-chat-8b': '0.72 USD'
+              'all': 'Combined results from all simulators',
+              'Gemini-2.0-Flash': 'Gemini-2.0-Flash simulator',
+              'gpt-4o': 'GPT-4o simulator',
+              'bird-chat-8b': 'Bird-chat-8B simulator',
+              'DIY': 'DIY simulator (data coming soon)'
             }
           }
         };
@@ -1446,23 +1373,16 @@
         // Global state
         let currentFilters = {
           dataset: 'full',
-          simulator: 'gpt-4o',
+          simulator: 'all',
           mode: 'c-interact',
           performance: 'reward'
         };
         let currentStage = 'Reward*';
 
         document.addEventListener('DOMContentLoaded', function () {
-          // Initialize filters
           initializeFilters();
-          
-          // Setup filter change listeners
           setupFilterListeners();
-          
-          // Setup stage selection listeners
           setupStageListeners();
-          
-          // Initial load
           updateModeDisplay();
           updateConfiguration();
           updateLeaderboard();
@@ -1490,7 +1410,6 @@
 
           document.getElementById('mode-filter').addEventListener('change', function() {
             currentFilters.mode = this.value;
-            // Reset to appropriate default stage when mode changes
             if (this.value === 'c-interact') {
               currentStage = currentFilters.performance === 'reward' ? 'Reward*' : 'Phase1-amb';
             } else {
@@ -1503,7 +1422,6 @@
 
           document.getElementById('performance-filter').addEventListener('change', function() {
             currentFilters.performance = this.value;
-            // Reset to default stage when performance changes
             if (this.value === 'reward') {
               currentStage = 'Reward*';
             } else {
@@ -1520,19 +1438,16 @@
             btn.addEventListener('click', function() {
               const clickedStage = this.getAttribute('data-dialect');
               
-              // Check if the clicked stage matches current performance filter
               if (currentFilters.performance === 'reward' && clickedStage.includes('Reward')) {
                 currentStage = clickedStage;
               } else if (currentFilters.performance === 'success-rate' && !clickedStage.includes('Reward')) {
                 currentStage = clickedStage;
               } else if (currentFilters.performance === 'reward' && !clickedStage.includes('Reward')) {
-                // If reward is selected but user clicks a phase, switch to success-rate
                 currentFilters.performance = 'success-rate';
                 document.getElementById('performance-filter').value = 'success-rate';
                 currentStage = clickedStage;
                 updateConfiguration();
               } else if (currentFilters.performance === 'success-rate' && clickedStage.includes('Reward')) {
-                // If success-rate is selected but user clicks reward, switch to reward
                 currentFilters.performance = 'reward';
                 document.getElementById('performance-filter').value = 'reward';
                 currentStage = clickedStage;
@@ -1549,14 +1464,17 @@
           const config = document.getElementById('current-config');
           const datasetText = currentFilters.dataset === 'lite' ? 'Lite Dataset (300 tasks)' : 'Full Dataset (600 tasks)';
           
-          // Fix simulator name formatting
           let simulatorText = currentFilters.simulator;
-          if (simulatorText === 'gpt-4o') {
+          if (simulatorText === 'all') {
+            simulatorText = 'All Simulators';
+          } else if (simulatorText === 'gpt-4o') {
             simulatorText = 'GPT-4o';
           } else if (simulatorText === 'Gemini-2.0-Flash') {
             simulatorText = 'Gemini-2.0-Flash';
           } else if (simulatorText === 'bird-chat-8b') {
             simulatorText = 'Bird-Chat-8B';
+          } else if (simulatorText === 'DIY') {
+            simulatorText = 'DIY';
           }
           
           const modeText = currentFilters.mode === 'c-interact' ? 'c-Interact' : 'a-Interact';
@@ -1596,16 +1514,12 @@
           const allStages = document.querySelectorAll('.stage-clickable.stage');
           const connectors = document.querySelectorAll('.connector');
 
-          // Reset all highlights
           overallBtn.classList.remove('active');
           allStages.forEach(el => el.classList.remove('active'));
           connectors.forEach(c => c.classList.remove('active'));
 
-          // Show/hide stages based on action mode and performance filter
           if (currentFilters.mode === 'c-interact') {
-            // For c-interact, show the complex progression
             if (currentFilters.performance === 'reward') {
-              // Show only Overall button
               overallBtn.style.display = 'block';
               allStages.forEach(el => el.style.display = 'none');
               connectors.forEach(conn => conn.style.display = 'none');
@@ -1613,7 +1527,6 @@
                 overallBtn.classList.add('active');
               }
             } else {
-              // Show phase progression
               overallBtn.style.display = 'none';
               allStages.forEach(el => {
                 const dialect = el.getAttribute('data-dialect');
@@ -1624,10 +1537,8 @@
                 }
               });
               
-              // Show connectors between visible stages
               connectors.forEach(conn => conn.style.display = 'block');
               
-              // Highlight progression
               const cStageOrder = config.successStages;
               const idx = cStageOrder.indexOf(currentStage);
               if (idx !== -1) {
@@ -1643,9 +1554,7 @@
               }
             }
           } else {
-            // For a-interact, show simplified progression
             if (currentFilters.performance === 'reward') {
-              // Show only Overall button
               overallBtn.style.display = 'block';
               allStages.forEach(el => el.style.display = 'none');
               connectors.forEach(conn => conn.style.display = 'none');
@@ -1653,7 +1562,6 @@
                 overallBtn.classList.add('active');
               }
             } else {
-              // Show only a-interact phases (Phase 1 → Phase 2)
               overallBtn.style.display = 'none';
               allStages.forEach(el => {
                 const dialect = el.getAttribute('data-dialect');
@@ -1664,7 +1572,6 @@
                 }
               });
               
-              // Show the a-interact connector
               const aConnector = document.getElementById('a-connector');
               connectors.forEach((conn, i) => {
                 if (conn === aConnector) {
@@ -1674,7 +1581,6 @@
                 }
               });
               
-              // Highlight progression for a-interact
               const aStageOrder = config.successStages;
               const idx = aStageOrder.indexOf(currentStage);
               if (idx !== -1) {
@@ -1693,55 +1599,143 @@
         }
 
         function updateLeaderboard() {
-          // FIXED: Build correct data key without performance suffix
-          const dataKey = `${currentFilters.dataset}-${currentFilters.simulator}-${currentFilters.mode}`;
-          const data = allLeaderboardData[dataKey];
           const tbody = document.getElementById('leaderboard-tbody');
           const metricHeader = document.getElementById('metric-header');
           
-          // Update metric header based on performance filter
           if (currentFilters.performance === 'reward') {
             metricHeader.textContent = 'Reward*';
           } else {
             metricHeader.textContent = 'Success Rate (%)';
           }
           
-          // Clear existing rows
           tbody.innerHTML = '';
           
-          if (data && data[currentStage]) {
-            // Populate with actual data
-            data[currentStage].forEach(entry => {
+          if (currentFilters.simulator === 'all') {
+            // Aggregate data from all simulators
+            const aggregatedData = aggregateAllSimulators();
+            
+            if (aggregatedData && aggregatedData.length > 0) {
+              aggregatedData.forEach(entry => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td class="rank-cell">${entry.rank}</td>
+                  <td class="model-cell">${entry.model}</td>
+                  <td>${entry.simulator}</td>
+                  <td>${entry.passRate}</td>
+                  <td>
+                    <img src="./img/institute_img/${entry.institute}.png"
+                         alt="${entry.institute}"
+                         style="max-height:20px;vertical-align:middle;" />
+                  </td>
+                  <td></td>
+                  <td><span class="date-cell">${entry.date}</span></td>
+                  <td>${entry.tier}</td>
+                `;
+                tbody.appendChild(tr);
+              });
+            } else {
               const tr = document.createElement('tr');
               tr.innerHTML = `
-                <td class="rank-cell">${entry.rank}</td>
-                <td class="model-cell">${entry.model}</td>
-                <td>${entry.passRate}</td>
-                <td>
-                  <img src="./img/institute_img/${entry.institute}.png"
-                       alt="${entry.institute}"
-                       style="max-height:20px;vertical-align:middle;" />
+                <td colspan="8" class="empty-table-message">
+                  Data for this combination will be available soon.<br>
+                  <small>Dataset: ${currentFilters.dataset} • Mode: ${currentFilters.mode} • Performance: ${currentFilters.performance}</small>
                 </td>
-                <td></td>
-                <td><span class="date-cell">${entry.date}</span></td>
-                <td>${entry.tier}</td>
               `;
               tbody.appendChild(tr);
-            });
-          } else {
-            // Show placeholder message
+            }
+          } else if (currentFilters.simulator === 'DIY') {
+            // Show placeholder for DIY
             const tr = document.createElement('tr');
             tr.innerHTML = `
-              <td colspan="7" class="empty-table-message">
-                Data for this combination will be available soon.<br>
-                <small>Dataset: ${currentFilters.dataset} • Simulator: ${currentFilters.simulator} • Mode: ${currentFilters.mode} • Performance: ${currentFilters.performance}</small>
+              <td colspan="8" class="empty-table-message">
+                DIY simulator data coming soon.<br>
+                <small>Stay tuned for updates!</small>
               </td>
             `;
             tbody.appendChild(tr);
+          } else {
+            // Show data for specific simulator
+            const dataKey = `${currentFilters.dataset}-${currentFilters.simulator}-${currentFilters.mode}`;
+            const data = allLeaderboardData[dataKey];
+            
+            if (data && data[currentStage]) {
+              data[currentStage].forEach(entry => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td class="rank-cell">${entry.rank}</td>
+                  <td class="model-cell">${entry.model}</td>
+                  <td>${entry.simulator}</td>
+                  <td>${entry.passRate}</td>
+                  <td>
+                    <img src="./img/institute_img/${entry.institute}.png"
+                         alt="${entry.institute}"
+                         style="max-height:20px;vertical-align:middle;" />
+                  </td>
+                  <td></td>
+                  <td><span class="date-cell">${entry.date}</span></td>
+                  <td>${entry.tier}</td>
+                `;
+                tbody.appendChild(tr);
+              });
+            } else {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td colspan="8" class="empty-table-message">
+                  Data for this combination will be available soon.<br>
+                  <small>Dataset: ${currentFilters.dataset} • Simulator: ${currentFilters.simulator} • Mode: ${currentFilters.mode} • Performance: ${currentFilters.performance}</small>
+                </td>
+              `;
+              tbody.appendChild(tr);
+            }
           }
           
-          // Update descriptions
           updateDescriptions();
+        }
+
+        function aggregateAllSimulators() {
+          // Collect all data from different simulators for the current dataset and mode
+          const allData = [];
+          const simulators = ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8b'];
+          
+          simulators.forEach(sim => {
+            const dataKey = `${currentFilters.dataset}-${sim}-${currentFilters.mode}`;
+            const data = allLeaderboardData[dataKey];
+            
+            if (data && data[currentStage]) {
+              data[currentStage].forEach(entry => {
+                allData.push({
+                  ...entry,
+                  simulator: sim === 'gpt-4o' ? 'GPT-4o' : sim === 'Gemini-2.0-Flash' ? 'Gemini-2.0-Flash' : 'Bird-chat-8B'
+                });
+              });
+            }
+          });
+          
+          // Sort by passRate descending and reassign ranks
+          allData.sort((a, b) => parseFloat(b.passRate) - parseFloat(a.passRate));
+          
+          // Reassign ranks
+          allData.forEach((entry, index) => {
+            entry.rank = index + 1;
+          });
+          
+          // Reassign tiers based on new rankings
+          const config = modeConfigs[currentFilters.mode];
+          const total = allData.length;
+          allData.forEach((entry, index) => {
+            const percentile = (index + 1) / total;
+            if (percentile <= 0.1) {
+              entry.tier = config.tierLabels[0];
+            } else if (percentile <= 0.3) {
+              entry.tier = config.tierLabels[1];
+            } else if (percentile <= 0.6) {
+              entry.tier = config.tierLabels[2];
+            } else {
+              entry.tier = config.tierLabels[3];
+            }
+          });
+          
+          return allData;
         }
 
         function updateDescriptions() {
@@ -1749,20 +1743,10 @@
           const tierDescription = document.getElementById('tier-description');
           const simulatorCost = document.getElementById('simulator-cost');
           
-          // Update tier descriptions
           tierDescription.innerHTML = config.tierLabels.map(label => `<li>${label}</li>`).join('');
           
-          // Update simulator cost with proper formatting
           const cost = config.costs[currentFilters.simulator];
-          let simulatorName = currentFilters.simulator;
-          if (simulatorName === 'gpt-4o') {
-            simulatorName = 'GPT-4o';
-          } else if (simulatorName === 'Gemini-2.0-Flash') {
-            simulatorName = 'Gemini-2.0-Flash';
-          } else if (simulatorName === 'bird-chat-8b') {
-            simulatorName = 'Bird-Chat-8B';
-          }
-          simulatorCost.textContent = `${simulatorName}.`;
+          simulatorCost.textContent = cost || 'Simulator information';
         }
       </script>
     </div><!-- /.container -->
