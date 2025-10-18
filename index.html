@@ -314,17 +314,17 @@
       #leaderboard-table-free th:nth-child(2), #leaderboard-table-free td:nth-child(2),
       #leaderboard-table-stress th:nth-child(2), #leaderboard-table-stress td:nth-child(2) { width: 22%; } /* Model */
       #leaderboard-table-free th:nth-child(3), #leaderboard-table-free td:nth-child(3),
-      #leaderboard-table-stress th:nth-child(3), #leaderboard-table-stress td:nth-child(3) { width: 8%; }  /* Budget/Efficiency */
+      #leaderboard-table-stress th:nth-child(3), #leaderboard-table-stress td:nth-child(3) { width: 8%; }  /* Institute */
       #leaderboard-table-free th:nth-child(4), #leaderboard-table-free td:nth-child(4),
-      #leaderboard-table-stress th:nth-child(4), #leaderboard-table-stress td:nth-child(4) { width: 12%; } /* Metric */
+      #leaderboard-table-stress th:nth-child(4), #leaderboard-table-stress td:nth-child(4) { width: 5%; }  /* Link */
       #leaderboard-table-free th:nth-child(5), #leaderboard-table-free td:nth-child(5),
-      #leaderboard-table-stress th:nth-child(5), #leaderboard-table-stress td:nth-child(5) { width: 8%; }  /* Institute */
+      #leaderboard-table-stress th:nth-child(5), #leaderboard-table-stress td:nth-child(5) { width: 10%; } /* Date */
       #leaderboard-table-free th:nth-child(6), #leaderboard-table-free td:nth-child(6),
-      #leaderboard-table-stress th:nth-child(6), #leaderboard-table-stress td:nth-child(6) { width: 5%; }  /* Link */
+      #leaderboard-table-stress th:nth-child(6), #leaderboard-table-stress td:nth-child(6) { width: 14%; } /* User Simulator */
       #leaderboard-table-free th:nth-child(7), #leaderboard-table-free td:nth-child(7),
-      #leaderboard-table-stress th:nth-child(7), #leaderboard-table-stress td:nth-child(7) { width: 10%; } /* Date */
+      #leaderboard-table-stress th:nth-child(7), #leaderboard-table-stress td:nth-child(7) { width: 8%; }  /* Budget/Efficiency */
       #leaderboard-table-free th:nth-child(8), #leaderboard-table-free td:nth-child(8),
-      #leaderboard-table-stress th:nth-child(8), #leaderboard-table-stress td:nth-child(8) { width: 14%; } /* User Simulator */
+      #leaderboard-table-stress th:nth-child(8), #leaderboard-table-stress td:nth-child(8) { width: 12%; } /* Metric */
       
       /* Custom cell classes */
       .rank-cell {
@@ -1091,7 +1091,7 @@
                     <option value="all" selected>All</option>
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
                     <option value="gpt-4o">GPT-4o</option>
-                    <option value="bird-chat-8b">Bird-chat-8B</option>
+                    <option value="bird-chat-8B">Bird-chat-8B</option>
                     <option value="DIY">DIY</option>
                   </select>
                 </div>
@@ -1138,12 +1138,12 @@
                   <tr>
                     <th scope="col">Rank</th>
                     <th scope="col">Model</th>
-                    <th scope="col">Efficiency</th>
-                    <th scope="col" id="metric-header-free">Success Rate (%)</th>
                     <th scope="col">Institute</th>
                     <th scope="col">Link</th>
                     <th scope="col">Date</th>
                     <th scope="col">User Simulator</th>
+                    <th scope="col">Efficiency</th>
+                    <th scope="col" id="metric-header-free">Success Rate (%)</th>
                   </tr>
                 </thead>
                 <tbody id="leaderboard-tbody-free">
@@ -1159,7 +1159,7 @@
               <!-- Description based on current mode -->
               <div id="table-description-free">
                 <p>
-                  <li><strong>Efficiency</strong> represents resource efficiency in Free Mode (no budget constraints).</li>
+                  <li><strong>Efficiency</strong> means the conversational turns used or BIRD COIN used in Free Mode (no budget constraints).</li>
                   <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
                   <li><strong>Phase-1 success rate (SR)</strong> means the success rate of ambiguity resolution phase.</li>
                   <li><strong>Phase-1-Debug SR</strong> means the success rate of the ambiguity resolution phase with the chance of debugging.</li>
@@ -1202,7 +1202,7 @@
                     <option value="all" selected>All</option>
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
                     <option value="gpt-4o">GPT-4o</option>
-                    <option value="bird-chat-8b">Bird-chat-8B</option>
+                    <option value="bird-chat-8B">Bird-chat-8B</option>
                     <option value="DIY">DIY</option>
                   </select>
                 </div>
@@ -1249,12 +1249,12 @@
                   <tr>
                     <th scope="col">Rank</th>
                     <th scope="col">Model</th>
-                    <th scope="col">Budget</th>
-                    <th scope="col" id="metric-header-stress">Success Rate (%)</th>
                     <th scope="col">Institute</th>
                     <th scope="col">Link</th>
                     <th scope="col">Date</th>
                     <th scope="col">User Simulator</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col" id="metric-header-stress">Success Rate (%)</th>
                   </tr>
                 </thead>
                 <tbody id="leaderboard-tbody-stress">
@@ -1903,7 +1903,7 @@
             simulatorText = 'GPT-4o';
           } else if (simulatorText === 'Gemini-2.0-Flash') {
             simulatorText = 'Gemini-2.0-Flash';
-          } else if (simulatorText === 'bird-chat-8b') {
+          } else if (simulatorText === 'bird-chat-8B') {
             simulatorText = 'Bird-Chat-8B';
           } else if (simulatorText === 'DIY') {
             simulatorText = 'DIY';
@@ -2047,7 +2047,7 @@
           const tbody = document.getElementById(`leaderboard-tbody-${tableType}`);
           const metricHeader = document.getElementById(`metric-header-${tableType}`);
           
-          // ✨ 关键修改:根据tableType选择不同的数据源
+          // 根据tableType选择不同的数据源
           const dataSource = tableType === 'free' ? freeLeaderboardData : stressLeaderboardData;
           
           if (filters.performance === 'reward') {
@@ -2059,7 +2059,7 @@
           tbody.innerHTML = '';
           
           if (filters.simulator === 'all') {
-            // ✨ 传递正确的数据源
+            // 传递正确的数据源
             const aggregatedData = aggregateAllSimulators(filters, currentStage, dataSource);
             
             if (aggregatedData && aggregatedData.length > 0) {
@@ -2069,8 +2069,6 @@
                 tr.innerHTML = `
                   <td class="rank-cell">${entry.rank}</td>
                   <td class="model-cell">${entry.model}</td>
-                  <td>${entry.budget}</td>
-                  <td>${entry.passRate}</td>
                   <td>
                     <img src="./img/institute_img/${entry.institute}.png"
                          alt="${entry.institute}"
@@ -2079,6 +2077,8 @@
                   <td></td>
                   <td><span class="date-cell">${entry.date}</span></td>
                   <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
+                  <td>${entry.budget}</td>
+                  <td>${entry.passRate}</td>
                 `;
                 tbody.appendChild(tr);
               });
@@ -2107,12 +2107,12 @@
               simulatorKey = 'gpt-4o';
             } else if (filters.simulator === 'Gemini-2.0-Flash') {
               simulatorKey = 'Gemini-2.0-Flash';
-            } else if (filters.simulator === 'bird-chat-8b') {
-              simulatorKey = 'bird-chat-8b';
+            } else if (filters.simulator === 'bird-chat-8B') {
+              simulatorKey = 'bird-chat-8B';
             }
             
             const dataKey = `${filters.dataset}-${simulatorKey}-${filters.mode}`;
-            // ✨ 从正确的数据源读取
+            // 从正确的数据源读取
             const data = dataSource[dataKey];
             
             if (data && data[currentStage]) {
@@ -2122,8 +2122,6 @@
                 tr.innerHTML = `
                   <td class="rank-cell">${entry.rank}</td>
                   <td class="model-cell">${entry.model}</td>
-                  <td>${entry.budget}</td>
-                  <td>${entry.passRate}</td>
                   <td>
                     <img src="./img/institute_img/${entry.institute}.png"
                          alt="${entry.institute}"
@@ -2132,6 +2130,8 @@
                   <td></td>
                   <td><span class="date-cell">${entry.date}</span></td>
                   <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
+                  <td>${entry.budget}</td>
+                  <td>${entry.passRate}</td>
                 `;
                 tbody.appendChild(tr);
               });
@@ -2153,11 +2153,11 @@
         function aggregateAllSimulators(filters, currentStage, dataSource) { 
           const allData = [];
           const simulatorKeys = {
-            'lite': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8b'],
-            'full': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8b']
+            'lite': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'],
+            'full': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B']
           };
           
-          const keysToCheck = simulatorKeys[filters.dataset] || ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8b'];
+          const keysToCheck = simulatorKeys[filters.dataset] || ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'];
           
           keysToCheck.forEach(simKey => {
             const dataKey = `${filters.dataset}-${simKey}-${filters.mode}`;
@@ -2186,12 +2186,13 @@
         function updateDescriptions(tableType) {
           const filters = tableType === 'free' ? freeFilters : stressFilters;
           const simulatorCost = document.getElementById(`simulator-cost-${tableType}`);
+          if (!simulatorCost) return;
           
           const costs = {
             'all': 'Combined results from all simulators',
             'Gemini-2.0-Flash': 'Gemini-2.0-Flash simulator',
             'gpt-4o': 'GPT-4o simulator',
-            'bird-chat-8b': 'Bird-chat-8B simulator',
+            'bird-chat-8B': 'Bird-chat-8B simulator',
             'DIY': 'DIY simulator (data coming soon)'
           };
           
