@@ -817,13 +817,21 @@
                             padding: 2px 4px;
                             border-radius: 5px;
                           "
-                          ><strong style="color: #ffe7ce">Sep. 18, 2025:</strong></span
+                          ><strong style="color: #ffe7ce">Oct. 19, 2025:</strong></span
                         >
                         <strong>Announcement:</strong>
-                        We have updated the <strong>Submission Guidelines</strong>, where the customized agent scaffolds are supported. 
                         <br />
-                        👉 Please feel free to take a look at our detailed submission guidelines below.
-                      </li>
+                        1. We have updated the Docker image for quicker Bird-Interact experiments and to avoid performance mismatch.  
+                        For more details, please visit our 
+                        <a href="https://github.com/bird-bench/BIRD-Interact" target="_blank" style="color:#155E95; text-decoration:none; font-weight:bold;">
+                        GitHub repository
+                        </a>.
+                        <br />
+                        2. We have updated the <a href="https://docs.google.com/document/d/1F1DSqHDBzGvXFlWU8iCl9otkqxIefgcH/edit?usp=sharing&ouid=108161566779099489782&rtpof=true&sd=true"
+                           target="_blank"
+                           style="color:#155E95; text-decoration:none; font-weight:bold;">
+                           Submission Guidelines
+                        </a>, where the customized agent scaffolds are supported. Please feel free to take a look.
                       <li style="list-style-type: none; margin-bottom: 1em;">
                         <span
                           style="
@@ -1092,7 +1100,7 @@
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
                     <option value="gpt-4o">GPT-4o</option>
                     <option value="bird-chat-8B">Bird-chat-8B</option>
-                    <option value="DIY">DIY</option>
+                    <option value="Customized-User">Customized-User</option>
                   </select>
                 </div>
                 
@@ -1203,7 +1211,7 @@
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
                     <option value="gpt-4o">GPT-4o</option>
                     <option value="bird-chat-8B">Bird-chat-8B</option>
-                    <option value="DIY">DIY</option>
+                    <option value="Customized-User">Customized-User</option>
                   </select>
                 </div>
                 
@@ -1722,10 +1730,10 @@
         let freeFilters = {
           dataset: 'full',
           simulator: 'all',
-          mode: 'c-interact',
+          mode: 'a-interact',          
           performance: 'success-rate'
         };
-        let freeStage = 'Phase1-amb';
+        let freeStage = 'a-Phase1'; 
 
         let stressFilters = {
           dataset: 'full',
@@ -1739,6 +1747,7 @@
           initializeFilters();
           setupFilterListeners();
           setupStageListeners();
+          relabelStages();
           updateModeDisplay('free');
           updateModeDisplay('stress');
           updateConfiguration('free');
@@ -1746,6 +1755,25 @@
           updateLeaderboard('free');
           updateLeaderboard('stress');
         });
+
+        function relabelStages() {
+          const cMap = {
+            'Phase1-amb':   'Priority Questions',
+            'Phase1-debug': 'Priority Questions — Debug',
+            'Phase2-FU':    'Follow Ups',
+            'Phase2-debug': 'Follow Ups — Debug'
+          };
+          const aMap = {
+            'a-Phase1': 'Priority Questions',
+            'a-Phase2': 'Follow Ups'
+          };
+
+          document.querySelectorAll('.stage-clickable.stage').forEach(el => {
+            const key = el.getAttribute('data-dialect');
+            if (cMap[key]) el.textContent = cMap[key];
+            if (aMap[key]) el.textContent = aMap[key];
+          });
+        }
 
         function initializeFilters() {
           // Free mode
@@ -1905,8 +1933,8 @@
             simulatorText = 'Gemini-2.0-Flash';
           } else if (simulatorText === 'bird-chat-8B') {
             simulatorText = 'Bird-Chat-8B';
-          } else if (simulatorText === 'DIY') {
-            simulatorText = 'DIY';
+          } else if (simulatorText === 'Customized-User') {
+            simulatorText = 'Customized-User';
           }
           
           const modeText = filters.mode === 'c-interact' ? 'c-Interact' : 'a-Interact';
@@ -2037,7 +2065,7 @@
           if (simulator === 'Gemini-2.0-Flash') return 'simulator-gemini';
           if (simulator === 'GPT-4o') return 'simulator-gpt';
           if (simulator === 'Bird-chat-8B') return 'simulator-bird';
-          if (simulator === 'DIY') return 'simulator-diy';
+          if (simulator === 'Customized-User') return 'simulator-diy';
           return 'simulator-gemini';
         }
 
@@ -2063,7 +2091,7 @@
             const aggregatedData = aggregateAllSimulators(filters, currentStage, dataSource);
             
             if (aggregatedData && aggregatedData.length > 0) {
-              aggregatedData.forEach(entry => {
+              aggregatedData.forEach((entry, idx) => {
                 const simulatorClass = getSimulatorClass(entry.simulator);
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -2078,7 +2106,7 @@
                   <td><span class="date-cell">${entry.date}</span></td>
                   <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
                   <td>${entry.budget}</td>
-                  <td>${entry.passRate}</td>
+                  <td>${idx === 0 ? `<strong>${entry.passRate}</strong>` : entry.passRate}</td>
                 `;
                 tbody.appendChild(tr);
               });
@@ -2092,11 +2120,11 @@
               `;
               tbody.appendChild(tr);
             }
-          } else if (filters.simulator === 'DIY') {
+          } else if (filters.simulator === 'Customized-User') {
             const tr = document.createElement('tr');
             tr.innerHTML = `
               <td colspan="8" class="empty-table-message">
-                DIY simulator data coming soon.<br>
+                Customized-User data coming soon.<br>
                 <small>Stay tuned for updates!</small>
               </td>
             `;
@@ -2116,7 +2144,7 @@
             const data = dataSource[dataKey];
             
             if (data && data[currentStage]) {
-              data[currentStage].forEach(entry => {
+              data[currentStage].forEach((entry, idx) => {
                 const simulatorClass = getSimulatorClass(entry.simulator);
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -2131,7 +2159,7 @@
                   <td><span class="date-cell">${entry.date}</span></td>
                   <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
                   <td>${entry.budget}</td>
-                  <td>${entry.passRate}</td>
+                  <td>${idx === 0 ? `<strong>${entry.passRate}</strong>` : entry.passRate}</td>
                 `;
                 tbody.appendChild(tr);
               });
@@ -2193,7 +2221,7 @@
             'Gemini-2.0-Flash': 'Gemini-2.0-Flash simulator',
             'gpt-4o': 'GPT-4o simulator',
             'bird-chat-8B': 'Bird-chat-8B simulator',
-            'DIY': 'DIY simulator (data coming soon)'
+            'Customized-User': 'Customized-User (data coming soon)'
           };
           
           const cost = costs[filters.simulator];
