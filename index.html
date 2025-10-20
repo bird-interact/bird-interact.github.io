@@ -831,7 +831,7 @@
                            target="_blank"
                            style="color:#155E95; text-decoration:none; font-weight:bold;">
                            Submission Guidelines
-                        </a>, where the customized agent scaffolds are supported. Please feel free to take a look.
+                        </a>, where the customized agent scaffolds and user simulators are supported under universal evaluation. Please feel free to take a look.
                       <li style="list-style-type: none; margin-bottom: 1em;">
                         <span
                           style="
@@ -1277,7 +1277,7 @@
               
               <!-- Stress Mode Note -->
               <div class="stress-note">
-                <strong>📌 NOTE:</strong> In Stress Mode, the <strong>budget</strong> value must be specified in the LLM's prompt to test the model's performance under limited resource constraints. This evaluates how well the model can optimize its behavior when resource usage is restricted.
+                <strong>📌 NOTE:</strong> In Stress Mode, the <strong>budget</strong> value should be specified in the LLM’s prompt to test the model’s performance under limited resource constraints. This evaluation is designed to examine the trade-off between efficiency and effectiveness when operating under extreme situations.
               </div>
               
               <!-- Description based on current mode -->
@@ -1759,9 +1759,9 @@
         function relabelStages() {
           const cMap = {
             'Phase1-amb':   'Priority Questions',
-            'Phase1-debug': 'Priority Questions — Debug',
+            'Phase1-debug': '+ Debug',
             'Phase2-FU':    'Follow Ups',
-            'Phase2-debug': 'Follow Ups — Debug'
+            'Phase2-debug': '+ Debug'
           };
           const aMap = {
             'a-Phase1': 'Priority Questions',
