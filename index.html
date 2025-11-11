@@ -151,6 +151,68 @@
         transition: height 0.2s;
       }
       
+      /* Dialect 徽章 */
+      .dialect-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        font-size: 13px;
+        color: #ffffff;
+        background: linear-gradient(135deg, #1a2e50 0%, #274a78 100%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 6px 16px rgba(18, 41, 82, 0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        backdrop-filter: blur(4px);
+      }
+
+      /* 左侧亮点 */
+      .dialect-badge::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #5bc0ff;
+        box-shadow: 0 0 8px rgba(91,192,255,0.6);
+      }
+
+      /* 光线滑动动画 */
+      .dialect-badge::after {
+        content: "";
+        position: absolute;
+        top: 0; left: -150%;
+        width: 120%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+        transform: skewX(-20deg);
+        animation: dialectShimmer 3s ease-in-out infinite;
+      }
+
+      @keyframes dialectShimmer {
+        0%   { left: -150%; }
+        55%  { left: 150%; }
+        100% { left: 150%; }
+      }
+
+      /* 标签名略淡，突出值 */
+      .dialect-badge .dialect-label {
+        opacity: 0.85;
+        font-weight: 600;
+        color: #b9d4ff;
+      }
+
+      /* 鼠标悬停时轻微提升亮度 */
+      .dialect-badge:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(15, 50, 110, 0.55), inset 0 1px 0 rgba(255,255,255,0.1);
+        transition: all 0.3s ease;
+      }
+
       .data-paragraph .paragraph-title {
         color: #888888;
       }
@@ -293,39 +355,30 @@
       }
       
       /* Leaderboard table styling */
-      #leaderboard-table-free, #leaderboard-table-stress {
+      #leaderboard-table {
         max-width: 100%;
         margin: 0 auto;
         width: 100%;
         table-layout: fixed;
       }
-      
+
       /* Center all header and cell content */
-      #leaderboard-table-free th, #leaderboard-table-free td,
-      #leaderboard-table-stress th, #leaderboard-table-stress td {
+      #leaderboard-table th, #leaderboard-table td {
         text-align: center;
         vertical-align: middle;
         padding: 0.42em;
       }
-      
+
       /* Column widths - updated */
-      #leaderboard-table-free th:nth-child(1), #leaderboard-table-free td:nth-child(1),
-      #leaderboard-table-stress th:nth-child(1), #leaderboard-table-stress td:nth-child(1) { width: 5%; }  /* Rank */
-      #leaderboard-table-free th:nth-child(2), #leaderboard-table-free td:nth-child(2),
-      #leaderboard-table-stress th:nth-child(2), #leaderboard-table-stress td:nth-child(2) { width: 22%; } /* Model */
-      #leaderboard-table-free th:nth-child(3), #leaderboard-table-free td:nth-child(3),
-      #leaderboard-table-stress th:nth-child(3), #leaderboard-table-stress td:nth-child(3) { width: 8%; }  /* Institute */
-      #leaderboard-table-free th:nth-child(4), #leaderboard-table-free td:nth-child(4),
-      #leaderboard-table-stress th:nth-child(4), #leaderboard-table-stress td:nth-child(4) { width: 5%; }  /* Link */
-      #leaderboard-table-free th:nth-child(5), #leaderboard-table-free td:nth-child(5),
-      #leaderboard-table-stress th:nth-child(5), #leaderboard-table-stress td:nth-child(5) { width: 10%; } /* Date */
-      #leaderboard-table-free th:nth-child(6), #leaderboard-table-free td:nth-child(6),
-      #leaderboard-table-stress th:nth-child(6), #leaderboard-table-stress td:nth-child(6) { width: 14%; } /* User Simulator */
-      #leaderboard-table-free th:nth-child(7), #leaderboard-table-free td:nth-child(7),
-      #leaderboard-table-stress th:nth-child(7), #leaderboard-table-stress td:nth-child(7) { width: 8%; }  /* Budget/Efficiency */
-      #leaderboard-table-free th:nth-child(8), #leaderboard-table-free td:nth-child(8),
-      #leaderboard-table-stress th:nth-child(8), #leaderboard-table-stress td:nth-child(8) { width: 12%; } /* Metric */
-      
+      #leaderboard-table th:nth-child(1), #leaderboard-table td:nth-child(1) { width: 5%; }  /* Rank */
+      #leaderboard-table th:nth-child(2), #leaderboard-table td:nth-child(2) { width: 22%; } /* Model */
+      #leaderboard-table th:nth-child(3), #leaderboard-table td:nth-child(3) { width: 8%; }  /* Institute */
+      #leaderboard-table th:nth-child(4), #leaderboard-table td:nth-child(4) { width: 5%; }  /* Link */
+      #leaderboard-table th:nth-child(5), #leaderboard-table td:nth-child(5) { width: 10%; } /* Date */
+      #leaderboard-table th:nth-child(6), #leaderboard-table td:nth-child(6) { width: 14%; } /* User Simulator */
+      #leaderboard-table th:nth-child(7), #leaderboard-table td:nth-child(7) { width: 8%; }  /* Budget/Efficiency */
+      #leaderboard-table th:nth-child(8), #leaderboard-table td:nth-child(8) { width: 12%; } /* Metric */
+            
       /* Custom cell classes */
       .rank-cell {
         font-weight: bold;
@@ -1068,18 +1121,31 @@
         
         <!-- Right column with unified leaderboard -->
         <div style="flex: 1;">
-          <!-- FREE MODE Leaderboard -->
-          <div class="card card-outline-secondary mb-4" id="free-mode-leaderboard">
-            <div class="card-header mode-title">
-              BIRD-INTERACT Leaderboard - Free Mode 🆓
+          <!-- UNIFIED Leaderboard - 默认显示 Free Mode -->
+          <div class="card card-outline-secondary mb-4" id="unified-leaderboard">
+            <div class="card-header mode-title" id="leaderboard-title">
+              BIRD-INTERACT Leaderboard
             </div>
             
-            <!-- Filter Controls -->
+            <!-- Filter Controls - 只保留一套，用 JS 控制 -->
             <div class="filter-container">
+              <!-- 第一行：Mode -->
+              <div class="filter-row" style="margin-bottom: 12px; justify-content: center;">
+                <div class="filter-group">
+                  <div class="filter-label">Mode</div>
+                  <select id="test-mode-filter" class="filter-select">
+                    <option value="free" selected>Free Mode</option>
+                    <option value="stress">Stress Mode</option>
+                  </select>
+                </div>
+              </div>
+              
+              <!-- 第二行：其他 4 个 filters -->
               <div class="filter-row">
                 <div class="filter-group">
                   <div class="filter-label">Dataset</div>
-                  <select id="dataset-filter-free" class="filter-select">
+                  <select id="dataset-filter" class="filter-select">
+                    <option value="mini_interact">Mini-Interact (300 tasks)</option>
                     <option value="lite">Lite (300 tasks)</option>
                     <option value="full" selected>Full (600 tasks)</option>
                   </select>
@@ -1087,7 +1153,7 @@
                 
                 <div class="filter-group">
                   <div class="filter-label">Interaction Mode</div>
-                  <select id="mode-filter-free" class="filter-select">
+                  <select id="mode-filter" class="filter-select">
                     <option value="c-interact" selected>c-Interact</option>
                     <option value="a-interact">a-Interact</option>
                   </select>
@@ -1095,7 +1161,7 @@
 
                 <div class="filter-group">
                   <div class="filter-label">User Simulator</div>
-                  <select id="simulator-filter-free" class="filter-select">
+                  <select id="simulator-filter" class="filter-select">
                     <option value="all" selected>All</option>
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
                     <option value="gpt-4o">GPT-4o</option>
@@ -1106,23 +1172,22 @@
                 
                 <div class="filter-group">
                   <div class="filter-label">Performance</div>
-                  <select id="performance-filter-free" class="filter-select">
+                  <select id="performance-filter" class="filter-select">
                     <option value="reward">Reward*</option>
                     <option value="success-rate" selected>Success Rate</option>
                   </select>
                 </div>
               </div>
             </div>
-
             <!-- Stage Selection -->
-            <div class="leaderboard-stage-container" id="stage-container-free">
+            <div class="leaderboard-stage-container" id="stage-container">
               <!-- Overall/Reward button - shown when performance=reward -->
-              <div class="overall-reward stage-clickable" data-dialect="Reward*" id="overall-btn-free" style="display: none;">
-                <span id="overall-text-free">📊 Normalized Reward</span>
+              <div class="overall-reward stage-clickable" data-dialect="Reward*" id="overall-btn" style="display: none;">
+                <span id="overall-text">📊 Normalized Reward</span>
               </div>
               
               <!-- c-interact stages -->
-              <div class="stage-progress" id="c-stages-free" style="display: flex;">
+              <div class="stage-progress" id="c-stages" style="display: flex;">
                 <div class="stage stage-clickable active" data-dialect="Phase1-amb">Phase-1</div>
                 <div class="connector"></div>
                 <div class="stage stage-clickable" data-dialect="Phase1-debug">Phase-1-Debug</div>
@@ -1133,15 +1198,14 @@
               </div>
               
               <!-- a-interact stages -->
-              <div class="stage-progress" id="a-stages-free" style="display: none;">
+              <div class="stage-progress" id="a-stages" style="display: none;">
                 <div class="stage stage-clickable" data-dialect="a-Phase1">Phase 1</div>
-                <div class="connector" id="a-connector-free"></div>
+                <div class="connector" id="a-connector"></div>
                 <div class="stage stage-clickable" data-dialect="a-Phase2">Phase 2</div>
               </div>
-            </div>
 
             <div class="table-wrapper">
-              <table id="leaderboard-table-free" class="table">
+              <table id="leaderboard-table" class="table">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Rank</th>
@@ -1151,21 +1215,26 @@
                     <th scope="col">Date</th>
                     <th scope="col">User Simulator</th>
                     <th scope="col">Efficiency</th>
-                    <th scope="col" id="metric-header-free">Success Rate (%)</th>
+                    <th scope="col" id="metric-header">Success Rate (%)</th>
                   </tr>
                 </thead>
-                <tbody id="leaderboard-tbody-free">
+                <tbody id="leaderboard-tbody">
                   <!-- JS will populate this -->
                 </tbody>
               </table>
               
               <!-- Current Configuration Display -->
-              <div class="current-config" id="current-config-free">
-                Current: Full Dataset • All Simulators • c-Interact • Success Rate
+              <div class="current-config" id="current-config">
+                Current: Full Dataset • All Simulators • c-Interact • Success Rate • PostgreSQL
               </div>
               
+              <!-- Stress Mode Note (conditionally shown) -->
+              <div class="stress-note" id="stress-note" style="display: none;">
+                <strong>📌 NOTE:</strong> In Stress Mode, the <strong>Budget (i.e., Efficiency above)</strong> value should be specified in the LLM’s prompt to test the model’s performance under limited resources. This evaluation aims to examine the trade-off between efficiency and effectiveness when operating under extreme situations.
+              </div>
+
               <!-- Description based on current mode -->
-              <div id="table-description-free">
+              <div id="table-description">
                 <p>
                   <li><strong>Efficiency</strong> means the conversational turns used or BIRD COIN used in Free Mode (no budget constraints).</li>
                   <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
@@ -1175,122 +1244,6 @@
                   <li><strong>Phase-2-Debug SR</strong> means success rate of both phase 1 and follow up question phase with the chance of debugging.</li>
                 </p>
                 <p>📌 <strong>NOTE:</strong> The Efficiency for c-interact is the conversational turns used; for a-interact is the total BIRD COIN used.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- STRESS MODE Leaderboard -->
-          <div class="card card-outline-secondary mb-4" id="stress-mode-leaderboard">
-            <div class="card-header mode-title">
-              BIRD-INTERACT Leaderboard - Stress Mode ⚡ 
-            </div>
-            
-            <!-- Filter Controls -->
-            <div class="filter-container">
-              <div class="filter-row">
-                <div class="filter-group">
-                  <div class="filter-label">Dataset</div>
-                  <select id="dataset-filter-stress" class="filter-select">
-                    <option value="lite">Lite (300 tasks)</option>
-                    <option value="full" selected>Full (600 tasks)</option>
-                  </select>
-                </div>
-                
-                <div class="filter-group">
-                  <div class="filter-label">Interaction Mode</div>
-                  <select id="mode-filter-stress" class="filter-select">
-                    <option value="c-interact" selected>c-Interact</option>
-                    <option value="a-interact">a-Interact</option>
-                  </select>
-                </div>
-
-                <div class="filter-group">
-                  <div class="filter-label">User Simulator</div>
-                  <select id="simulator-filter-stress" class="filter-select">
-                    <option value="all" selected>All</option>
-                    <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
-                    <option value="gpt-4o">GPT-4o</option>
-                    <option value="bird-chat-8B">Bird-chat-8B</option>
-                    <option value="Customized-User">Customized-User</option>
-                  </select>
-                </div>
-                
-                <div class="filter-group">
-                  <div class="filter-label">Performance</div>
-                  <select id="performance-filter-stress" class="filter-select">
-                    <option value="reward">Reward*</option>
-                    <option value="success-rate" selected>Success Rate</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stage Selection -->
-            <div class="leaderboard-stage-container" id="stage-container-stress">
-              <!-- Overall/Reward button - shown when performance=reward -->
-              <div class="overall-reward stage-clickable" data-dialect="Reward*" id="overall-btn-stress" style="display: none;">
-                <span id="overall-text-stress">📊 Normalized Reward</span>
-              </div>
-              
-              <!-- c-interact stages -->
-              <div class="stage-progress" id="c-stages-stress" style="display: flex;">
-                <div class="stage stage-clickable active" data-dialect="Phase1-amb">Phase-1</div>
-                <div class="connector"></div>
-                <div class="stage stage-clickable" data-dialect="Phase1-debug">Phase-1-Debug</div>
-                <div class="connector"></div>
-                <div class="stage stage-clickable" data-dialect="Phase2-FU">Phase-2</div>
-                <div class="connector"></div>
-                <div class="stage stage-clickable" data-dialect="Phase2-debug">Phase-2-Debug</div>
-              </div>
-              
-              <!-- a-interact stages -->
-              <div class="stage-progress" id="a-stages-stress" style="display: none;">
-                <div class="stage stage-clickable" data-dialect="a-Phase1">Phase 1</div>
-                <div class="connector" id="a-connector-stress"></div>
-                <div class="stage stage-clickable" data-dialect="a-Phase2">Phase 2</div>
-              </div>
-            </div>
-
-            <div class="table-wrapper">
-              <table id="leaderboard-table-stress" class="table">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Model</th>
-                    <th scope="col">Institute</th>
-                    <th scope="col">Link</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">User Simulator</th>
-                    <th scope="col">Budget</th>
-                    <th scope="col" id="metric-header-stress">Success Rate (%)</th>
-                  </tr>
-                </thead>
-                <tbody id="leaderboard-tbody-stress">
-                  <!-- JS will populate this -->
-                </tbody>
-              </table>
-              
-              <!-- Current Configuration Display -->
-              <div class="current-config" id="current-config-stress">
-                Current: Full Dataset • All Simulators • c-Interact • Success Rate
-              </div>
-              
-              <!-- Stress Mode Note -->
-              <div class="stress-note">
-                <strong>📌 NOTE:</strong> In Stress Mode, the <strong>budget</strong> value should be specified in the LLM’s prompt to test the model’s performance under limited resources. This evaluation aims to examine the trade-off between efficiency and effectiveness when operating under extreme situations.
-              </div>
-              
-              <!-- Description based on current mode -->
-              <div id="table-description-stress">
-                <p>
-                  <li><strong>Budget</strong> represents the resource constraint for this evaluation in Stress Mode.</li>
-                  <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
-                  <li><strong>Phase-1 success rate (SR)</strong> means the success rate of ambiguity resolution phase.</li>
-                  <li><strong>Phase-1-Debug SR</strong> means the success rate of the ambiguity resolution phase with the chance of debugging.</li>
-                  <li><strong>Phase-2 SR</strong> means the success rate of both phase 1 and the follow up question phase.</li>
-                  <li><strong>Phase-2-Debug SR</strong> means success rate of both phase 1 and follow up question phase with the chance of debugging.</li>
-                </p>
-                <p>📌 <strong>NOTE:</strong> The Budget for c-interact is the conversational turns number; for a-interact is the total BIRD COIN available.</p>
               </div>
             </div>
           </div>
@@ -1727,33 +1680,25 @@
         };
 
         // Global state for both tables
-        let freeFilters = {
+        let currentFilters = {
+          testMode: 'free',  // 'free' or 'stress'
           dataset: 'full',
           simulator: 'all',
-          mode: 'a-interact',          
+          interactionMode: 'c-interact',
           performance: 'success-rate'
         };
-        let freeStage = 'a-Phase1'; 
-
-        let stressFilters = {
-          dataset: 'full',
-          simulator: 'all',
-          mode: 'c-interact',
-          performance: 'success-rate'
-        };
-        let stressStage = 'Phase1-amb';
+        let currentStage = 'Phase1-amb';
 
         document.addEventListener('DOMContentLoaded', function () {
           initializeFilters();
           setupFilterListeners();
           setupStageListeners();
           relabelStages();
-          updateModeDisplay('free');
-          updateModeDisplay('stress');
-          updateConfiguration('free');
-          updateConfiguration('stress');
-          updateLeaderboard('free');
-          updateLeaderboard('stress');
+          updateLeaderboardTitle();
+          updateStressNote();
+          updateModeDisplay();
+          updateConfiguration();
+          updateLeaderboard();
         });
 
         function relabelStages() {
@@ -1776,155 +1721,130 @@
         }
 
         function initializeFilters() {
-          // Free mode
-          document.getElementById('dataset-filter-free').value = freeFilters.dataset;
-          document.getElementById('simulator-filter-free').value = freeFilters.simulator;
-          document.getElementById('mode-filter-free').value = freeFilters.mode;
-          document.getElementById('performance-filter-free').value = freeFilters.performance;
-          
-          // Stress mode
-          document.getElementById('dataset-filter-stress').value = stressFilters.dataset;
-          document.getElementById('simulator-filter-stress').value = stressFilters.simulator;
-          document.getElementById('mode-filter-stress').value = stressFilters.mode;
-          document.getElementById('performance-filter-stress').value = stressFilters.performance;
+          document.getElementById('test-mode-filter').value = currentFilters.testMode;
+          document.getElementById('dataset-filter').value = currentFilters.dataset;
+          document.getElementById('simulator-filter').value = currentFilters.simulator;
+          document.getElementById('mode-filter').value = currentFilters.interactionMode;
+          document.getElementById('performance-filter').value = currentFilters.performance;
         }
 
         function setupFilterListeners() {
-          // FREE MODE listeners
-          document.getElementById('dataset-filter-free').addEventListener('change', function() {
-            freeFilters.dataset = this.value;
-            updateConfiguration('free');
-            updateLeaderboard('free');
+          // Test Mode (Free/Stress) 切换
+          document.getElementById('test-mode-filter').addEventListener('change', function() {
+            currentFilters.testMode = this.value;
+            updateLeaderboardTitle();
+            updateStressNote();
+            updateConfiguration();
+            updateLeaderboard();
           });
 
-          document.getElementById('simulator-filter-free').addEventListener('change', function() {
-            freeFilters.simulator = this.value;
-            updateConfiguration('free');
-            updateLeaderboard('free');
+          // Dataset 切换
+          document.getElementById('dataset-filter').addEventListener('change', function() {
+            currentFilters.dataset = this.value;
+            
+            // mini_interact 特殊处理：隐藏 stage pipeline
+            if (this.value === 'mini_interact') {
+              // 隐藏阶段控件
+              document.getElementById('overall-btn').style.display = 'none';
+              document.getElementById('c-stages').style.display = 'none';
+              document.getElementById('a-stages').style.display = 'none';
+            } else {
+              // 根据当前交互模式恢复阶段控件
+              updateModeDisplay(); // 你已有的函数，会正确显示 c/a 的阶段
+            }
+            
+            updateConfiguration();
+            updateLeaderboard();
           });
 
-          document.getElementById('mode-filter-free').addEventListener('change', function() {
-            freeFilters.mode = this.value;
+          // Interaction Mode 切换
+          document.getElementById('mode-filter').addEventListener('change', function() {
+            currentFilters.interactionMode = this.value;
             if (this.value === 'c-interact') {
-              freeStage = freeFilters.performance === 'reward' ? 'Reward*' : 'Phase1-amb';
+              currentStage = currentFilters.performance === 'reward' ? 'Reward*' : 'Phase1-amb';
             } else {
-              freeStage = freeFilters.performance === 'reward' ? 'Reward*' : 'a-Phase1';
+              currentStage = currentFilters.performance === 'reward' ? 'Reward*' : 'a-Phase1';
             }
-            updateModeDisplay('free');
-            updateConfiguration('free');
-            updateLeaderboard('free');
+            updateModeDisplay();
+            updateConfiguration();
+            updateLeaderboard();
           });
 
-          document.getElementById('performance-filter-free').addEventListener('change', function() {
-            freeFilters.performance = this.value;
+          // Simulator 切换
+          document.getElementById('simulator-filter').addEventListener('change', function() {
+            currentFilters.simulator = this.value;
+            updateConfiguration();
+            updateLeaderboard();
+          });
+
+          // Performance 切换
+          document.getElementById('performance-filter').addEventListener('change', function() {
+            currentFilters.performance = this.value;
             if (this.value === 'reward') {
-              freeStage = 'Reward*';
+              currentStage = 'Reward*';
             } else {
-              freeStage = freeFilters.mode === 'c-interact' ? 'Phase1-amb' : 'a-Phase1';
+              currentStage = currentFilters.interactionMode === 'c-interact' ? 'Phase1-amb' : 'a-Phase1';
             }
-            updateStageHighlight('free');
-            updateConfiguration('free');
-            updateLeaderboard('free');
-          });
-
-          // STRESS MODE listeners
-          document.getElementById('dataset-filter-stress').addEventListener('change', function() {
-            stressFilters.dataset = this.value;
-            updateConfiguration('stress');
-            updateLeaderboard('stress');
-          });
-
-          document.getElementById('simulator-filter-stress').addEventListener('change', function() {
-            stressFilters.simulator = this.value;
-            updateConfiguration('stress');
-            updateLeaderboard('stress');
-          });
-
-          document.getElementById('mode-filter-stress').addEventListener('change', function() {
-            stressFilters.mode = this.value;
-            if (this.value === 'c-interact') {
-              stressStage = stressFilters.performance === 'reward' ? 'Reward*' : 'Phase1-amb';
-            } else {
-              stressStage = stressFilters.performance === 'reward' ? 'Reward*' : 'a-Phase1';
-            }
-            updateModeDisplay('stress');
-            updateConfiguration('stress');
-            updateLeaderboard('stress');
-          });
-
-          document.getElementById('performance-filter-stress').addEventListener('change', function() {
-            stressFilters.performance = this.value;
-            if (this.value === 'reward') {
-              stressStage = 'Reward*';
-            } else {
-              stressStage = stressFilters.mode === 'c-interact' ? 'Phase1-amb' : 'a-Phase1';
-            }
-            updateStageHighlight('stress');
-            updateConfiguration('stress');
-            updateLeaderboard('stress');
+            updateStageHighlight();
+            updateConfiguration();
+            updateLeaderboard();
           });
         }
 
+        // 更新标题（Free/Stress Mode）
+        function updateLeaderboardTitle() {
+          const title = document.getElementById('leaderboard-title');
+          if (currentFilters.testMode === 'free') {
+            title.textContent = 'BIRD-INTERACT Leaderboard - Free Mode 🆓';
+          } else {
+            title.textContent = 'BIRD-INTERACT Leaderboard - Stress Mode ⚡';
+          }
+        }
+
+        // 显示/隐藏 Stress Mode 说明
+        function updateStressNote() {
+          const note = document.getElementById('stress-note');
+          if (currentFilters.testMode === 'stress') {
+            note.style.display = 'block';
+          } else {
+            note.style.display = 'none';
+          }
+        }
+        
         function setupStageListeners() {
-          // FREE MODE stage listeners
-          document.querySelectorAll('#stage-container-free .stage-clickable').forEach(btn => {
+          document.querySelectorAll('#stage-container .stage-clickable').forEach(btn => {
             btn.addEventListener('click', function() {
               const clickedStage = this.getAttribute('data-dialect');
               
-              if (freeFilters.performance === 'reward' && clickedStage.includes('Reward')) {
-                freeStage = clickedStage;
-              } else if (freeFilters.performance === 'success-rate' && !clickedStage.includes('Reward')) {
-                freeStage = clickedStage;
-              } else if (freeFilters.performance === 'reward' && !clickedStage.includes('Reward')) {
-                freeFilters.performance = 'success-rate';
-                document.getElementById('performance-filter-free').value = 'success-rate';
-                freeStage = clickedStage;
-                updateConfiguration('free');
-              } else if (freeFilters.performance === 'success-rate' && clickedStage.includes('Reward')) {
-                freeFilters.performance = 'reward';
-                document.getElementById('performance-filter-free').value = 'reward';
-                freeStage = clickedStage;
-                updateConfiguration('free');
+              if (currentFilters.performance === 'reward' && clickedStage.includes('Reward')) {
+                currentStage = clickedStage;
+              } else if (currentFilters.performance === 'success-rate' && !clickedStage.includes('Reward')) {
+                currentStage = clickedStage;
+              } else if (currentFilters.performance === 'reward' && !clickedStage.includes('Reward')) {
+                currentFilters.performance = 'success-rate';
+                document.getElementById('performance-filter').value = 'success-rate';
+                currentStage = clickedStage;
+                updateConfiguration();
+              } else if (currentFilters.performance === 'success-rate' && clickedStage.includes('Reward')) {
+                currentFilters.performance = 'reward';
+                document.getElementById('performance-filter').value = 'reward';
+                currentStage = clickedStage;
+                updateConfiguration();
               }
               
-              updateStageHighlight('free');
-              updateLeaderboard('free');
-            });
-          });
-
-          // STRESS MODE stage listeners
-          document.querySelectorAll('#stage-container-stress .stage-clickable').forEach(btn => {
-            btn.addEventListener('click', function() {
-              const clickedStage = this.getAttribute('data-dialect');
-              
-              if (stressFilters.performance === 'reward' && clickedStage.includes('Reward')) {
-                stressStage = clickedStage;
-              } else if (stressFilters.performance === 'success-rate' && !clickedStage.includes('Reward')) {
-                stressStage = clickedStage;
-              } else if (stressFilters.performance === 'reward' && !clickedStage.includes('Reward')) {
-                stressFilters.performance = 'success-rate';
-                document.getElementById('performance-filter-stress').value = 'success-rate';
-                stressStage = clickedStage;
-                updateConfiguration('stress');
-              } else if (stressFilters.performance === 'success-rate' && clickedStage.includes('Reward')) {
-                stressFilters.performance = 'reward';
-                document.getElementById('performance-filter-stress').value = 'reward';
-                stressStage = clickedStage;
-                updateConfiguration('stress');
-              }
-              
-              updateStageHighlight('stress');
-              updateLeaderboard('stress');
+              updateStageHighlight();
+              updateLeaderboard();
             });
           });
         }
 
-        function updateConfiguration(tableType) {
-          const filters = tableType === 'free' ? freeFilters : stressFilters;
-          const config = document.getElementById(`current-config-${tableType}`);
-          const datasetText = filters.dataset === 'lite' ? 'Lite Dataset (300 tasks)' : 'Full Dataset (600 tasks)';
+        function updateConfiguration() {
+          const config = document.getElementById('current-config');
+          const datasetText = currentFilters.dataset === 'mini_interact' ? 'Mini-Interact (300 tasks)' :
+                              currentFilters.dataset === 'lite' ? 'Lite Dataset (300 tasks)' : 
+                              'Full Dataset (600 tasks)';
           
-          let simulatorText = filters.simulator;
+          let simulatorText = currentFilters.simulator;
           if (simulatorText === 'all') {
             simulatorText = 'All Simulators';
           } else if (simulatorText === 'gpt-4o') {
@@ -1937,26 +1857,38 @@
             simulatorText = 'Customized-User';
           }
           
-          const modeText = filters.mode === 'c-interact' ? 'c-Interact' : 'a-Interact';
-          const performanceText = filters.performance === 'reward' ? 'Reward*' : 'Success Rate';
+          const modeText = currentFilters.interactionMode === 'c-interact' ? 'c-Interact' : 'a-Interact';
+          const performanceText = currentFilters.performance === 'reward' ? 'Reward*' : 'Success Rate';
           
+          // ✨ 新增：Dialect 显示
+          // 判断当前方言
+          const dialectText = currentFilters.dataset === 'mini_interact' ? 'SQLite' : 'PostgreSQL';
+
+          // 🎨 新增漂亮的蓝色徽章 HTML
+          const dialectBadge = `
+            <span class="dialect-badge" title="SQL Dialect being evaluated">
+              <span class="dialect-label">Dialect:</span> ${dialectText}
+            </span>
+          `;
+
+          // 🧩 更新配置展示区域
           config.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
               <span><strong>Dataset:</strong> ${datasetText}</span>
               <span><strong>Simulator:</strong> ${simulatorText}</span>
               <span><strong>Mode:</strong> ${modeText}</span>
               <span><strong>Metric:</strong> ${performanceText}</span>
+              ${dialectBadge}
             </div>
           `;
         }
 
-        function updateModeDisplay(tableType) {
-          const filters = tableType === 'free' ? freeFilters : stressFilters;
-          const cStages = document.getElementById(`c-stages-${tableType}`);
-          const aStages = document.getElementById(`a-stages-${tableType}`);
-          const overallText = document.getElementById(`overall-text-${tableType}`);
+        function updateModeDisplay() {
+          const cStages = document.getElementById('c-stages');
+          const aStages = document.getElementById('a-stages');
+          const overallText = document.getElementById('overall-text');
           
-          if (filters.mode === 'c-interact') {
+          if (currentFilters.interactionMode === 'c-interact') {
             cStages.style.display = 'flex';
             aStages.style.display = 'none';
             overallText.textContent = '📊 Normalized Reward';
@@ -1966,23 +1898,21 @@
             overallText.textContent = '📊 Normalized Reward';
           }
           
-          updateStageHighlight(tableType);
+          updateStageHighlight();
         }
 
-        function updateStageHighlight(tableType) {
-          const filters = tableType === 'free' ? freeFilters : stressFilters;
-          const currentStage = tableType === 'free' ? freeStage : stressStage;
-          const config = modeConfigs[filters.mode];
-          const overallBtn = document.querySelector(`#overall-btn-${tableType}`);
-          const allStages = document.querySelectorAll(`#stage-container-${tableType} .stage-clickable.stage`);
-          const connectors = document.querySelectorAll(`#stage-container-${tableType} .connector`);
+        function updateStageHighlight() {
+          const config = modeConfigs[currentFilters.interactionMode];
+          const overallBtn = document.querySelector('#overall-btn');
+          const allStages = document.querySelectorAll('#stage-container .stage-clickable.stage');
+          const connectors = document.querySelectorAll('#stage-container .connector');
 
           overallBtn.classList.remove('active');
           allStages.forEach(el => el.classList.remove('active'));
           connectors.forEach(c => c.classList.remove('active'));
 
-          if (filters.mode === 'c-interact') {
-            if (filters.performance === 'reward') {
+          if (currentFilters.interactionMode === 'c-interact') {
+            if (currentFilters.performance === 'reward') {
               overallBtn.style.display = 'block';
               allStages.forEach(el => el.style.display = 'none');
               connectors.forEach(conn => conn.style.display = 'none');
@@ -2017,7 +1947,7 @@
               }
             }
           } else {
-            if (filters.performance === 'reward') {
+            if (currentFilters.performance === 'reward') {
               overallBtn.style.display = 'block';
               allStages.forEach(el => el.style.display = 'none');
               connectors.forEach(conn => conn.style.display = 'none');
@@ -2035,7 +1965,7 @@
                 }
               });
               
-              const aConnector = document.getElementById(`a-connector-${tableType}`);
+              const aConnector = document.getElementById('a-connector');
               connectors.forEach((conn, i) => {
                 if (conn === aConnector) {
                   conn.style.display = 'block';
@@ -2069,16 +1999,14 @@
           return 'simulator-gemini';
         }
 
-        function updateLeaderboard(tableType) {
-          const filters = tableType === 'free' ? freeFilters : stressFilters;
-          const currentStage = tableType === 'free' ? freeStage : stressStage;
-          const tbody = document.getElementById(`leaderboard-tbody-${tableType}`);
-          const metricHeader = document.getElementById(`metric-header-${tableType}`);
+        function updateLeaderboard() {
+          const tbody = document.getElementById('leaderboard-tbody');
+          const metricHeader = document.getElementById('metric-header');
           
-          // 根据tableType选择不同的数据源
-          const dataSource = tableType === 'free' ? freeLeaderboardData : stressLeaderboardData;
+          // 根据 testMode 选择数据源
+          const dataSource = currentFilters.testMode === 'free' ? freeLeaderboardData : stressLeaderboardData;
           
-          if (filters.performance === 'reward') {
+          if (currentFilters.performance === 'reward') {
             metricHeader.textContent = 'Reward*';
           } else {
             metricHeader.textContent = 'Success Rate (%)';
@@ -2086,9 +2014,22 @@
           
           tbody.innerHTML = '';
           
-          if (filters.simulator === 'all') {
+          // ✨ mini_interact 特殊处理
+          if (currentFilters.dataset === 'mini_interact') {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td colspan="8" class="empty-table-message">
+                Data for this combination will be available soon.<br>
+                <small>Dataset: ${currentFilters.dataset} • Mode: ${currentFilters.interactionMode} • Performance: ${currentFilters.performance}</small>
+              </td>
+            `;
+            tbody.appendChild(tr);
+            return;
+          }
+          
+          if (currentFilters.simulator === 'all') {
             // 传递正确的数据源
-            const aggregatedData = aggregateAllSimulators(filters, currentStage, dataSource);
+            const aggregatedData = aggregateAllSimulators(currentFilters, currentStage, dataSource);
             
             if (aggregatedData && aggregatedData.length > 0) {
               aggregatedData.forEach((entry, idx) => {
@@ -2120,7 +2061,7 @@
               `;
               tbody.appendChild(tr);
             }
-          } else if (filters.simulator === 'Customized-User') {
+          } else if (currentFilters.simulator === 'Customized-User') {
             const tr = document.createElement('tr');
             tr.innerHTML = `
               <td colspan="8" class="empty-table-message">
@@ -2130,17 +2071,16 @@
             `;
             tbody.appendChild(tr);
           } else {
-            let simulatorKey = filters.simulator;
-            if (filters.simulator === 'gpt-4o') {
+            let simulatorKey = currentFilters.simulator;
+            if (currentFilters.simulator === 'gpt-4o') {
               simulatorKey = 'gpt-4o';
-            } else if (filters.simulator === 'Gemini-2.0-Flash') {
+            } else if (currentFilters.simulator === 'Gemini-2.0-Flash') {
               simulatorKey = 'Gemini-2.0-Flash';
             } else if (filters.simulator === 'bird-chat-8B') {
               simulatorKey = 'bird-chat-8B';
             }
             
-            const dataKey = `${filters.dataset}-${simulatorKey}-${filters.mode}`;
-            // 从正确的数据源读取
+            const dataKey = `${currentFilters.dataset}-${simulatorKey}-${currentFilters.interactionMode}`; 
             const data = dataSource[dataKey];
             
             if (data && data[currentStage]) {
@@ -2168,14 +2108,14 @@
               tr.innerHTML = `
                 <td colspan="8" class="empty-table-message">
                   Data for this combination will be available soon.<br>
-                  <small>Dataset: ${filters.dataset} • Simulator: ${filters.simulator} • Mode: ${filters.mode} • Performance: ${filters.performance}</small>
+                  <small>Dataset: ${currentFilters.dataset} • Simulator: ${currentFilters.simulator} • Mode: ${currentFilters.interactionMode} • Performance: ${currentFilters.performance}</small>
                 </td>
               `;
               tbody.appendChild(tr);
             }
           }
           
-          updateDescriptions(tableType);
+          updateDescriptions();
         }
 
         function aggregateAllSimulators(filters, currentStage, dataSource) { 
@@ -2188,8 +2128,7 @@
           const keysToCheck = simulatorKeys[filters.dataset] || ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'];
           
           keysToCheck.forEach(simKey => {
-            const dataKey = `${filters.dataset}-${simKey}-${filters.mode}`;
-            // ✨ 从传入的dataSource读取
+            const dataKey = `${filters.dataset}-${simKey}-${filters.interactionMode}`; 
             const data = dataSource[dataKey];
             
             if (data && data[currentStage]) {
@@ -2211,9 +2150,9 @@
           return allData;
         }
 
-        function updateDescriptions(tableType) {
-          const filters = tableType === 'free' ? freeFilters : stressFilters;
-          const simulatorCost = document.getElementById(`simulator-cost-${tableType}`);
+        function updateDescriptions() {
+          // 如果有 simulator-cost 元素，更新它
+          const simulatorCost = document.getElementById('simulator-cost');
           if (!simulatorCost) return;
           
           const costs = {
@@ -2224,7 +2163,7 @@
             'Customized-User': 'Customized-User (data coming soon)'
           };
           
-          const cost = costs[filters.simulator];
+          const cost = costs[currentFilters.simulator];
           simulatorCost.textContent = cost || 'Simulator information';
         }
       </script>
