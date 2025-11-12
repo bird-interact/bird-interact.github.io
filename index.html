@@ -171,6 +171,25 @@
         backdrop-filter: blur(4px);
       }
 
+      /* SQLite 特定样式 - 绿色主题 */
+      .dialect-badge.sqlite {
+        background: linear-gradient(135deg, #0f5132 0%, #198754 100%);
+        box-shadow: 0 6px 16px rgba(15, 81, 50, 0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+      }
+
+      .dialect-badge.sqlite::before {
+        background: #5cb85c;
+        box-shadow: 0 0 8px rgba(92, 184, 92, 0.6);
+      }
+
+      .dialect-badge.sqlite .dialect-label {
+        color: #c8f5d4;
+      }
+
+      .dialect-badge.sqlite:hover {
+        box-shadow: 0 8px 20px rgba(15, 81, 50, 0.55), inset 0 1px 0 rgba(255,255,255,0.1);
+      }
+
       /* 左侧亮点 */
       .dialect-badge::before {
         content: "";
@@ -447,7 +466,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-width: 140px;
+        min-width: 110px;
       }
 
       .filter-label {
@@ -459,25 +478,25 @@
       }
 
       .filter-select {
-        padding: 8px 14px;
+        padding: 6px 10px;
         border: 2px solid #574964;
         border-radius: 22px;
         background: white;
         font-family: 'Lato', sans-serif;
-        font-size: 14px;
-        min-width: 130px;
-        outline: ne;
+        font-size: 13px;
+        min-width: 100px;
+        outline: none;
         transition: all 0.3s ease;
         text-align: center;
         text-align-last: center;
-        -webkit-appearance: ne;
-        -moz-appearance: ne;
+        -webkit-appearance: none;
+        -moz-appearance: none;
         appearance: none;
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23574964' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
         background-repeat: no-repeat;
-        background-position: right 10px center;
-        background-size: 16px;
-        padding-right: 35px;
+        background-position: right 8px center;
+        background-size: 14px;
+        padding-right: 30px;
       }
 
       .filter-select option {
@@ -827,7 +846,7 @@
               </div>
               <div id="button-group">
                 <div class="button-row">
-                  <a href="" target="_blank">
+                  <a href="https://huggingface.co/datasets/birdsql/mini-interact" target="_blank">
                     <button type="button" class="btn btn-d">Mini-Interact</button>
                   </a>
                 </div>
@@ -1129,8 +1148,8 @@
             
             <!-- Filter Controls - 只保留一套，用 JS 控制 -->
             <div class="filter-container">
-              <!-- 第一行：Mode -->
-              <div class="filter-row" style="margin-bottom: 12px; justify-content: center;">
+              <div class="filter-row">
+                <!-- Mode移到这里，和其他4个在同一个filter-row里 -->
                 <div class="filter-group">
                   <div class="filter-label">Mode</div>
                   <select id="test-mode-filter" class="filter-select">
@@ -1138,10 +1157,7 @@
                     <option value="stress">Stress Mode</option>
                   </select>
                 </div>
-              </div>
-              
-              <!-- 第二行：其他 4 个 filters -->
-              <div class="filter-row">
+                
                 <div class="filter-group">
                   <div class="filter-label">Dataset</div>
                   <select id="dataset-filter" class="filter-select">
@@ -1795,7 +1811,7 @@
         function updateLeaderboardTitle() {
           const title = document.getElementById('leaderboard-title');
           if (currentFilters.testMode === 'free') {
-            title.textContent = 'BIRD-INTERACT Leaderboard - Free Mode 🆓';
+            title.textContent = 'BIRD-INTERACT Leaderboard - Free Mode 🕹️';
           } else {
             title.textContent = 'BIRD-INTERACT Leaderboard - Stress Mode ⚡';
           }
@@ -1865,8 +1881,9 @@
           const dialectText = currentFilters.dataset === 'mini_interact' ? 'SQLite' : 'PostgreSQL';
 
           // 🎨 新增漂亮的蓝色徽章 HTML
+          const dialectClass = currentFilters.dataset === 'mini_interact' ? 'sqlite' : '';
           const dialectBadge = `
-            <span class="dialect-badge" title="SQL Dialect being evaluated">
+            <span class="dialect-badge ${dialectClass}" title="SQL Dialect being evaluated">
               <span class="dialect-label">Dialect:</span> ${dialectText}
             </span>
           `;
