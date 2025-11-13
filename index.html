@@ -437,6 +437,10 @@
         background-color: #10A37F;
       }
 
+      .simulator-claude {
+        background-color: #6f42c1;
+      }
+
       .simulator-bird {
         background-color: #FF6B6B;
       }
@@ -1212,6 +1216,7 @@
                     <option value="all" selected>All</option>
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
                     <option value="gpt-4o">GPT-4o</option>
+                    <option value="Claude-Haiku-4-5">Claude-Haiku-4-5</option>
                     <option value="bird-chat-8B">Bird-chat-8B</option>
                     <option value="Customized-User">Customized-User</option>
                   </select>
@@ -1513,6 +1518,56 @@
               { rank: 6, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", budget: "18.94", passRate: "9.67", institute: "deepseek", date: "2025-04-20" },
               { rank: 7, model: "GPT-4o", simulator: "Gemini-2.0-Flash", budget: "18.95", passRate: "9.00", institute: "openai", date: "2025-04-20" }
             ]
+          },
+
+          'mini_interact-Claude-Haiku-4-5-c-interact': {
+            'Phase1-amb': [
+              {
+                rank: 1,
+                model: "Claude-Sonnet-4.5",
+                simulator: "Claude-Haiku-4-5",
+                budget: "4.91",
+                passRate: "29.00",
+                institute: "anthropic",
+                date: "2025-11-13"
+              },
+              {
+                rank: 2,
+                model: "Qwen-3-Coder-480B",
+                simulator: "Claude-Haiku-4-5",
+                budget: "5.80",
+                passRate: "27.67",
+                institute: "qwen",
+                date: "2025-11-13"
+              },
+              {
+                rank: 3,
+                model: "DeepSeek-V3",
+                simulator: "Claude-Haiku-4-5",
+                budget: "5.24",
+                passRate: "24.67",
+                institute: "deepseek",
+                date: "2025-11-13"
+              },
+              {
+                rank: 4,
+                model: "GPT-OSS",
+                simulator: "Claude-Haiku-4-5",
+                budget: "4.63",
+                passRate: "23.00",
+                institute: "openai",
+                date: "2025-11-13"
+              },
+              {
+                rank: 5,
+                model: "Claude-3.7-Sonnet",
+                simulator: "Claude-Haiku-4-5",
+                budget: "3.73",
+                passRate: "21.33",
+                institute: "anthropic",
+                date: "2025-11-13"
+              }
+            ]
           }
         };
 
@@ -1708,6 +1763,57 @@
               { rank: 6, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", budget: "19.28", passRate: "9.67", institute: "deepseek", date: "2025-04-20" },
               { rank: 7, model: "GPT-4o", simulator: "Gemini-2.0-Flash", budget: "19.28", passRate: "9.00", institute: "openai", date: "2025-04-20" }
             ]
+          },
+
+          'mini_interact-Claude-Haiku-4-5-c-interact': {
+            // 只需要 Success Rate（Phase1-amb），Reward* 以后再加
+            'Phase1-amb': [
+              {
+                rank: 1,
+                model: "Claude-Sonnet-4.5",
+                simulator: "Claude-Haiku-4-5",
+                budget: "4.91",
+                passRate: "29.00",
+                institute: "anthropic",
+                date: "2025-11-13"
+              },
+              {
+                rank: 2,
+                model: "Qwen-3-Coder-480B",
+                simulator: "Claude-Haiku-4-5",
+                budget: "5.80",
+                passRate: "27.67",
+                institute: "qwen",
+                date: "2025-11-13"
+              },
+              {
+                rank: 3,
+                model: "DeepSeek-V3",
+                simulator: "Claude-Haiku-4-5",
+                budget: "5.24",
+                passRate: "24.67",
+                institute: "deepseek",
+                date: "2025-11-13"
+              },
+              {
+                rank: 4,
+                model: "GPT-OSS",
+                simulator: "Claude-Haiku-4-5",
+                budget: "4.63",
+                passRate: "23.00",
+                institute: "openai",
+                date: "2025-11-13"
+              },
+              {
+                rank: 5,
+                model: "Claude-3.7-Sonnet",
+                simulator: "Claude-Haiku-4-5",
+                budget: "3.73",
+                passRate: "21.33",
+                institute: "anthropic",
+                date: "2025-11-13"
+              }
+            ]
           }
         };
 
@@ -1739,6 +1845,7 @@
 
         document.addEventListener('DOMContentLoaded', function () {
           initializeFilters();
+          enforcePerformanceForDataset();
           setupFilterListeners();
           setupStageListeners();
           relabelStages();
@@ -1776,6 +1883,19 @@
           document.getElementById('performance-filter').value = currentFilters.performance;
         }
 
+        function enforcePerformanceForDataset() {
+          const perfSelect = document.getElementById('performance-filter');
+          const rewardOption = perfSelect.querySelector('option[value="reward"]');
+          if (currentFilters.dataset === 'mini_interact') {
+            currentFilters.performance = 'success-rate';
+            perfSelect.value = 'success-rate';
+            if (rewardOption) rewardOption.disabled = true;
+            currentStage = 'Phase1-amb';
+          } else {
+            if (rewardOption) rewardOption.disabled = false;
+          }
+        }
+
         function setupFilterListeners() {
           // Test Mode (Free/Stress) 切换
           document.getElementById('test-mode-filter').addEventListener('change', function() {
@@ -1789,16 +1909,27 @@
           // Dataset 切换
           document.getElementById('dataset-filter').addEventListener('change', function() {
             currentFilters.dataset = this.value;
-            
-            // mini_interact 特殊处理：隐藏 stage pipeline
+
+            // 控制 Performance 选项：mini_interact 只能 Success Rate
+            const perfSelect = document.getElementById('performance-filter');
+            const rewardOption = perfSelect.querySelector('option[value="reward"]');
             if (this.value === 'mini_interact') {
-              // 隐藏阶段控件
+              currentFilters.performance = 'success-rate';
+              perfSelect.value = 'success-rate';
+              if (rewardOption) rewardOption.disabled = true;
+              // mini-interact 默认用 Phase1-amb 这个 stage
+              currentStage = 'Phase1-amb';
+            } else {
+              if (rewardOption) rewardOption.disabled = false;
+            }
+            
+            // mini_interact 特殊处理：隐藏 stage pipeline（如果你想保留这行为）
+            if (this.value === 'mini_interact') {
               document.getElementById('overall-btn').style.display = 'none';
               document.getElementById('c-stages').style.display = 'none';
               document.getElementById('a-stages').style.display = 'none';
             } else {
-              // 根据当前交互模式恢复阶段控件
-              updateModeDisplay(); // 你已有的函数，会正确显示 c/a 的阶段
+              updateModeDisplay();
             }
             
             updateConfiguration();
@@ -2044,6 +2175,7 @@
           if (simulator === 'Gemini-2.0-Flash') return 'simulator-gemini';
           if (simulator === 'GPT-4o') return 'simulator-gpt';
           if (simulator === 'Bird-chat-8B') return 'simulator-bird';
+          if (simulator === 'Claude-Haiku-4-5') return 'simulator-claude';
           if (simulator === 'Customized-User') return 'simulator-diy';
           return 'simulator-gemini';
         }
@@ -2063,53 +2195,102 @@
           
           tbody.innerHTML = '';
           
-          // ✨ mini_interact 特殊处理
-          if (currentFilters.dataset === 'mini_interact') {
+          // ✨ mini_interact 特殊处理：
+          // 只有 mini_interact + c-interact + (Claude-Haiku-4-5 或 ALL) 有数据，
+          // 其它 mini_interact 组合一律显示 coming soon
+          if (
+            currentFilters.dataset === 'mini_interact' &&
+            !(
+              currentFilters.interactionMode === 'c-interact' &&
+              (currentFilters.simulator === 'Claude-Haiku-4-5' ||
+               currentFilters.simulator === 'all')
+            )
+          ) {
             const tr = document.createElement('tr');
             tr.innerHTML = `
               <td colspan="8" class="empty-table-message">
                 Data for this combination will be available soon.<br>
-                <small>Dataset: ${currentFilters.dataset} • Mode: ${currentFilters.interactionMode} • Performance: ${currentFilters.performance}</small>
+                <small>Dataset: ${currentFilters.dataset} • Simulator: ${currentFilters.simulator} • Mode: ${currentFilters.interactionMode} • Performance: ${currentFilters.performance}</small>
               </td>
             `;
             tbody.appendChild(tr);
             return;
-          }
-          
+          }     
+
+          // ====== 情况 1：Simulator = ALL ======
           if (currentFilters.simulator === 'all') {
-            // 传递正确的数据源
-            const aggregatedData = aggregateAllSimulators(currentFilters, currentStage, dataSource);
-            
-            if (aggregatedData && aggregatedData.length > 0) {
-              aggregatedData.forEach((entry, idx) => {
-                const simulatorClass = getSimulatorClass(entry.simulator);
+            // mini_interact 特殊：目前只有 Claude-Haiku-4-5 一组数据
+            if (currentFilters.dataset === 'mini_interact' &&
+                currentFilters.interactionMode === 'c-interact') {
+
+              const data = dataSource['mini_interact-Claude-Haiku-4-5-c-interact'];
+              if (data && data[currentStage]) {
+                data[currentStage].forEach((entry, idx) => {
+                  const simulatorClass = getSimulatorClass(entry.simulator);
+                  const tr = document.createElement('tr');
+                  tr.innerHTML = `
+                    <td class="rank-cell">${idx + 1}</td>
+                    <td class="model-cell">${entry.model}</td>
+                    <td>
+                      <img src="./img/institute_img/${entry.institute}.png"
+                           alt="${entry.institute}"
+                           style="max-height:20px;vertical-align:middle;" />
+                    </td>
+                    <td></td>
+                    <td><span class="date-cell">${entry.date}</span></td>
+                    <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
+                    <td>${entry.budget}</td>
+                    <td>${idx === 0 ? `<strong>${entry.passRate}</strong>` : entry.passRate}</td>
+                  `;
+                  tbody.appendChild(tr);
+                });
+              } else {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                  <td class="rank-cell">${entry.rank}</td>
-                  <td class="model-cell">${entry.model}</td>
-                  <td>
-                    <img src="./img/institute_img/${entry.institute}.png"
-                         alt="${entry.institute}"
-                         style="max-height:20px;vertical-align:middle;" />
+                  <td colspan="8" class="empty-table-message">
+                    Data for this combination will be available soon.<br>
+                    <small>Dataset: ${currentFilters.dataset} • Mode: ${currentFilters.interactionMode} • Performance: ${currentFilters.performance}</small>
                   </td>
-                  <td></td>
-                  <td><span class="date-cell">${entry.date}</span></td>
-                  <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
-                  <td>${entry.budget}</td>
-                  <td>${idx === 0 ? `<strong>${entry.passRate}</strong>` : entry.passRate}</td>
                 `;
                 tbody.appendChild(tr);
-              });
+              }
+
             } else {
-              const tr = document.createElement('tr');
-              tr.innerHTML = `
-                <td colspan="8" class="empty-table-message">
-                  Data for this combination will be available soon.<br>
-                  <small>Dataset: ${filters.dataset} • Mode: ${filters.mode} • Performance: ${filters.performance}</small>
-                </td>
-              `;
-              tbody.appendChild(tr);
+              // 原来的 lite / full 聚合逻辑
+              const aggregatedData = aggregateAllSimulators(currentFilters, currentStage, dataSource);
+              
+              if (aggregatedData && aggregatedData.length > 0) {
+                aggregatedData.forEach((entry, idx) => {
+                  const simulatorClass = getSimulatorClass(entry.simulator);
+                  const tr = document.createElement('tr');
+                  tr.innerHTML = `
+                    <td class="rank-cell">${entry.rank}</td>
+                    <td class="model-cell">${entry.model}</td>
+                    <td>
+                      <img src="./img/institute_img/${entry.institute}.png"
+                           alt="${entry.institute}"
+                           style="max-height:20px;vertical-align:middle;" />
+                    </td>
+                    <td></td>
+                    <td><span class="date-cell">${entry.date}</span></td>
+                    <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
+                    <td>${entry.budget}</td>
+                    <td>${idx === 0 ? `<strong>${entry.passRate}</strong>` : entry.passRate}</td>
+                  `;
+                  tbody.appendChild(tr);
+                });
+              } else {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td colspan="8" class="empty-table-message">
+                    Data for this combination will be available soon.<br>
+                    <small>Dataset: ${currentFilters.dataset} • Mode: ${currentFilters.interactionMode} • Performance: ${currentFilters.performance}</small>
+                  </td>
+                `;
+                tbody.appendChild(tr);
+              }
             }
+          // ====== 情况 2：Simulator = Customized-User ======
           } else if (currentFilters.simulator === 'Customized-User') {
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -2119,19 +2300,23 @@
               </td>
             `;
             tbody.appendChild(tr);
+
+          // ====== 情况 3：普通的单个 Simulator（包括 Claude-Haiku-4-5） ======
           } else {
             let simulatorKey = currentFilters.simulator;
             if (currentFilters.simulator === 'gpt-4o') {
               simulatorKey = 'gpt-4o';
             } else if (currentFilters.simulator === 'Gemini-2.0-Flash') {
               simulatorKey = 'Gemini-2.0-Flash';
-            } else if (filters.simulator === 'bird-chat-8B') {
+            } else if (currentFilters.simulator === 'bird-chat-8B') {
               simulatorKey = 'bird-chat-8B';
+            } else if (currentFilters.simulator === 'Claude-Haiku-4-5') {
+              simulatorKey = 'Claude-Haiku-4-5';
             }
-            
+
             const dataKey = `${currentFilters.dataset}-${simulatorKey}-${currentFilters.interactionMode}`; 
             const data = dataSource[dataKey];
-            
+
             if (data && data[currentStage]) {
               data[currentStage].forEach((entry, idx) => {
                 const simulatorClass = getSimulatorClass(entry.simulator);
