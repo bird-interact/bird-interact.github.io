@@ -560,6 +560,22 @@
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
       }
       
+      #table-description .metric-explain-list {
+        margin: 0;                 /* 去掉默认外边距 */
+        padding-left: 1.5rem;      /* 控制整体向右缩进程度 */
+        list-style-position: inside; /* 让小圆点在内容盒子内部，而不是跑到外面 */
+      }
+
+      #table-description {
+        margin-top: 16px;   /* 想离多远调这里，比如 12px / 16px / 20px */
+      }
+
+      .scroll-container {
+        max-height: 280px; 
+        overflow-y: auto;
+        padding-right: 6px;
+      }
+
       .stage-progress {
         display: flex;
         align-items: center;
@@ -821,7 +837,7 @@
                   <li style="margin-bottom: 8px;">
                     <span style="display: inline-block; margin-left: 12px;">
                       <img src="./img/mic_logo.png" style="height: 16px; vertical-align: middle; margin-right: 8px;" />
-                      <strong>mini-interact: (Coming Soon)</strong> A portable and easy-to-eval version containing <span style="color: #155E95; font-weight: bold;">300</span> tasks specifically for SQLite with ambiguity resolution and follow up query separately and decoupled. The trained human-aligned local user simulator will be deployed.
+                      <strong>mini-interact: (Coming Soon)</strong> A portable and easy-to-eval version containing <span style="color: #155E95; font-weight: bold;">300</span> tasks specifically for SQLite with ambiguity resolution and follow up query separately and decoupled.
                     </span>
                   </li>
                   <li style="margin-bottom: 8px;">
@@ -881,6 +897,21 @@
                 <div class="card card-outline-secondary mb-4" style="text-align: left">
                   <div class="card-body" style="background-color: #f1f6f9">
                     <ul style="padding-left: 0">
+                      <li style="list-style-type: none; margin-bottom: 1em;">
+                        <span
+                          style="
+                            background-color: #B03052;
+                            color: white;
+                            padding: 2px 4px;
+                            border-radius: 5px;
+                          "
+                          ><strong style="color: #ffe7ce">Nov. 13, 2025:</strong></span
+                        >
+                        We have released <a href="https://huggingface.co/datasets/birdsql/mini-interact" target="_blank"
+                          ><strong>Mini-Interact</strong>
+                        </a
+                        >, an SQLite-based interactive benchmark with a self-contained environment that requires no Docker setup. This lightweight version enables fast development and testing of interactive intelligence for agentic data exploration with users.
+                      </li>
                       <li style="list-style-type: none; margin-bottom: 1em;">
                         <span
                           style="
@@ -1251,14 +1282,15 @@
 
               <!-- Description based on current mode -->
               <div id="table-description">
-                <p>
+                <ul class="metric-explain-list">
                   <li><strong>Efficiency</strong> means the conversational turns used or BIRD COIN used in Free Mode (no budget constraints).</li>
                   <li><strong>Reward*</strong> means normalized global reward which is at most 100.</li>
-                  <li><strong>Phase-1 success rate (SR)</strong> means the success rate of ambiguity resolution phase.</li>
-                  <li><strong>Phase-1-Debug SR</strong> means the success rate of the ambiguity resolution phase with the chance of debugging.</li>
-                  <li><strong>Phase-2 SR</strong> means the success rate of both phase 1 and the follow up question phase.</li>
-                  <li><strong>Phase-2-Debug SR</strong> means success rate of both phase 1 and follow up question phase with the chance of debugging.</li>
-                </p>
+                  <li><strong>Priority Questions success rate (SR)</strong> means the success rate of ambiguity resolution phase.</li>
+                  <li><strong>Priority Questions + Debug SR</strong> means the success rate of the ambiguity resolution phase with the chance of debugging.</li>
+                  <li><strong>Follow Ups SR</strong> means the success rate of both Priority Questions and the Follow Up questions.</li>
+                  <li><strong>Follow Ups + Debug SR</strong> means success rate of both Priority Questions and Follow Up Questions with the chance of debugging.</li>
+                </ul>
+
                 <p>📌 <strong>NOTE:</strong> The Efficiency for c-interact is the conversational turns used; for a-interact is the total BIRD COIN used.</p>
               </div>
             </div>
