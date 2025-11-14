@@ -1296,7 +1296,7 @@
                   <li><strong>Follow Ups + Debug SR</strong> means success rate of both Priority Questions and Follow Up Questions with the chance of debugging.</li>
                 </ul>
 
-                <p>📌 <strong>NOTE:</strong> The Efficiency for c-interact is the conversational turns used; for a-interact is the total BIRD COIN used.</p>
+                <p>📌 <strong>NOTE:</strong> The <strong>Efficiency</strong> for c-interact is the conversational turns used; for a-interact is the total BIRD COIN used. The higher value means more interactive but also cost more.</p>
               </div>
             </div>
           </div>
@@ -2039,18 +2039,18 @@
           const modeText = currentFilters.interactionMode === 'c-interact' ? 'c-Interact' : 'a-Interact';
           const performanceText = currentFilters.performance === 'reward' ? 'Reward*' : 'Success Rate';
           
-          // ✨ 新增：Dialect 显示
-          // 判断当前方言
-          const dialectText = currentFilters.dataset === 'mini_interact' ? 'SQLite' : 'PostgreSQL';
+          // ✨ 新增：Dialect 显示（带超链接）
+          const dialectText = currentFilters.dataset === 'mini_interact'
+            ? '<a href="https://docs.python.org/3/library/sqlite3.html" target="_blank" style="color: inherit; text-decoration: underline;">SQLite</a>'
+            : '<a href="https://www.postgresql.org/docs/14/release-14.html" target="_blank" style="color: inherit; text-decoration: underline;">PostgreSQL</a>';
 
-          // 🎨 新增漂亮的蓝色徽章 HTML
           const dialectClass = currentFilters.dataset === 'mini_interact' ? 'sqlite' : '';
+
           const dialectBadge = `
             <span class="dialect-badge ${dialectClass}" title="SQL Dialect being evaluated">
               <span class="dialect-label">Dialect:</span> ${dialectText}
             </span>
           `;
-
           // 🧩 更新配置展示区域
           config.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
