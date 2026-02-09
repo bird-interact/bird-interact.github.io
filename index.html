@@ -397,7 +397,25 @@
       #leaderboard-table th:nth-child(6), #leaderboard-table td:nth-child(6) { width: 14%; } /* User Simulator */
       #leaderboard-table th:nth-child(7), #leaderboard-table td:nth-child(7) { width: 8%; }  /* Budget/Efficiency */
       #leaderboard-table th:nth-child(8), #leaderboard-table td:nth-child(8) { width: 12%; } /* Metric */
-            
+
+      /* Table row hover effects */
+      #leaderboard-table tbody tr {
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      #leaderboard-table tbody tr:hover {
+        transform: scale(1.02);
+        background-color: #e8f4fc;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        position: relative;
+        z-index: 1;
+      }
+
+      #leaderboard-table tbody tr:hover td {
+        color: #1a5276;
+      }
+
       /* Custom cell classes */
       .rank-cell {
         font-weight: bold;
@@ -688,6 +706,13 @@
         text-align: center;
       }
 
+      /* Leaderboard header with verified toggle */
+      #leaderboard-title {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+
       /* Note styling for Stress Mode */
       .stress-note {
         background: #fff3cd;
@@ -770,6 +795,76 @@
         padding: 40px 20px;
         color: #6c757d;
         font-style: italic;
+      }
+
+      /* Verified Filter Toggle Styles */
+      .verified-filter-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .verified-filter-container label {
+        cursor: pointer;
+        font-size: 0.85rem;
+        color: #495057;
+        user-select: none;
+        margin: 0;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: color 0.3s ease;
+      }
+
+      .verified-filter-container:hover label {
+        color: #28a745;
+      }
+
+      .verified-filter-container input[type="checkbox"] {
+        display: none;
+      }
+
+      .toggle-switch {
+        display: inline-block;
+        position: relative;
+        width: 42px;
+        height: 22px;
+        background-color: #ccc;
+        border-radius: 22px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+      }
+
+      .toggle-switch:hover {
+        background-color: #bbb;
+      }
+
+      .toggle-switch::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 18px;
+        height: 18px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+
+      .verified-filter-container input[type="checkbox"]:checked + .toggle-switch {
+        background-color: #28a745;
+      }
+
+      .verified-filter-container input[type="checkbox"]:checked + .toggle-switch::after {
+        transform: translateX(20px);
+      }
+
+      .verified-filter-container.checked label {
+        color: #28a745;
+        font-weight: 600;
       }
     </style>
   </head>
@@ -917,7 +1012,7 @@
                           style="color: #155E95; text-decoration: none"
                           ><strong>BIRD-Interact paper</strong></a
                         >
-                         accepted at <strong>ICLR 2026 (Oral)</strong>! We would like to sincerely thank everyone who provided valuable suggestions, especially the ICLR reviewers and Area Chair, for their thoughtful reviews and constructive feedback.
+                         accepted at <strong>ICLR 2026 (<span style="color:red;">Oral</span>)</strong>! We would like to sincerely thank everyone who provided valuable suggestions, especially the ICLR reviewers and Area Chair, for their thoughtful reviews and constructive feedback.
                       </li>
                       
                       <li style="list-style-type: none; margin-bottom: 1em;">
@@ -1197,7 +1292,13 @@
           <!-- UNIFIED Leaderboard - 默认显示 Free Mode -->
           <div class="card card-outline-secondary mb-4" id="unified-leaderboard">
             <div class="card-header mode-title" id="leaderboard-title">
-              BIRD-INTERACT Leaderboard
+              <span></span>
+              <span id="leaderboard-title-text">BIRD-INTERACT Leaderboard - Free Mode 🕹️</span>
+              <div class="verified-filter-container checked">
+                <label for="verified-filter">Verified</label>
+                <input type="checkbox" id="verified-filter" checked />
+                <span class="toggle-switch" onclick="document.getElementById('verified-filter').click()"></span>
+              </div>
             </div>
             
             <!-- Filter Controls - 只保留一套，用 JS 控制 -->
@@ -1315,7 +1416,7 @@
                   <li><strong>Follow Ups + Debug SR</strong> means success rate of both Priority Questions and Follow Up Questions with the chance of debugging.</li>
                 </ul>
 
-                <p>📌 <strong>NOTE:</strong> The <strong>Efficiency</strong> for c-interact is the conversational turns used; for a-interact is the total BIRD COIN used. The higher value means more interactive but also cost more.</p>
+                <p>📌 <strong>NOTE:</strong> The <strong>Efficiency</strong> for c-interact is the conversational turns used; for a-interact is the total BIRD COIN used. The higher value means more interactive but also cost more.<span id="verified-note" style="display: inline;"> We add a <img src="./logo/bedge.png" alt="badge" style="max-height:20px;vertical-align:middle;" /> badge for verified models (e.g., Gemini-2.5-Pro above).</span></p>
               </div>
             </div>
           </div>
@@ -1536,6 +1637,76 @@
               { rank: 5, model: "Gemini-2.0-Flash", simulator: "Gemini-2.0-Flash", budget: "18.73", passRate: "10.33", institute: "google", date: "2025-04-20" },
               { rank: 6, model: "DeepSeek-V3", simulator: "Gemini-2.0-Flash", budget: "18.94", passRate: "9.67", institute: "deepseek", date: "2025-04-20" },
               { rank: 7, model: "GPT-4o", simulator: "Gemini-2.0-Flash", budget: "18.95", passRate: "9.00", institute: "openai", date: "2025-04-20" }
+            ]
+          },
+
+          'full-Claude-Haiku-4-5-c-interact': {
+            'Reward*': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "13.30", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "10.82", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "9.33", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "7.68", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "7.37", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "3.02", institute: "meta", date: "2026-02-02" }
+            ],
+            'Phase1-amb': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "10.84", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "9.66", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "3.50", institute: "meta", date: "2026-02-02" }
+            ],
+            'Phase1-debug': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "16.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "13.17", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "10.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "9.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "8.67", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "4.00", institute: "meta", date: "2026-02-02" }
+            ],
+            'Phase2-FU': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "6.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 3, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "6.00", institute: "meta", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "5.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "4.33", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "0.50", institute: "meta", date: "2026-02-02" }
+            ],
+            'Phase2-debug': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "7.33", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "6.67", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "6.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "5.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "1.33", institute: "meta", date: "2026-02-02" }
+            ]
+          },
+
+          'full-Claude-Haiku-4-5-a-interact': {
+            'Reward*': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "14.47", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "11.87", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "11.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "11.60", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "8.77", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.27", institute: "meta", date: "2026-02-02" }
+            ],
+            'a-Phase1': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "18.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "15.17", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "13.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "11.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.94", institute: "meta", date: "2026-02-02" }
+            ],
+            'a-Phase2': [
+              { rank: 1, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "5.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "4.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "4.17", institute: "meta", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "3.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "0.69", institute: "meta", date: "2026-02-02" }
             ]
           },
 
@@ -1784,6 +1955,76 @@
             ]
           },
 
+          'full-Claude-Haiku-4-5-c-interact': {
+            'Reward*': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "13.30", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.82", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.33", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.68", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.37", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "3.02", institute: "meta", date: "2026-02-02" }
+            ],
+            'Phase1-amb': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.84", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.66", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "3.50", institute: "meta", date: "2026-02-02" }
+            ],
+            'Phase1-debug': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "16.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "13.17", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.67", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "4.00", institute: "meta", date: "2026-02-02" }
+            ],
+            'Phase2-FU': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 3, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.00", institute: "meta", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "5.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "4.33", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "0.50", institute: "meta", date: "2026-02-02" }
+            ],
+            'Phase2-debug': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.33", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.67", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "5.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "1.33", institute: "meta", date: "2026-02-02" }
+            ]
+          },
+
+          'full-Claude-Haiku-4-5-a-interact': {
+            'Reward*': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.47", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.87", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.60", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.77", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.27", institute: "meta", date: "2026-02-02" }
+            ],
+            'a-Phase1': [
+              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "18.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "15.17", institute: "meta", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "13.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.94", institute: "meta", date: "2026-02-02" }
+            ],
+            'a-Phase2': [
+              { rank: 1, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 2, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "5.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 3, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.17", institute: "meta", date: "2026-02-02" },
+              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "3.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "0.69", institute: "meta", date: "2026-02-02" }
+            ]
+          },
+
           'mini_interact-Claude-Haiku-4-5-c-interact': {
             // 只需要 Success Rate（Phase1-amb），Reward* 以后再加
             'Phase1-amb': [
@@ -1861,12 +2102,14 @@
           performance: 'success-rate'
         };
         let currentStage = 'Phase1-amb';
+        let showVerifiedOnly = true;  // Verified filter state
 
         document.addEventListener('DOMContentLoaded', function () {
           initializeFilters();
           enforcePerformanceForDataset();
           setupFilterListeners();
           setupStageListeners();
+          setupVerifiedFilter();
           relabelStages();
           updateLeaderboardTitle();
           updateStressNote();
@@ -1874,6 +2117,32 @@
           updateConfiguration();
           updateLeaderboard();
         });
+
+        function setupVerifiedFilter() {
+          const verifiedCheckbox = document.getElementById('verified-filter');
+          const verifiedContainer = verifiedCheckbox.closest('.verified-filter-container');
+          const verifiedNote = document.getElementById('verified-note');
+
+          // Set initial state (verified is on by default)
+          if (verifiedNote) {
+            verifiedNote.style.display = verifiedCheckbox.checked ? 'inline' : 'none';
+          }
+
+          verifiedCheckbox.addEventListener('change', function() {
+            showVerifiedOnly = this.checked;
+
+            if (this.checked) {
+              verifiedContainer.classList.add('checked');
+              if (verifiedNote) verifiedNote.style.display = 'inline';
+            } else {
+              verifiedContainer.classList.remove('checked');
+              if (verifiedNote) verifiedNote.style.display = 'none';
+            }
+
+            // Update the leaderboard table (currently shows same data)
+            updateLeaderboard();
+          });
+        }
 
         function relabelStages() {
           const cMap = {
@@ -1991,11 +2260,11 @@
 
         // 更新标题（Free/Stress Mode）
         function updateLeaderboardTitle() {
-          const title = document.getElementById('leaderboard-title');
+          const titleText = document.getElementById('leaderboard-title-text');
           if (currentFilters.testMode === 'free') {
-            title.textContent = 'BIRD-INTERACT Leaderboard - Free Mode 🕹️';
+            titleText.textContent = 'BIRD-INTERACT Leaderboard - Free Mode 🕹️';
           } else {
-            title.textContent = 'BIRD-INTERACT Leaderboard - Stress Mode ⚡';
+            titleText.textContent = 'BIRD-INTERACT Leaderboard - Stress Mode ⚡';
           }
         }
 
@@ -2199,6 +2468,20 @@
           return 'simulator-gemini';
         }
 
+        function getRankDisplay(rank) {
+          if (rank === 1) return '<img src="./logo/gold_mic.png" alt="1st" style="max-height:21px;vertical-align:middle;" />';
+          if (rank === 2) return '<img src="./logo/silver_mic.png" alt="2nd" style="max-height:21px;vertical-align:middle;" />';
+          if (rank === 3) return '<img src="./logo/green_mic.png" alt="3rd" style="max-height:21px;vertical-align:middle;" />';
+          return rank;
+        }
+
+        function getModelBadge(modelName) {
+          if (showVerifiedOnly && modelName === 'Gemini-2.5-Pro') {
+            return '<img src="./logo/bedge.png" alt="badge" style="max-height:20px;vertical-align:middle;margin-left:5px;" />';
+          }
+          return '';
+        }
+
         function updateLeaderboard() {
           const tbody = document.getElementById('leaderboard-tbody');
           const metricHeader = document.getElementById('metric-header');
@@ -2248,8 +2531,8 @@
                   const simulatorClass = getSimulatorClass(entry.simulator);
                   const tr = document.createElement('tr');
                   tr.innerHTML = `
-                    <td class="rank-cell">${idx + 1}</td>
-                    <td class="model-cell">${entry.model}</td>
+                    <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
+                    <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
                     <td>
                       <img src="./img/institute_img/${entry.institute}.png"
                            alt="${entry.institute}"
@@ -2283,8 +2566,8 @@
                   const simulatorClass = getSimulatorClass(entry.simulator);
                   const tr = document.createElement('tr');
                   tr.innerHTML = `
-                    <td class="rank-cell">${entry.rank}</td>
-                    <td class="model-cell">${entry.model}</td>
+                    <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
+                    <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
                     <td>
                       <img src="./img/institute_img/${entry.institute}.png"
                            alt="${entry.institute}"
@@ -2341,8 +2624,8 @@
                 const simulatorClass = getSimulatorClass(entry.simulator);
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                  <td class="rank-cell">${entry.rank}</td>
-                  <td class="model-cell">${entry.model}</td>
+                  <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
+                  <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
                   <td>
                     <img src="./img/institute_img/${entry.institute}.png"
                          alt="${entry.institute}"
@@ -2371,24 +2654,30 @@
           updateDescriptions();
         }
 
-        function aggregateAllSimulators(filters, currentStage, dataSource) { 
+        function aggregateAllSimulators(filters, currentStage, dataSource) {
           const allData = [];
           const simulatorKeys = {
             'lite': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'],
-            'full': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B']
+            'full': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5']
           };
-          
+
           const keysToCheck = simulatorKeys[filters.dataset] || ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'];
-          
+
           keysToCheck.forEach(simKey => {
-            const dataKey = `${filters.dataset}-${simKey}-${filters.interactionMode}`; 
+            const dataKey = `${filters.dataset}-${simKey}-${filters.interactionMode}`;
             const data = dataSource[dataKey];
-            
+
             if (data && data[currentStage]) {
               data[currentStage].forEach(entry => {
+                let displaySimulator;
+                if (simKey === 'gpt-4o') displaySimulator = 'GPT-4o';
+                else if (simKey === 'Gemini-2.0-Flash') displaySimulator = 'Gemini-2.0-Flash';
+                else if (simKey === 'Claude-Haiku-4-5') displaySimulator = 'Claude-Haiku-4-5';
+                else displaySimulator = 'Bird-chat-8B';
+
                 allData.push({
                   ...entry,
-                  simulator: simKey === 'gpt-4o' ? 'GPT-4o' : simKey === 'Gemini-2.0-Flash' ? 'Gemini-2.0-Flash' : 'Bird-chat-8B'
+                  simulator: displaySimulator
                 });
               });
             }
