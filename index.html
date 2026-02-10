@@ -1416,7 +1416,7 @@
                   <li><strong>Follow Ups + Debug SR</strong> means success rate of both Priority Questions and Follow Up Questions with the chance of debugging.</li>
                 </ul>
 
-                <p>📌 <strong>NOTE:</strong> The <strong>Efficiency</strong> for c-interact is the conversational turns used; for a-interact is the total BIRD COIN used. The higher value means more interactive but also cost more.<span id="verified-note" style="display: inline;"> We add a <img src="./logo/bedge.png" alt="badge" style="max-height:20px;vertical-align:middle;" /> badge for verified models (e.g., Gemini-2.5-Pro above).</span></p>
+                <p>📌 <strong>NOTE:</strong> The <strong>Efficiency</strong> for c-interact is the conversational turns used; for a-interact is the total BIRD COIN used. The higher value means more interactive but also cost more.<span id="verified-note"> We add a <img src="./logo/bedge.png" alt="badge" style="max-height:20px;vertical-align:middle;" /> badge for verified models (e.g., Gemini-2.5-Pro above). To get verified, please submit your codebase for pipeline evaluation.</span></p>
               </div>
             </div>
           </div>
@@ -2121,22 +2121,14 @@
         function setupVerifiedFilter() {
           const verifiedCheckbox = document.getElementById('verified-filter');
           const verifiedContainer = verifiedCheckbox.closest('.verified-filter-container');
-          const verifiedNote = document.getElementById('verified-note');
-
-          // Set initial state (verified is on by default)
-          if (verifiedNote) {
-            verifiedNote.style.display = verifiedCheckbox.checked ? 'inline' : 'none';
-          }
 
           verifiedCheckbox.addEventListener('change', function() {
             showVerifiedOnly = this.checked;
 
             if (this.checked) {
               verifiedContainer.classList.add('checked');
-              if (verifiedNote) verifiedNote.style.display = 'inline';
             } else {
               verifiedContainer.classList.remove('checked');
-              if (verifiedNote) verifiedNote.style.display = 'none';
             }
 
             // Update the leaderboard table (currently shows same data)
