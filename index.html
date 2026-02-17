@@ -1642,71 +1642,157 @@
 
           'full-Claude-Haiku-4-5-c-interact': {
             'Reward*': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "13.30", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "10.82", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "9.33", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "7.68", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "7.37", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "3.02", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.81", passRate: "21.20", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "4.78", passRate: "15.90", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "13.30", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.20", passRate: "11.55", institute: "zai", date: "2026-02-17" },
+              { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.78", passRate: "11.07", institute: "minimax", date: "2026-02-17" },
+              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "10.82", institute: "meta", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "9.33", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "7.68", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "7.37", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "3.02", institute: "meta", date: "2026-02-02" }
             ],
             'Phase1-amb': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "10.84", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "9.66", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "3.50", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.81", passRate: "22.17", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "4.78", passRate: "16.67", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.78", passRate: "12.00", institute: "minimax", date: "2026-02-17" },
+              { rank: 5, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "10.84", institute: "meta", date: "2026-02-02" },
+              { rank: 6, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.20", passRate: "10.83", institute: "zai", date: "2026-02-17" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "9.66", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "3.50", institute: "meta", date: "2026-02-02" }
             ],
             'Phase1-debug': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "16.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "13.17", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "10.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "9.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "8.67", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "4.00", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.81", passRate: "25.17", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "4.78", passRate: "18.50", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "16.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.20", passRate: "13.67", institute: "zai", date: "2026-02-17" },
+              { rank: 5, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "13.17", institute: "meta", date: "2026-02-02" },
+              { rank: 6, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.78", passRate: "12.83", institute: "minimax", date: "2026-02-17" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "10.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "9.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "8.67", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "4.00", institute: "meta", date: "2026-02-02" }
             ],
             'Phase2-FU': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "6.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 3, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "6.00", institute: "meta", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "5.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "4.33", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "0.50", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.81", passRate: "13.50", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "4.78", passRate: "10.83", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.20", passRate: "8.17", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.78", passRate: "6.50", institute: "minimax", date: "2026-02-17" },
+              { rank: 6, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "6.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 7, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "6.00", institute: "meta", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "5.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "4.33", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "0.50", institute: "meta", date: "2026-02-02" }
             ],
             'Phase2-debug': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "7.33", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "6.67", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "6.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "5.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "1.33", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.81", passRate: "14.17", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "4.78", passRate: "11.17", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.20", passRate: "8.67", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.76", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.78", passRate: "8.00", institute: "minimax", date: "2026-02-17" },
+              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.10", passRate: "7.33", institute: "meta", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "1.62", passRate: "6.67", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "2.38", passRate: "6.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "1.82", passRate: "5.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "2.03", passRate: "1.33", institute: "meta", date: "2026-02-02" }
+            ]
+          },
+
+          'lite-Claude-Haiku-4-5-c-interact': {
+            'Reward*': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.34", passRate: "40.00", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.52", passRate: "28.76", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.33", passRate: "23.44", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.94", passRate: "22.21", institute: "minimax", date: "2026-02-17" }
+            ],
+            'Phase1-amb': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.34", passRate: "43.81", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.52", passRate: "30.77", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.33", passRate: "25.75", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.94", passRate: "23.08", institute: "minimax", date: "2026-02-17" }
+            ],
+            'Phase1-debug': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.34", passRate: "46.49", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.52", passRate: "33.11", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.33", passRate: "27.42", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.94", passRate: "26.76", institute: "minimax", date: "2026-02-17" }
+            ],
+            'Phase2-FU': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.34", passRate: "25.75", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.52", passRate: "19.73", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.33", passRate: "15.05", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.94", passRate: "12.71", institute: "minimax", date: "2026-02-17" }
+            ],
+            'Phase2-debug': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.34", passRate: "27.09", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "2.52", passRate: "20.40", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "2.33", passRate: "15.38", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "3.94", passRate: "14.72", institute: "minimax", date: "2026-02-17" }
             ]
           },
 
           'full-Claude-Haiku-4-5-a-interact': {
             'Reward*': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "14.47", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "11.87", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "11.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "11.60", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "8.77", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.27", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "28.35", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "22.92", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.68", passRate: "20.58", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.51", passRate: "20.48", institute: "minimax", date: "2026-02-17" },
+              { rank: 5, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "14.47", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "11.87", institute: "meta", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "11.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "11.60", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "8.77", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.27", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "18.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "15.17", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "13.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "11.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.94", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "33.00", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "28.17", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.68", passRate: "25.83", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.51", passRate: "24.83", institute: "minimax", date: "2026-02-17" },
+              { rank: 5, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "18.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "15.17", institute: "meta", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "13.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "11.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.94", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "5.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "4.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "4.17", institute: "meta", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "3.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "0.69", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "17.50", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "10.67", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.51", passRate: "10.33", institute: "minimax", date: "2026-02-17" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.68", passRate: "8.33", institute: "zai", date: "2026-02-17" },
+              { rank: 5, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.46", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.74", passRate: "5.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.60", passRate: "4.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.80", passRate: "4.17", institute: "meta", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.29", passRate: "3.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "0.69", institute: "meta", date: "2026-02-02" }
+            ]
+          },
+
+          'lite-Claude-Haiku-4-5-a-interact': {
+            'Reward*': [
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "18.17", passRate: "32.63", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "18.72", passRate: "23.73", institute: "minimax", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "19.06", passRate: "23.00", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "18.93", passRate: "22.53", institute: "kimi", date: "2026-02-17" }
+            ],
+            'a-Phase1': [
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "18.17", passRate: "36.33", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "19.06", passRate: "29.00", institute: "zai", date: "2026-02-17" },
+              { rank: 3, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "18.72", passRate: "28.33", institute: "minimax", date: "2026-02-17" },
+              { rank: 4, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "18.93", passRate: "27.33", institute: "kimi", date: "2026-02-17" }
+            ],
+            'a-Phase2': [
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "18.17", passRate: "24.00", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "18.72", passRate: "13.00", institute: "minimax", date: "2026-02-17" },
+              { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "18.93", passRate: "11.33", institute: "kimi", date: "2026-02-17" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "19.06", passRate: "9.00", institute: "zai", date: "2026-02-17" }
             ]
           },
 
@@ -1957,71 +2043,157 @@
 
           'full-Claude-Haiku-4-5-c-interact': {
             'Reward*': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "13.30", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.82", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.33", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.68", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.37", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "3.02", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "21.20", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "15.90", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "13.30", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "11.55", institute: "zai", date: "2026-02-17" },
+              { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "11.07", institute: "minimax", date: "2026-02-17" },
+              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.82", institute: "meta", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.33", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.68", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.37", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "3.02", institute: "meta", date: "2026-02-02" }
             ],
             'Phase1-amb': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.84", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.66", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "3.50", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "22.17", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "16.67", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "12.00", institute: "minimax", date: "2026-02-17" },
+              { rank: 5, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.84", institute: "meta", date: "2026-02-02" },
+              { rank: 6, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.83", institute: "zai", date: "2026-02-17" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.66", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "3.50", institute: "meta", date: "2026-02-02" }
             ],
             'Phase1-debug': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "16.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "13.17", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.67", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "4.00", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "25.17", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "18.50", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "16.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "13.67", institute: "zai", date: "2026-02-17" },
+              { rank: 5, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "13.17", institute: "meta", date: "2026-02-02" },
+              { rank: 6, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "12.83", institute: "minimax", date: "2026-02-17" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "9.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.67", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "4.00", institute: "meta", date: "2026-02-02" }
             ],
             'Phase2-FU': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 3, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.00", institute: "meta", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "5.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "4.33", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "0.50", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "13.50", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "10.83", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.17", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.50", institute: "minimax", date: "2026-02-17" },
+              { rank: 6, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 7, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.00", institute: "meta", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "5.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "4.33", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "0.50", institute: "meta", date: "2026-02-02" }
             ],
             'Phase2-debug': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.33", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.67", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "5.00", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "1.33", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "14.17", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "11.17", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.67", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "8.00", institute: "minimax", date: "2026-02-17" },
+              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "7.33", institute: "meta", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.67", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "6.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "5.00", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "5.93", passRate: "1.33", institute: "meta", date: "2026-02-02" }
+            ]
+          },
+
+          'lite-Claude-Haiku-4-5-c-interact': {
+            'Reward*': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "40.00", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "28.76", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "23.44", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "22.21", institute: "minimax", date: "2026-02-17" }
+            ],
+            'Phase1-amb': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "43.81", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "30.77", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "25.75", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "23.08", institute: "minimax", date: "2026-02-17" }
+            ],
+            'Phase1-debug': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "46.49", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "33.11", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "27.42", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "26.76", institute: "minimax", date: "2026-02-17" }
+            ],
+            'Phase2-FU': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "25.75", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "19.73", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "15.05", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "12.71", institute: "minimax", date: "2026-02-17" }
+            ],
+            'Phase2-debug': [
+              { rank: 1, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "27.09", institute: "kimi", date: "2026-02-17" },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "20.40", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "15.38", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "6.64", passRate: "14.72", institute: "minimax", date: "2026-02-17" }
             ]
           },
 
           'full-Claude-Haiku-4-5-a-interact': {
             'Reward*': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.47", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.87", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.60", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.77", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.27", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.35", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "22.92", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.58", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.48", institute: "minimax", date: "2026-02-17" },
+              { rank: 5, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.47", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.87", institute: "meta", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.60", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.77", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.27", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "18.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "15.17", institute: "meta", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "13.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.94", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "33.00", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.17", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "25.83", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "24.83", institute: "minimax", date: "2026-02-17" },
+              { rank: 5, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "18.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "15.17", institute: "meta", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "13.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.94", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 2, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "5.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 3, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 4, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.17", institute: "meta", date: "2026-02-02" },
-              { rank: 5, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "3.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "0.69", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "17.50", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.67", institute: "kimi", date: "2026-02-17" },
+              { rank: 3, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.33", institute: "minimax", date: "2026-02-17" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.33", institute: "zai", date: "2026-02-17" },
+              { rank: 5, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 6, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "5.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.17", institute: "meta", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "3.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "0.69", institute: "meta", date: "2026-02-02" }
+            ]
+          },
+
+          'lite-Claude-Haiku-4-5-a-interact': {
+            'Reward*': [
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "32.63", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "23.73", institute: "minimax", date: "2026-02-17" },
+              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "23.00", institute: "zai", date: "2026-02-17" },
+              { rank: 4, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "22.53", institute: "kimi", date: "2026-02-17" }
+            ],
+            'a-Phase1': [
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "36.33", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "29.00", institute: "zai", date: "2026-02-17" },
+              { rank: 3, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "28.33", institute: "minimax", date: "2026-02-17" },
+              { rank: 4, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "27.33", institute: "kimi", date: "2026-02-17" }
+            ],
+            'a-Phase2': [
+              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "24.00", institute: "anthropic", date: "2026-02-17" },
+              { rank: 2, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "13.00", institute: "minimax", date: "2026-02-17" },
+              { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "11.33", institute: "kimi", date: "2026-02-17" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "19.28", passRate: "9.00", institute: "zai", date: "2026-02-17" }
             ]
           },
 
@@ -2649,7 +2821,7 @@
         function aggregateAllSimulators(filters, currentStage, dataSource) {
           const allData = [];
           const simulatorKeys = {
-            'lite': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'],
+            'lite': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5'],
             'full': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5']
           };
 
