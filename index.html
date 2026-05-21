@@ -437,6 +437,19 @@
         display: inline-block;
       }
 
+      .new-sub-badge {
+        display: inline-block;
+        margin-top: 4px;
+        font-size: 0.68em;
+        font-weight: 700;
+        color: #ffffff;
+        background: #dc3545;
+        padding: 2px 6px;
+        border-radius: 999px;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
       /* User Simulator styling with different colors */
       .simulator-cell {
         font-size: 0.75em;
@@ -1344,9 +1357,9 @@
             <div class="card-header mode-title" id="leaderboard-title">
               <span></span>
               <span id="leaderboard-title-text">BIRD-INTERACT Leaderboard - Free Mode 🕹️</span>
-              <div class="verified-filter-container checked">
+              <div class="verified-filter-container">
                 <label for="verified-filter">Verified</label>
-                <input type="checkbox" id="verified-filter" checked />
+                <input type="checkbox" id="verified-filter" />
                 <span class="toggle-switch" onclick="document.getElementById('verified-filter').click()"></span>
               </div>
             </div>
@@ -2024,40 +2037,43 @@
 
           'full-gpt-4o-a-interact': {
             'Reward*': [
-              { rank: 1, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "25.52", institute: "openai", date: "2025-08-22" },
-              { rank: 2, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "23.28", institute: "anthropic", date: "2025-08-22" },
-              { rank: 3, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", budget: "17.86", passRate: "17.45", institute: "anthropic", date: "2025-08-22" },
-              { rank: 4, model: "Gemini-2-5-Pro", simulator: "GPT-4o", budget: "17.86", passRate: "17.33", institute: "google", date: "2025-08-22" },
-              { rank: 5, model: "GPT-4o", simulator: "GPT-4o", budget: "17.86", passRate: "16.95", institute: "openai", date: "2025-08-22" },
-              { rank: 6, model: "O3-Mini", simulator: "GPT-4o", budget: "17.86", passRate: "16.43", institute: "openai_reasoning", date: "2025-08-22" },
-              { rank: 7, model: "Qwen-3-235B", simulator: "GPT-4o", budget: "17.86", passRate: "16.42", institute: "qwen", date: "2025-08-22" },
-              { rank: 8, model: "Gemini-2.0-Flash", simulator: "GPT-4o", budget: "17.86", passRate: "15.17", institute: "google", date: "2025-08-22" },
-              { rank: 9, model: "DeepSeek-Chat-V3.1", simulator: "GPT-4o", budget: "17.86", passRate: "13.47", institute: "deepseek", date: "2025-08-22" },
-              { rank: 10, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", budget: "17.86", passRate: "10.58", institute: "qwen", date: "2025-08-22" }
+              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "33.45", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 2, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "25.52", institute: "openai", date: "2025-08-22" },
+              { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "23.28", institute: "anthropic", date: "2025-08-22" },
+              { rank: 4, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", budget: "17.86", passRate: "17.45", institute: "anthropic", date: "2025-08-22" },
+              { rank: 5, model: "Gemini-2-5-Pro", simulator: "GPT-4o", budget: "17.86", passRate: "17.33", institute: "google", date: "2025-08-22" },
+              { rank: 6, model: "GPT-4o", simulator: "GPT-4o", budget: "17.86", passRate: "16.95", institute: "openai", date: "2025-08-22" },
+              { rank: 7, model: "O3-Mini", simulator: "GPT-4o", budget: "17.86", passRate: "16.43", institute: "openai_reasoning", date: "2025-08-22" },
+              { rank: 8, model: "Qwen-3-235B", simulator: "GPT-4o", budget: "17.86", passRate: "16.42", institute: "qwen", date: "2025-08-22" },
+              { rank: 9, model: "Gemini-2.0-Flash", simulator: "GPT-4o", budget: "17.86", passRate: "15.17", institute: "google", date: "2025-08-22" },
+              { rank: 10, model: "DeepSeek-Chat-V3.1", simulator: "GPT-4o", budget: "17.86", passRate: "13.47", institute: "deepseek", date: "2025-08-22" },
+              { rank: 11, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", budget: "17.86", passRate: "10.58", institute: "qwen", date: "2025-08-22" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "29.17", institute: "openai", date: "2025-08-22" },
-              { rank: 2, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "27.83", institute: "anthropic", date: "2025-08-22" },
-              { rank: 3, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", budget: "17.86", passRate: "21.00", institute: "anthropic", date: "2025-08-22" },
-              { rank: 4, model: "GPT-4o", simulator: "GPT-4o", budget: "17.86", passRate: "21.00", institute: "openai", date: "2025-08-22" },
-              { rank: 5, model: "Gemini-2-5-Pro", simulator: "GPT-4o", budget: "17.86", passRate: "20.33", institute: "google", date: "2025-08-22" },
-              { rank: 6, model: "O3-Mini", simulator: "GPT-4o", budget: "17.86", passRate: "19.83", institute: "openai_reasoning", date: "2025-08-22" },
-              { rank: 7, model: "Qwen-3-235B", simulator: "GPT-4o", budget: "17.86", passRate: "19.17", institute: "qwen", date: "2025-08-22" },
-              { rank: 8, model: "Gemini-2.0-Flash", simulator: "GPT-4o", budget: "17.86", passRate: "18.17", institute: "google", date: "2025-08-22" },
-              { rank: 9, model: "DeepSeek-Chat-V3.1", simulator: "GPT-4o", budget: "17.86", passRate: "17.17", institute: "deepseek", date: "2025-08-22" },
-              { rank: 10, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", budget: "17.86", passRate: "13.33", institute: "qwen", date: "2025-08-22" }
+              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "38.00", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 2, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "29.17", institute: "openai", date: "2025-08-22" },
+              { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "27.83", institute: "anthropic", date: "2025-08-22" },
+              { rank: 4, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", budget: "17.86", passRate: "21.00", institute: "anthropic", date: "2025-08-22" },
+              { rank: 5, model: "GPT-4o", simulator: "GPT-4o", budget: "17.86", passRate: "21.00", institute: "openai", date: "2025-08-22" },
+              { rank: 6, model: "Gemini-2-5-Pro", simulator: "GPT-4o", budget: "17.86", passRate: "20.33", institute: "google", date: "2025-08-22" },
+              { rank: 7, model: "O3-Mini", simulator: "GPT-4o", budget: "17.86", passRate: "19.83", institute: "openai_reasoning", date: "2025-08-22" },
+              { rank: 8, model: "Qwen-3-235B", simulator: "GPT-4o", budget: "17.86", passRate: "19.17", institute: "qwen", date: "2025-08-22" },
+              { rank: 9, model: "Gemini-2.0-Flash", simulator: "GPT-4o", budget: "17.86", passRate: "18.17", institute: "google", date: "2025-08-22" },
+              { rank: 10, model: "DeepSeek-Chat-V3.1", simulator: "GPT-4o", budget: "17.86", passRate: "17.17", institute: "deepseek", date: "2025-08-22" },
+              { rank: 11, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", budget: "17.86", passRate: "13.33", institute: "qwen", date: "2025-08-22" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "17.00", institute: "openai", date: "2025-08-22" },
-              { rank: 2, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "12.67", institute: "anthropic", date: "2025-08-22" },
-              { rank: 3, model: "Gemini-2-5-Pro", simulator: "GPT-4o", budget: "17.86", passRate: "10.33", institute: "google", date: "2025-08-22" },
-              { rank: 4, model: "Qwen-3-235B", simulator: "GPT-4o", budget: "17.86", passRate: "10.00", institute: "qwen", date: "2025-08-22" },
-              { rank: 5, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", budget: "17.86", passRate: "9.17", institute: "anthropic", date: "2025-08-22" },
-              { rank: 6, model: "O3-Mini", simulator: "GPT-4o", budget: "17.86", passRate: "8.50", institute: "openai_reasoning", date: "2025-08-22" },
-              { rank: 7, model: "Gemini-2.0-Flash", simulator: "GPT-4o", budget: "17.86", passRate: "8.17", institute: "google", date: "2025-08-22" },
-              { rank: 8, model: "GPT-4o", simulator: "GPT-4o", budget: "17.86", passRate: "7.50", institute: "openai", date: "2025-08-22" },
-              { rank: 9, model: "DeepSeek-Chat-V3.1", simulator: "GPT-4o", budget: "17.86", passRate: "4.83", institute: "deepseek", date: "2025-08-22" },
-              { rank: 10, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", budget: "17.86", passRate: "4.17", institute: "qwen", date: "2025-08-22" }
+              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "22.67", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 2, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "17.00", institute: "openai", date: "2025-08-22" },
+              { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "12.67", institute: "anthropic", date: "2025-08-22" },
+              { rank: 4, model: "Gemini-2-5-Pro", simulator: "GPT-4o", budget: "17.86", passRate: "10.33", institute: "google", date: "2025-08-22" },
+              { rank: 5, model: "Qwen-3-235B", simulator: "GPT-4o", budget: "17.86", passRate: "10.00", institute: "qwen", date: "2025-08-22" },
+              { rank: 6, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", budget: "17.86", passRate: "9.17", institute: "anthropic", date: "2025-08-22" },
+              { rank: 7, model: "O3-Mini", simulator: "GPT-4o", budget: "17.86", passRate: "8.50", institute: "openai_reasoning", date: "2025-08-22" },
+              { rank: 8, model: "Gemini-2.0-Flash", simulator: "GPT-4o", budget: "17.86", passRate: "8.17", institute: "google", date: "2025-08-22" },
+              { rank: 9, model: "GPT-4o", simulator: "GPT-4o", budget: "17.86", passRate: "7.50", institute: "openai", date: "2025-08-22" },
+              { rank: 10, model: "DeepSeek-Chat-V3.1", simulator: "GPT-4o", budget: "17.86", passRate: "4.83", institute: "deepseek", date: "2025-08-22" },
+              { rank: 11, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", budget: "17.86", passRate: "4.17", institute: "qwen", date: "2025-08-22" }
             ]
           },
 
@@ -2189,40 +2205,43 @@
 
           'full-Claude-Haiku-4-5-a-interact': {
             'Reward*': [
-              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.35", institute: "anthropic", date: "2026-02-17" },
-              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "22.92", institute: "kimi", date: "2026-02-17" },
-              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.58", institute: "zai", date: "2026-02-17" },
-              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.48", institute: "minimax", date: "2026-02-17" },
-              { rank: 5, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.47", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.87", institute: "meta", date: "2026-02-02" },
-              { rank: 7, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 8, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.60", institute: "qwen", date: "2026-02-02" },
-              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.77", institute: "qwen", date: "2026-02-02" },
-              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.27", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "29.23", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.35", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "22.92", institute: "kimi", date: "2026-02-17" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.58", institute: "zai", date: "2026-02-17" },
+              { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.48", institute: "minimax", date: "2026-02-17" },
+              { rank: 6, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.47", institute: "qwen", date: "2026-02-02" },
+              { rank: 7, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.87", institute: "meta", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.60", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.77", institute: "qwen", date: "2026-02-02" },
+              { rank: 11, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.27", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase1': [
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "33.00", institute: "anthropic", date: "2026-02-17" },
-              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.17", institute: "kimi", date: "2026-02-17" },
-              { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "25.83", institute: "zai", date: "2026-02-17" },
-              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "24.83", institute: "minimax", date: "2026-02-17" },
-              { rank: 5, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "18.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "15.17", institute: "meta", date: "2026-02-02" },
-              { rank: 7, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
-              { rank: 8, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "13.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.94", institute: "meta", date: "2026-02-02" }
+              { rank: 2, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "32.83", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.17", institute: "kimi", date: "2026-02-17" },
+              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "25.83", institute: "zai", date: "2026-02-17" },
+              { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "24.83", institute: "minimax", date: "2026-02-17" },
+              { rank: 6, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "18.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 7, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "15.17", institute: "meta", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "14.50", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "13.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 10, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "11.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 11, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.94", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "17.50", institute: "anthropic", date: "2026-02-17" },
-              { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.67", institute: "kimi", date: "2026-02-17" },
-              { rank: 3, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.33", institute: "minimax", date: "2026-02-17" },
-              { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.33", institute: "zai", date: "2026-02-17" },
-              { rank: 5, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 6, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "5.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 7, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.83", institute: "qwen", date: "2026-02-02" },
-              { rank: 8, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.17", institute: "meta", date: "2026-02-02" },
-              { rank: 9, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "3.17", institute: "qwen", date: "2026-02-02" },
-              { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "0.69", institute: "meta", date: "2026-02-02" }
+              { rank: 1, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.83", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "17.50", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.67", institute: "kimi", date: "2026-02-17" },
+              { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.33", institute: "minimax", date: "2026-02-17" },
+              { rank: 5, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.33", institute: "zai", date: "2026-02-17" },
+              { rank: 6, model: "Qwen3-14B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "7.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 7, model: "Qwen3-Coder-30B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "5.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 8, model: "Qwen3-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.83", institute: "qwen", date: "2026-02-02" },
+              { rank: 9, model: "Llama-3.1-70B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "4.17", institute: "meta", date: "2026-02-02" },
+              { rank: 10, model: "Qwen3-32B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "3.17", institute: "qwen", date: "2026-02-02" },
+              { rank: 11, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "0.69", institute: "meta", date: "2026-02-02" }
             ]
           },
 
@@ -2317,14 +2336,14 @@
 
         // Global state for both tables
         let currentFilters = {
-          testMode: 'free',  // 'free' or 'stress'
+          testMode: 'stress',  // 'free' or 'stress'
           dataset: 'full',
           simulator: 'all',
-          interactionMode: 'c-interact',
+          interactionMode: 'a-interact',
           performance: 'success-rate'
         };
-        let currentStage = 'Phase1-amb';
-        let showVerifiedOnly = true;  // Verified filter state
+        let currentStage = 'a-Phase1';
+        let showVerifiedOnly = false;  // Verified filter state
 
         document.addEventListener('DOMContentLoaded', function () {
           initializeFilters();
@@ -2690,10 +2709,38 @@
         }
 
         function getModelBadge(modelName) {
-          if (showVerifiedOnly && modelName === 'Gemini-2.5-Pro') {
+          const verifiedModels = new Set([
+            'Gemini-2.5-Pro'
+          ]);
+          if (showVerifiedOnly && verifiedModels.has(modelName)) {
             return '<img src="./logo/bedge.png" alt="badge" style="max-height:20px;vertical-align:middle;margin-left:5px;" />';
           }
           return '';
+        }
+
+        function getVisibleEntries(entries) {
+          if (!showVerifiedOnly) return entries;
+          return entries.filter(entry => entry.verified !== false);
+        }
+
+        function applyNewSubBadges() {
+          const rows = document.querySelectorAll('#leaderboard-table tbody tr');
+
+          rows.forEach(row => {
+            if (!row.dataset.newSub) return;
+
+            const cells = row.querySelectorAll('td');
+            const metricCell = cells[cells.length - 1];
+            if (!metricCell || metricCell.querySelector('.new-sub-badge')) return;
+
+            const newSubBadge = document.createElement('span');
+            newSubBadge.className = 'new-sub-badge';
+            newSubBadge.setAttribute('data-tooltip', 'Submitted within the last 2 weeks');
+            newSubBadge.textContent = 'New Sub';
+
+            metricCell.insertBefore(document.createElement('br'), metricCell.firstChild);
+            metricCell.insertBefore(newSubBadge, metricCell.firstChild);
+          });
         }
 
         function updateLeaderboard() {
@@ -2741,9 +2788,10 @@
 
               const data = dataSource['mini_interact-Claude-Haiku-4-5-c-interact'];
               if (data && data[currentStage]) {
-                data[currentStage].forEach((entry, idx) => {
+                getVisibleEntries(data[currentStage]).forEach((entry, idx) => {
                   const simulatorClass = getSimulatorClass(entry.simulator);
                   const tr = document.createElement('tr');
+                  if (entry.newSub) tr.dataset.newSub = 'true';
                   tr.innerHTML = `
                     <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
                     <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
@@ -2779,6 +2827,7 @@
                 aggregatedData.forEach((entry, idx) => {
                   const simulatorClass = getSimulatorClass(entry.simulator);
                   const tr = document.createElement('tr');
+                  if (entry.newSub) tr.dataset.newSub = 'true';
                   tr.innerHTML = `
                     <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
                     <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
@@ -2834,9 +2883,10 @@
             const data = dataSource[dataKey];
 
             if (data && data[currentStage]) {
-              data[currentStage].forEach((entry, idx) => {
+              getVisibleEntries(data[currentStage]).forEach((entry, idx) => {
                 const simulatorClass = getSimulatorClass(entry.simulator);
                 const tr = document.createElement('tr');
+                if (entry.newSub) tr.dataset.newSub = 'true';
                 tr.innerHTML = `
                   <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
                   <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
@@ -2865,6 +2915,7 @@
             }
           }
           
+          applyNewSubBadges();
           updateDescriptions();
         }
 
@@ -2882,7 +2933,7 @@
             const data = dataSource[dataKey];
 
             if (data && data[currentStage]) {
-              data[currentStage].forEach(entry => {
+              getVisibleEntries(data[currentStage]).forEach(entry => {
                 let displaySimulator;
                 if (simKey === 'gpt-4o') displaySimulator = 'GPT-4o';
                 else if (simKey === 'Gemini-2.0-Flash') displaySimulator = 'Gemini-2.0-Flash';
