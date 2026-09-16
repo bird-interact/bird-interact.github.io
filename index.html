@@ -427,6 +427,23 @@
       .model-cell {
         width: 22%;
       }
+
+      .model-affiliation {
+        display: block;
+        margin-top: 2px;
+        color: #777;
+        font-size: 0.78em;
+        font-weight: 400;
+      }
+
+      .submission-link {
+        font-size: 1em;
+        text-decoration: none;
+      }
+
+      .submission-link:hover {
+        color: #155e95;
+      }
       
       .date-cell {
         font-size: 0.75em;
@@ -1801,6 +1818,8 @@
 
           'full-Claude-Haiku-4-5-a-interact': {
             'Reward*': [
+              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "30.88", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "30.78", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "28.35", institute: "anthropic", date: "2026-02-17" },
               { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "22.92", institute: "kimi", date: "2026-02-17" },
               { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.68", passRate: "20.58", institute: "zai", date: "2026-02-17" },
@@ -1813,6 +1832,8 @@
               { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.27", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase1': [
+              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "35.33", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "35.33", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "33.00", institute: "anthropic", date: "2026-02-17" },
               { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "28.17", institute: "kimi", date: "2026-02-17" },
               { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.68", passRate: "25.83", institute: "zai", date: "2026-02-17" },
@@ -1825,6 +1846,8 @@
               { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.94", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase2': [
+              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "20.50", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "20.17", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "17.50", institute: "anthropic", date: "2026-02-17" },
               { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "10.67", institute: "kimi", date: "2026-02-17" },
               { rank: 3, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.51", passRate: "10.33", institute: "minimax", date: "2026-02-17" },
@@ -2207,6 +2230,7 @@
             'Reward*': [
               { rank: 1, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "29.23", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
               { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.35", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "28.22", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
               { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "22.92", institute: "kimi", date: "2026-02-17" },
               { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.58", institute: "zai", date: "2026-02-17" },
               { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.48", institute: "minimax", date: "2026-02-17" },
@@ -2218,6 +2242,7 @@
               { rank: 11, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.27", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase1': [
+              { rank: 1, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "33.17", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "33.00", institute: "anthropic", date: "2026-02-17" },
               { rank: 2, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "32.83", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
               { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.17", institute: "kimi", date: "2026-02-17" },
@@ -2233,6 +2258,7 @@
             'a-Phase2': [
               { rank: 1, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.83", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
               { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "17.50", institute: "anthropic", date: "2026-02-17" },
+              { rank: 3, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "16.67", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
               { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.67", institute: "kimi", date: "2026-02-17" },
               { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.33", institute: "minimax", date: "2026-02-17" },
               { rank: 5, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.33", institute: "zai", date: "2026-02-17" },
@@ -2718,6 +2744,18 @@
           return '';
         }
 
+        function renderModelCell(entry) {
+          const affiliation = entry.institute === 'aws_quickscience'
+            ? '<span class="model-affiliation">AWSQuickScience</span>'
+            : '';
+          return `${entry.model}${getModelBadge(entry.model)}${affiliation}`;
+        }
+
+        function renderSubmissionLink(entry) {
+          if (entry.institute !== 'aws_quickscience') return '';
+          return '<a class="submission-link" href="https://www.amazon.science/" target="_blank" rel="noopener noreferrer" title="Amazon Science" aria-label="Amazon Science">🔗</a>';
+        }
+
         function getVisibleEntries(entries) {
           if (!showVerifiedOnly) return entries;
           return entries.filter(entry => entry.verified !== false);
@@ -2794,13 +2832,13 @@
                   if (entry.newSub) tr.dataset.newSub = 'true';
                   tr.innerHTML = `
                     <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
-                    <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
+                    <td class="model-cell">${renderModelCell(entry)}</td>
                     <td>
                       <img src="./img/institute_img/${entry.institute}.png"
                            alt="${entry.institute}"
                            style="max-height:20px;vertical-align:middle;" />
                     </td>
-                    <td></td>
+                    <td>${renderSubmissionLink(entry)}</td>
                     <td><span class="date-cell">${entry.date}</span></td>
                     <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
                     <td>${entry.budget}</td>
@@ -2830,13 +2868,13 @@
                   if (entry.newSub) tr.dataset.newSub = 'true';
                   tr.innerHTML = `
                     <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
-                    <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
+                    <td class="model-cell">${renderModelCell(entry)}</td>
                     <td>
                       <img src="./img/institute_img/${entry.institute}.png"
                            alt="${entry.institute}"
                            style="max-height:20px;vertical-align:middle;" />
                     </td>
-                    <td></td>
+                    <td>${renderSubmissionLink(entry)}</td>
                     <td><span class="date-cell">${entry.date}</span></td>
                     <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
                     <td>${entry.budget}</td>
@@ -2889,13 +2927,13 @@
                 if (entry.newSub) tr.dataset.newSub = 'true';
                 tr.innerHTML = `
                   <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
-                  <td class="model-cell">${entry.model}${getModelBadge(entry.model)}</td>
+                  <td class="model-cell">${renderModelCell(entry)}</td>
                   <td>
                     <img src="./img/institute_img/${entry.institute}.png"
                          alt="${entry.institute}"
                          style="max-height:20px;vertical-align:middle;" />
                   </td>
-                  <td></td>
+                  <td>${renderSubmissionLink(entry)}</td>
                   <td><span class="date-cell">${entry.date}</span></td>
                   <td><span class="simulator-cell ${simulatorClass}">${entry.simulator}</span></td>
                   <td>${entry.budget}</td>
