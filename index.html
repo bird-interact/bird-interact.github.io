@@ -1415,6 +1415,7 @@
                   <select id="simulator-filter" class="filter-select">
                     <option value="all" selected>All</option>
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
+                    <option value="Gemini-3-Flash-Preview">Gemini-3-Flash-Preview</option>
                     <option value="gpt-4o">GPT-4o</option>
                     <option value="Claude-Haiku-4-5">Claude-Haiku-4-5</option>
                     <option value="bird-chat-8B">Bird-chat-8B</option>
@@ -1934,6 +1935,17 @@
         };
 
         const stressLeaderboardData = {
+          'lite-Gemini-3-Flash-Preview-a-interact': {
+            'Reward*': [
+              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "30.77", institute: "ds_nlp", date: "2026-10-03", verified: false, newSub: true }
+            ],
+            'a-Phase1': [
+              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "34.67", institute: "ds_nlp", date: "2026-10-03", verified: false, newSub: true }
+            ],
+            'a-Phase2': [
+              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "21.67", institute: "ds_nlp", date: "2026-10-03", verified: false, newSub: true }
+            ]
+          },
           'lite-Gemini-2.0-Flash-c-interact': {
             'Reward*': [
               { rank: 1, model: "O3-Mini", simulator: "Gemini-2.0-Flash", budget: "6.64", passRate: "32.93", institute: "openai_reasoning", date: "2025-04-20" },
@@ -2756,6 +2768,11 @@
           return '<a class="submission-link" href="https://www.amazon.science/" target="_blank" rel="noopener noreferrer" title="Amazon Science" aria-label="Amazon Science">🔗</a>';
         }
 
+        function renderInstitute(entry) {
+          if (entry.institute === 'ds_nlp') return 'DS-NLP';
+          return `<img src="./img/institute_img/${entry.institute}.png" alt="${entry.institute}" style="max-height:20px;vertical-align:middle;" />`;
+        }
+
         function getVisibleEntries(entries) {
           if (!showVerifiedOnly) return entries;
           return entries.filter(entry => entry.verified !== false);
@@ -2834,9 +2851,7 @@
                     <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
                     <td class="model-cell">${renderModelCell(entry)}</td>
                     <td>
-                      <img src="./img/institute_img/${entry.institute}.png"
-                           alt="${entry.institute}"
-                           style="max-height:20px;vertical-align:middle;" />
+                      ${renderInstitute(entry)}
                     </td>
                     <td>${renderSubmissionLink(entry)}</td>
                     <td><span class="date-cell">${entry.date}</span></td>
@@ -2870,9 +2885,7 @@
                     <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
                     <td class="model-cell">${renderModelCell(entry)}</td>
                     <td>
-                      <img src="./img/institute_img/${entry.institute}.png"
-                           alt="${entry.institute}"
-                           style="max-height:20px;vertical-align:middle;" />
+                      ${renderInstitute(entry)}
                     </td>
                     <td>${renderSubmissionLink(entry)}</td>
                     <td><span class="date-cell">${entry.date}</span></td>
@@ -2929,9 +2942,7 @@
                   <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
                   <td class="model-cell">${renderModelCell(entry)}</td>
                   <td>
-                    <img src="./img/institute_img/${entry.institute}.png"
-                         alt="${entry.institute}"
-                         style="max-height:20px;vertical-align:middle;" />
+                    ${renderInstitute(entry)}
                   </td>
                   <td>${renderSubmissionLink(entry)}</td>
                   <td><span class="date-cell">${entry.date}</span></td>
@@ -2960,7 +2971,7 @@
         function aggregateAllSimulators(filters, currentStage, dataSource) {
           const allData = [];
           const simulatorKeys = {
-            'lite': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5'],
+            'lite': ['Gemini-2.0-Flash', 'Gemini-3-Flash-Preview', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5'],
             'full': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5']
           };
 
@@ -2975,6 +2986,7 @@
                 let displaySimulator;
                 if (simKey === 'gpt-4o') displaySimulator = 'GPT-4o';
                 else if (simKey === 'Gemini-2.0-Flash') displaySimulator = 'Gemini-2.0-Flash';
+                else if (simKey === 'Gemini-3-Flash-Preview') displaySimulator = 'Gemini-3-Flash-Preview';
                 else if (simKey === 'Claude-Haiku-4-5') displaySimulator = 'Claude-Haiku-4-5';
                 else displaySimulator = 'Bird-chat-8B';
 
