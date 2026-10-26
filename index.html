@@ -1416,6 +1416,7 @@
                     <option value="all" selected>All</option>
                     <option value="Gemini-2.0-Flash">Gemini-2.0-Flash</option>
                     <option value="Gemini-3-Flash-Preview">Gemini-3-Flash-Preview</option>
+                    <option value="GPT-5.6-Luna">GPT-5.6-Luna</option>
                     <option value="gpt-4o">GPT-4o</option>
                     <option value="Claude-Haiku-4-5">Claude-Haiku-4-5</option>
                     <option value="bird-chat-8B">Bird-chat-8B</option>
@@ -1935,6 +1936,17 @@
         };
 
         const stressLeaderboardData = {
+          'full-GPT-5.6-Luna-a-interact': {
+            'Reward*': [
+              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "37.18", institute: "alibabacloud-color", date: "2026-10-27", verified: false, newSub: true }
+            ],
+            'a-Phase1': [
+              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "42.33", institute: "alibabacloud-color", date: "2026-10-27", verified: false, newSub: true }
+            ],
+            'a-Phase2': [
+              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "25.17", institute: "alibabacloud-color", date: "2026-10-27", verified: false, newSub: true }
+            ]
+          },
           'lite-Gemini-3-Flash-Preview-a-interact': {
             'Reward*': [
               { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "30.77", institute: "ds_nlp", date: "2026-10-03", verified: false, newSub: true }
@@ -2732,7 +2744,7 @@
 
         function getSimulatorClass(simulator) {
           if (simulator === 'Gemini-2.0-Flash') return 'simulator-gemini';
-          if (simulator === 'GPT-4o') return 'simulator-gpt';
+          if (simulator === 'GPT-4o' || simulator === 'GPT-5.6-Luna') return 'simulator-gpt';
           if (simulator === 'Bird-chat-8B') return 'simulator-bird';
           if (simulator === 'Claude-Haiku-4-5') return 'simulator-claude';
           if (simulator === 'Customized-User') return 'simulator-diy';
@@ -2759,17 +2771,25 @@
         function renderModelCell(entry) {
           const affiliation = entry.institute === 'aws_quickscience'
             ? '<span class="model-affiliation">AWSQuickScience</span>'
+            : entry.institute === 'alibabacloud-color'
+            ? '<span class="model-affiliation">Alibaba Cloud DMS Team</span>'
             : '';
           return `${entry.model}${getModelBadge(entry.model)}${affiliation}`;
         }
 
         function renderSubmissionLink(entry) {
+          if (entry.institute === 'alibabacloud-color') {
+            return '<a class="submission-link" href="https://aidbs.console.aliyun.com/" target="_blank" rel="noopener noreferrer" title="AIDBS-DataAgent" aria-label="AIDBS-DataAgent project">🔗</a>';
+          }
           if (entry.institute !== 'aws_quickscience') return '';
           return '<a class="submission-link" href="https://www.amazon.science/" target="_blank" rel="noopener noreferrer" title="Amazon Science" aria-label="Amazon Science">🔗</a>';
         }
 
         function renderInstitute(entry) {
           if (entry.institute === 'ds_nlp') return 'DS-NLP';
+          if (entry.institute === 'alibabacloud-color') {
+            return '<img src="./img/institute_img/alibabacloud-color.png" alt="Alibaba Cloud DMS Team" title="Alibaba Cloud DMS Team" style="max-height:20px;vertical-align:middle;" />';
+          }
           return `<img src="./img/institute_img/${entry.institute}.png" alt="${entry.institute}" style="max-height:20px;vertical-align:middle;" />`;
         }
 
@@ -2972,7 +2992,7 @@
           const allData = [];
           const simulatorKeys = {
             'lite': ['Gemini-2.0-Flash', 'Gemini-3-Flash-Preview', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5'],
-            'full': ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5']
+            'full': ['Gemini-2.0-Flash', 'gpt-4o', 'GPT-5.6-Luna', 'bird-chat-8B', 'Claude-Haiku-4-5']
           };
 
           const keysToCheck = simulatorKeys[filters.dataset] || ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'];
@@ -2985,6 +3005,7 @@
               getVisibleEntries(data[currentStage]).forEach(entry => {
                 let displaySimulator;
                 if (simKey === 'gpt-4o') displaySimulator = 'GPT-4o';
+                else if (simKey === 'GPT-5.6-Luna') displaySimulator = 'GPT-5.6-Luna';
                 else if (simKey === 'Gemini-2.0-Flash') displaySimulator = 'Gemini-2.0-Flash';
                 else if (simKey === 'Gemini-3-Flash-Preview') displaySimulator = 'Gemini-3-Flash-Preview';
                 else if (simKey === 'Claude-Haiku-4-5') displaySimulator = 'Claude-Haiku-4-5';
@@ -3016,6 +3037,7 @@
             'all': 'Combined results from all simulators',
             'Gemini-2.0-Flash': 'Gemini-2.0-Flash simulator',
             'gpt-4o': 'GPT-4o simulator',
+            'GPT-5.6-Luna': 'GPT-5.6-Luna simulator',
             'bird-chat-8B': 'Bird-chat-8B simulator',
             'Customized-User': 'Customized-User (data coming soon)'
           };
