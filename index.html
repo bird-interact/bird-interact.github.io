@@ -428,6 +428,25 @@
         width: 22%;
       }
 
+      .model-name-compact {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        font-size: 12px;
+      }
+
+      .interaction-tag {
+        display: block;
+        width: fit-content;
+        margin: 2px auto 0;
+        padding: 0 6px;
+        border-radius: 8px;
+        font-size: 0.68em;
+        line-height: 1.5;
+        color: #555;
+        background: #eef0f3;
+      }
+      .interaction-tag.c-interact { color: #1d4f91; background: #e6eefa; }
       .model-affiliation {
         display: block;
         margin-top: 2px;
@@ -495,6 +514,53 @@
 
       .simulator-diy {
         background-color: #9B59B6;
+      }
+
+      .category-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        padding: 16px 20px;
+        border-bottom: 1px solid #dee2e6;
+      }
+      .category-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+      .category-tab {
+        border: 0;
+        border-bottom: 3px solid transparent;
+        padding: 10px 12px;
+        background: transparent;
+        color: #495057;
+        font: 600 14px 'Lato', sans-serif;
+        cursor: pointer;
+      }
+      .category-tab[aria-pressed="true"] { color: #155e95; border-bottom-color: #155e95; }
+      .category-icon { display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: -2px; color: #7a8390; background-color: currentColor; }
+      .category-icon-overall { -webkit-mask: url('./img/icons/layout-grid.svg') center / contain no-repeat; mask: url('./img/icons/layout-grid.svg') center / contain no-repeat; }
+      .category-icon-query { -webkit-mask: url('./img/icons/search.svg') center / contain no-repeat; mask: url('./img/icons/search.svg') center / contain no-repeat; }
+      .category-icon-management { -webkit-mask: url('./img/icons/database.svg') center / contain no-repeat; mask: url('./img/icons/database.svg') center / contain no-repeat; }
+      .category-tab[aria-pressed="true"] .category-icon { color: #155e95; }
+      .category-tab:focus-visible { outline: 2px solid #155e95; outline-offset: 2px; }
+      .category-tab:disabled { opacity: .4; cursor: default; }
+      .category-count { margin-left: 5px; color: #6c757d; font-weight: 400; font-size: 12px; }
+      .category-meta { font-size: 13px; color: #6c757d; }
+      .category-description { flex-basis: 100%; margin: 0; color: #6c757d; font-size: 12px; line-height: 1.4; }
+      #unified-leaderboard { min-width: 0; }
+      #unified-leaderboard .category-table-scroll { overflow-x: auto; }
+      #leaderboard-table th, #leaderboard-table td { overflow-wrap: anywhere; }
+      #leaderboard-table tbody tr:hover { transform: none; }
+      @media (max-width: 768px) {
+        #unified-leaderboard .filter-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        #unified-leaderboard .filter-group { max-width: none; min-width: 0; }
+        #unified-leaderboard .filter-select { min-width: 0; max-width: 100%; }
+        #leaderboard-table { min-width: 820px; }
+        .category-bar { padding: 12px; }
+        .category-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; }
+        .category-tab { padding: 10px 3px; font-size: 13px; }
+        .category-count { display: block; margin: 4px 0 0; }
+        #unified-leaderboard .card-header { flex-wrap: wrap; gap: 8px; }
+        #leaderboard-title-text { font-size: 19px; }
       }
 
       /* Enhanced Filter Controls */
@@ -1294,6 +1360,7 @@
             </div>
             <div class="list-group-item">
               <h4>Submission</h4>
+              <p>Submissions may cover Query tasks, Management tasks, or both. Specify the task category and report every task in that category, including failures. Overall results require both categories.</p>
               <p>
                 BIRD 2025 will accept a more flexible submission pipelines, please contact <code>bird.bench25@gmail.com</code> with the tag <strong style="color:#CB0404">[bird-interact]</strong> in title, if you have any questions.
               </p>
@@ -1368,7 +1435,7 @@
         </div>
         
         <!-- Right column with unified leaderboard -->
-        <div style="flex: 1;">
+        <div style="flex: 1; min-width: 0;">
           <!-- UNIFIED Leaderboard - 默认显示 Free Mode -->
           <div class="card card-outline-secondary mb-4" id="unified-leaderboard">
             <div class="card-header mode-title" id="leaderboard-title">
@@ -1381,12 +1448,21 @@
               </div>
             </div>
             
+            <div class="category-bar">
+              <div class="category-tabs" role="group" aria-label="Task category">
+                <button type="button" class="category-tab" data-category="query" aria-pressed="true"><span class="category-icon category-icon-query" aria-hidden="true"></span>Query <span class="category-count"></span></button>
+                <button type="button" class="category-tab" data-category="management" aria-pressed="false"><span class="category-icon category-icon-management" aria-hidden="true"></span>Management <span class="category-count"></span></button>
+                <button type="button" class="category-tab" data-category="overall" aria-pressed="false"><span class="category-icon category-icon-overall" aria-hidden="true"></span>Overall <span class="category-count"></span></button>
+              </div>
+              <span class="category-meta" id="category-meta"></span>
+              <p class="category-description" id="category-description">Two tracks: Query focuses on read-only business intelligence (BI), while Management covers database management. Overall combines both.</p>
+            </div>
             <!-- Filter Controls - 只保留一套，用 JS 控制 -->
             <div class="filter-container">
               <div class="filter-row">
                 <!-- Mode移到这里，和其他4个在同一个filter-row里 -->
                 <div class="filter-group">
-                  <div class="filter-label">Mode</div>
+                  <div class="filter-label">Test Mode</div>
                   <select id="test-mode-filter" class="filter-select">
                     <option value="free" selected>Free Mode</option>
                     <option value="stress">Stress Mode</option>
@@ -1403,9 +1479,10 @@
                 </div>
                 
                 <div class="filter-group">
-                  <div class="filter-label">Interaction Mode</div>
+                  <div class="filter-label">Interaction</div>
                   <select id="mode-filter" class="filter-select">
-                    <option value="c-interact" selected>c-Interact</option>
+                    <option value="all" selected>All</option>
+                    <option value="c-interact">c-Interact</option>
                     <option value="a-interact">a-Interact</option>
                   </select>
                 </div>
@@ -1419,6 +1496,7 @@
                     <option value="GPT-5.6-Luna">GPT-5.6-Luna</option>
                     <option value="gpt-4o">GPT-4o</option>
                     <option value="Claude-Haiku-4-5">Claude-Haiku-4-5</option>
+                    <option value="Claude-Opus-4.8">Claude-Opus-4.8</option>
                     <option value="bird-chat-8B">Bird-chat-8B</option>
                     <option value="Customized-User">Customized-User</option>
                   </select>
@@ -1459,11 +1537,12 @@
               </div>
 
             <div class="table-wrapper">
+              <div class="category-table-scroll">
               <table id="leaderboard-table" class="table">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Rank</th>
-                    <th scope="col">Model</th>
+                    <th scope="col">Model / Method</th>
                     <th scope="col">Institute</th>
                     <th scope="col">Link</th>
                     <th scope="col">Date</th>
@@ -1476,6 +1555,7 @@
                   <!-- JS will populate this -->
                 </tbody>
               </table>
+              </div>
               
               <!-- Current Configuration Display -->
               <div class="current-config" id="current-config">
@@ -1526,6 +1606,8 @@
       <script src="./js/clean-blog.min.js"></script>
       
       <!-- Updated Leaderboard Logic Script -->
+      <script src="./script/task-category-results.js"></script>
+      <script src="./script/leaderboard-categories.js"></script>
       <script>
         // Complete dataset structure with all combinations
         const freeLeaderboardData = {
@@ -1820,8 +1902,8 @@
 
           'full-Claude-Haiku-4-5-a-interact': {
             'Reward*': [
-              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "30.88", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
-              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "30.78", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "30.88", institute: "aws_quickscience", date: "2026-09-15", verified: false },
+              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "30.78", institute: "aws_quickscience", date: "2026-09-15", verified: false },
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "28.35", institute: "anthropic", date: "2026-02-17" },
               { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "22.92", institute: "kimi", date: "2026-02-17" },
               { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.68", passRate: "20.58", institute: "zai", date: "2026-02-17" },
@@ -1834,8 +1916,8 @@
               { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.27", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "35.33", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
-              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "35.33", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "35.33", institute: "aws_quickscience", date: "2026-09-15", verified: false },
+              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "35.33", institute: "aws_quickscience", date: "2026-09-15", verified: false },
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "33.00", institute: "anthropic", date: "2026-02-17" },
               { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "28.17", institute: "kimi", date: "2026-02-17" },
               { rank: 3, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.68", passRate: "25.83", institute: "zai", date: "2026-02-17" },
@@ -1848,8 +1930,8 @@
               { rank: 10, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.75", passRate: "2.94", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "20.50", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
-              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "20.17", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 1, model: "Quick-BlendedIntelligence (Free-4)", simulator: "Claude-Haiku-4-5", budget: "17.32", passRate: "20.50", institute: "aws_quickscience", date: "2026-09-15", verified: false },
+              { rank: 2, model: "Quick-BlendedIntelligence (Free-6)", simulator: "Claude-Haiku-4-5", budget: "20.91", passRate: "20.17", institute: "aws_quickscience", date: "2026-09-15", verified: false },
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.33", passRate: "17.50", institute: "anthropic", date: "2026-02-17" },
               { rank: 2, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.58", passRate: "10.67", institute: "kimi", date: "2026-02-17" },
               { rank: 3, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.51", passRate: "10.33", institute: "minimax", date: "2026-02-17" },
@@ -1938,24 +2020,24 @@
         const stressLeaderboardData = {
           'full-GPT-5.6-Luna-a-interact': {
             'Reward*': [
-              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "37.18", institute: "alibabacloud-color", date: "2026-10-27", verified: false, newSub: true }
+              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "37.18", institute: "alibabacloud-color", date: "2026-10-27", verified: false }
             ],
             'a-Phase1': [
-              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "42.33", institute: "alibabacloud-color", date: "2026-10-27", verified: false, newSub: true }
+              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "42.33", institute: "alibabacloud-color", date: "2026-10-27", verified: false }
             ],
             'a-Phase2': [
-              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "25.17", institute: "alibabacloud-color", date: "2026-10-27", verified: false, newSub: true }
+              { rank: 1, model: "AIDBS-DataAgent", simulator: "GPT-5.6-Luna", budget: "17.86", passRate: "25.17", institute: "alibabacloud-color", date: "2026-10-27", verified: false }
             ]
           },
           'lite-Gemini-3-Flash-Preview-a-interact': {
             'Reward*': [
-              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "30.77", institute: "ds_nlp", date: "2026-10-03", verified: false, newSub: true }
+              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "30.77", institute: "ds_nlp", date: "2026-10-03", verified: false }
             ],
             'a-Phase1': [
-              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "34.67", institute: "ds_nlp", date: "2026-10-03", verified: false, newSub: true }
+              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "34.67", institute: "ds_nlp", date: "2026-10-03", verified: false }
             ],
             'a-Phase2': [
-              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "21.67", institute: "ds_nlp", date: "2026-10-03", verified: false, newSub: true }
+              { rank: 1, model: "Agent2Workflow", simulator: "Gemini-3-Flash-Preview", budget: "17.87", passRate: "21.67", institute: "ds_nlp", date: "2026-10-03", verified: false }
             ]
           },
           'lite-Gemini-2.0-Flash-c-interact': {
@@ -2084,7 +2166,7 @@
 
           'full-gpt-4o-a-interact': {
             'Reward*': [
-              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "33.45", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "33.45", institute: "snowflake_logo", date: "2026-05-22", verified: false },
               { rank: 2, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "25.52", institute: "openai", date: "2025-08-22" },
               { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "23.28", institute: "anthropic", date: "2025-08-22" },
               { rank: 4, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", budget: "17.86", passRate: "17.45", institute: "anthropic", date: "2025-08-22" },
@@ -2097,7 +2179,7 @@
               { rank: 11, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", budget: "17.86", passRate: "10.58", institute: "qwen", date: "2025-08-22" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "38.00", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "38.00", institute: "snowflake_logo", date: "2026-05-22", verified: false },
               { rank: 2, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "29.17", institute: "openai", date: "2025-08-22" },
               { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "27.83", institute: "anthropic", date: "2025-08-22" },
               { rank: 4, model: "Claude-3.7-Sonnet", simulator: "GPT-4o", budget: "17.86", passRate: "21.00", institute: "anthropic", date: "2025-08-22" },
@@ -2110,7 +2192,7 @@
               { rank: 11, model: "Qwen-3-Coder-480B", simulator: "GPT-4o", budget: "17.86", passRate: "13.33", institute: "qwen", date: "2025-08-22" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "22.67", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 1, model: "MERIT + GPT-5.4", simulator: "GPT-4o", budget: "17.86", passRate: "22.67", institute: "snowflake_logo", date: "2026-05-22", verified: false },
               { rank: 2, model: "GPT-5", simulator: "GPT-4o", budget: "17.86", passRate: "17.00", institute: "openai", date: "2025-08-22" },
               { rank: 3, model: "Claude-Sonnet-4", simulator: "GPT-4o", budget: "17.86", passRate: "12.67", institute: "anthropic", date: "2025-08-22" },
               { rank: 4, model: "Gemini-2-5-Pro", simulator: "GPT-4o", budget: "17.86", passRate: "10.33", institute: "google", date: "2025-08-22" },
@@ -2252,9 +2334,9 @@
 
           'full-Claude-Haiku-4-5-a-interact': {
             'Reward*': [
-              { rank: 1, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "29.23", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 1, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "29.23", institute: "snowflake_logo", date: "2026-05-22", verified: false },
               { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.35", institute: "anthropic", date: "2026-02-17" },
-              { rank: 3, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "28.22", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 3, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "28.22", institute: "aws_quickscience", date: "2026-09-15", verified: false },
               { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "22.92", institute: "kimi", date: "2026-02-17" },
               { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.58", institute: "zai", date: "2026-02-17" },
               { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.48", institute: "minimax", date: "2026-02-17" },
@@ -2266,9 +2348,9 @@
               { rank: 11, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.27", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase1': [
-              { rank: 1, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "33.17", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 1, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "33.17", institute: "aws_quickscience", date: "2026-09-15", verified: false },
               { rank: 1, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "33.00", institute: "anthropic", date: "2026-02-17" },
-              { rank: 2, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "32.83", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 2, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "32.83", institute: "snowflake_logo", date: "2026-05-22", verified: false },
               { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "28.17", institute: "kimi", date: "2026-02-17" },
               { rank: 4, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "25.83", institute: "zai", date: "2026-02-17" },
               { rank: 5, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "24.83", institute: "minimax", date: "2026-02-17" },
@@ -2280,9 +2362,9 @@
               { rank: 11, model: "Llama-3.1-8B", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "2.94", institute: "meta", date: "2026-02-02" }
             ],
             'a-Phase2': [
-              { rank: 1, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.83", institute: "snowflake_logo", date: "2026-05-22", verified: false, newSub: true },
+              { rank: 1, model: "MERIT + Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "20.83", institute: "snowflake_logo", date: "2026-05-22", verified: false },
               { rank: 2, model: "Claude-Opus-4.6", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "17.50", institute: "anthropic", date: "2026-02-17" },
-              { rank: 3, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "16.67", institute: "aws_quickscience", date: "2026-09-15", verified: false, newSub: true },
+              { rank: 3, model: "Quick-BlendedIntelligence", simulator: "Claude-Haiku-4-5", budget: "18.02", passRate: "16.67", institute: "aws_quickscience", date: "2026-09-15", verified: false },
               { rank: 3, model: "Kimi-2.5", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.67", institute: "kimi", date: "2026-02-17" },
               { rank: 4, model: "MiniMax-M2.1", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "10.33", institute: "minimax", date: "2026-02-17" },
               { rank: 5, model: "GLM-4.7", simulator: "Claude-Haiku-4-5", budget: "17.86", passRate: "8.33", institute: "zai", date: "2026-02-17" },
@@ -2381,26 +2463,49 @@
             successStages: ['a-Phase1', 'a-Phase2'],
             defaultRewardStage: 'Reward*',
             defaultSuccessStage: 'a-Phase1'
+          },
+          // All modes share Phase 1 / Phase 2 success rates; c-Interact rows use their after-debug rates.
+          'all': {
+            rewardStages: ['Reward*'],
+            successStages: ['a-Phase1', 'a-Phase2'],
+            defaultRewardStage: 'Reward*',
+            defaultSuccessStage: 'a-Phase1'
           }
         };
+
+        const allModeStages = {
+          'c-interact': {'a-Phase1': 'Phase1-debug', 'a-Phase2': 'Phase2-debug'},
+          'a-interact': {}
+        };
+
+        function stageForMode(mode, stage) {
+          return currentFilters.interactionMode === 'all' ? (allModeStages[mode][stage] || stage) : stage;
+        }
+
+        function selectedModes() {
+          return currentFilters.interactionMode === 'all' ? ['a-interact', 'c-interact'] : [currentFilters.interactionMode];
+        }
 
         // Global state for both tables
         let currentFilters = {
           testMode: 'stress',  // 'free' or 'stress'
           dataset: 'full',
           simulator: 'all',
-          interactionMode: 'a-interact',
+          interactionMode: 'all',
+          category: 'query',
           performance: 'success-rate'
         };
         let currentStage = 'a-Phase1';
         let showVerifiedOnly = false;  // Verified filter state
 
         document.addEventListener('DOMContentLoaded', function () {
+          restoreCategoryFilters();
           initializeFilters();
           enforcePerformanceForDataset();
           setupFilterListeners();
           setupStageListeners();
           setupVerifiedFilter();
+          setupCategoryControls();
           relabelStages();
           updateLeaderboardTitle();
           updateStressNote();
@@ -2589,6 +2694,7 @@
         }
 
         function updateConfiguration() {
+          updateCategoryControls();
           const config = document.getElementById('current-config');
           const datasetText = currentFilters.dataset === 'mini_interact' ? 'Mini-Interact (300 tasks)' :
                               currentFilters.dataset === 'lite' ? 'Lite Dataset (300 tasks)' : 
@@ -2607,7 +2713,7 @@
             simulatorText = 'Customized-User';
           }
           
-          const modeText = currentFilters.interactionMode === 'c-interact' ? 'c-Interact' : 'a-Interact';
+          const modeText = {all: 'All', 'c-interact': 'c-Interact', 'a-interact': 'a-Interact'}[currentFilters.interactionMode];
           const performanceText = currentFilters.performance === 'reward' ? 'Reward*' : 'Success Rate';
           
           // ✨ 新增：Dialect 显示（带超链接）
@@ -2626,8 +2732,9 @@
           config.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
               <span><strong>Dataset:</strong> ${datasetText}</span>
+              <span><strong>Tasks:</strong> ${getCategoryLabel()}</span>
               <span><strong>Simulator:</strong> ${simulatorText}</span>
-              <span><strong>Mode:</strong> ${modeText}</span>
+              <span><strong>Interaction:</strong> ${modeText}</span>
               <span><strong>Metric:</strong> ${performanceText}</span>
               ${dialectBadge}
             </div>
@@ -2758,12 +2865,12 @@
           return rank;
         }
 
-        function getModelBadge(modelName) {
+        function getModelBadge(modelName, verified = false) {
           const verifiedModels = new Set([
             'Gemini-2.5-Pro'
           ]);
-          if (showVerifiedOnly && verifiedModels.has(modelName)) {
-            return '<img src="./logo/bedge.png" alt="badge" style="max-height:20px;vertical-align:middle;margin-left:5px;" />';
+          if (verified || (showVerifiedOnly && verifiedModels.has(modelName))) {
+            return '<img src="./logo/bedge.png" alt="Verified" title="Verified" style="max-height:20px;vertical-align:middle;margin-left:5px;" />';
           }
           return '';
         }
@@ -2773,11 +2880,17 @@
             ? '<span class="model-affiliation">AWSQuickScience</span>'
             : entry.institute === 'alibabacloud-color'
             ? '<span class="model-affiliation">Alibaba Cloud DMS Team</span>'
+            : entry.institute === 'nvidia'
+            ? `<span class="model-affiliation">${entry.systemModel}</span>`
             : '';
-          return `${entry.model}${getModelBadge(entry.model)}${affiliation}`;
+          const name = `${entry.model}${getModelBadge(entry.model, entry.verified === true)}`;
+          return `${entry.institute === 'nvidia' ? `<span class="model-name-compact">${name}</span>` : name}${affiliation}`;
         }
 
         function renderSubmissionLink(entry) {
+          if (entry.institute === 'nvidia') {
+            return '<a class="submission-link" href="https://github.com/NVIDIA/auto-ontology" target="_blank" rel="noopener noreferrer" title="NVIDIA Auto-Ontology GitHub" aria-label="NVIDIA Auto-Ontology GitHub">🔗</a>';
+          }
           if (entry.institute === 'alibabacloud-color') {
             return '<a class="submission-link" href="https://aidbs.console.aliyun.com/" target="_blank" rel="noopener noreferrer" title="AIDBS-DataAgent" aria-label="AIDBS-DataAgent project">🔗</a>';
           }
@@ -2787,6 +2900,9 @@
 
         function renderInstitute(entry) {
           if (entry.institute === 'ds_nlp') return 'DS-NLP';
+          if (entry.institute === 'nvidia') {
+            return '<img src="./img/institute_img/nvidia.png" alt="NVIDIA" title="NVIDIA" style="max-height:30px;vertical-align:middle;" />';
+          }
           if (entry.institute === 'alibabacloud-color') {
             return '<img src="./img/institute_img/alibabacloud-color.png" alt="Alibaba Cloud DMS Team" title="Alibaba Cloud DMS Team" style="max-height:20px;vertical-align:middle;" />';
           }
@@ -2796,6 +2912,17 @@
         function getVisibleEntries(entries) {
           if (!showVerifiedOnly) return entries;
           return entries.filter(entry => entry.verified !== false);
+        }
+
+        // Rows dated within the last two months get the New Sub badge.
+        const NEW_SUBMISSION_MONTHS = 2;
+
+        function isNewSubmission(entry) {
+          if (!entry.date) return false;
+          const cutoff = new Date();
+          cutoff.setHours(0, 0, 0, 0);
+          cutoff.setMonth(cutoff.getMonth() - NEW_SUBMISSION_MONTHS);
+          return new Date(`${entry.date}T00:00:00`) >= cutoff;
         }
 
         function applyNewSubBadges() {
@@ -2810,7 +2937,7 @@
 
             const newSubBadge = document.createElement('span');
             newSubBadge.className = 'new-sub-badge';
-            newSubBadge.setAttribute('data-tooltip', 'Submitted within the last 2 weeks');
+            newSubBadge.setAttribute('data-tooltip', 'Submitted within the last 2 months');
             newSubBadge.textContent = 'New Sub';
 
             metricCell.insertBefore(document.createElement('br'), metricCell.firstChild);
@@ -2832,6 +2959,11 @@
           }
           
           tbody.innerHTML = '';
+          if (currentFilters.category !== 'overall') {
+            renderCategoryLeaderboard();
+            applyNewSubBadges();
+            return;
+          }
           
           // ✨ mini_interact 特殊处理：
           // 只有 mini_interact + c-interact + (Claude-Haiku-4-5 或 ALL) 有数据，
@@ -2839,7 +2971,7 @@
           if (
             currentFilters.dataset === 'mini_interact' &&
             !(
-              currentFilters.interactionMode === 'c-interact' &&
+              currentFilters.interactionMode !== 'a-interact' &&
               (currentFilters.simulator === 'Claude-Haiku-4-5' ||
                currentFilters.simulator === 'all')
             )
@@ -2859,17 +2991,18 @@
           if (currentFilters.simulator === 'all') {
             // mini_interact 特殊：目前只有 Claude-Haiku-4-5 一组数据
             if (currentFilters.dataset === 'mini_interact' &&
-                currentFilters.interactionMode === 'c-interact') {
+                currentFilters.interactionMode !== 'a-interact') {
 
               const data = dataSource['mini_interact-Claude-Haiku-4-5-c-interact'];
-              if (data && data[currentStage]) {
-                getVisibleEntries(data[currentStage]).forEach((entry, idx) => {
+              const miniStage = stageForMode('c-interact', currentStage);
+              if (data && data[miniStage]) {
+                getVisibleEntries(data[miniStage]).map(entry => ({...entry, interactionMode: 'c-interact'})).forEach((entry, idx) => {
                   const simulatorClass = getSimulatorClass(entry.simulator);
                   const tr = document.createElement('tr');
-                  if (entry.newSub) tr.dataset.newSub = 'true';
+                  if (isNewSubmission(entry)) tr.dataset.newSub = 'true';
                   tr.innerHTML = `
                     <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
-                    <td class="model-cell">${renderModelCell(entry)}</td>
+                    <td class="model-cell">${renderModelCell(entry)}${renderInteractionTag(entry)}</td>
                     <td>
                       ${renderInstitute(entry)}
                     </td>
@@ -2900,10 +3033,10 @@
                 aggregatedData.forEach((entry, idx) => {
                   const simulatorClass = getSimulatorClass(entry.simulator);
                   const tr = document.createElement('tr');
-                  if (entry.newSub) tr.dataset.newSub = 'true';
+                  if (isNewSubmission(entry)) tr.dataset.newSub = 'true';
                   tr.innerHTML = `
                     <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
-                    <td class="model-cell">${renderModelCell(entry)}</td>
+                    <td class="model-cell">${renderModelCell(entry)}${renderInteractionTag(entry)}</td>
                     <td>
                       ${renderInstitute(entry)}
                     </td>
@@ -2950,17 +3083,16 @@
               simulatorKey = 'Claude-Haiku-4-5';
             }
 
-            const dataKey = `${currentFilters.dataset}-${simulatorKey}-${currentFilters.interactionMode}`; 
-            const data = dataSource[dataKey];
+            const rows = aggregateAllSimulators(currentFilters, currentStage, dataSource, [simulatorKey]);
 
-            if (data && data[currentStage]) {
-              getVisibleEntries(data[currentStage]).forEach((entry, idx) => {
+            if (rows.length) {
+              rows.forEach((entry, idx) => {
                 const simulatorClass = getSimulatorClass(entry.simulator);
                 const tr = document.createElement('tr');
-                if (entry.newSub) tr.dataset.newSub = 'true';
+                if (isNewSubmission(entry)) tr.dataset.newSub = 'true';
                 tr.innerHTML = `
                   <td class="rank-cell">${getRankDisplay(idx + 1)}</td>
-                  <td class="model-cell">${renderModelCell(entry)}</td>
+                  <td class="model-cell">${renderModelCell(entry)}${renderInteractionTag(entry)}</td>
                   <td>
                     ${renderInstitute(entry)}
                   </td>
@@ -2988,21 +3120,22 @@
           updateDescriptions();
         }
 
-        function aggregateAllSimulators(filters, currentStage, dataSource) {
+        function aggregateAllSimulators(filters, currentStage, dataSource, onlySimulatorKeys) {
           const allData = [];
           const simulatorKeys = {
             'lite': ['Gemini-2.0-Flash', 'Gemini-3-Flash-Preview', 'gpt-4o', 'bird-chat-8B', 'Claude-Haiku-4-5'],
             'full': ['Gemini-2.0-Flash', 'gpt-4o', 'GPT-5.6-Luna', 'bird-chat-8B', 'Claude-Haiku-4-5']
           };
 
-          const keysToCheck = simulatorKeys[filters.dataset] || ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'];
+          const keysToCheck = onlySimulatorKeys || simulatorKeys[filters.dataset] || ['Gemini-2.0-Flash', 'gpt-4o', 'bird-chat-8B'];
 
-          keysToCheck.forEach(simKey => {
-            const dataKey = `${filters.dataset}-${simKey}-${filters.interactionMode}`;
+          keysToCheck.forEach(simKey => selectedModes().forEach(mode => {
+            const dataKey = `${filters.dataset}-${simKey}-${mode}`;
             const data = dataSource[dataKey];
+            const stage = stageForMode(mode, currentStage);
 
-            if (data && data[currentStage]) {
-              getVisibleEntries(data[currentStage]).forEach(entry => {
+            if (data && data[stage]) {
+              getVisibleEntries(data[stage]).forEach(entry => {
                 let displaySimulator;
                 if (simKey === 'gpt-4o') displaySimulator = 'GPT-4o';
                 else if (simKey === 'GPT-5.6-Luna') displaySimulator = 'GPT-5.6-Luna';
@@ -3013,11 +3146,12 @@
 
                 allData.push({
                   ...entry,
-                  simulator: displaySimulator
+                  simulator: onlySimulatorKeys ? entry.simulator : displaySimulator,
+                  interactionMode: mode
                 });
               });
             }
-          });
+          }));
           
           allData.sort((a, b) => parseFloat(b.passRate) - parseFloat(a.passRate));
           
