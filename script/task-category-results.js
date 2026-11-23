@@ -12,6 +12,26 @@ window.taskCategoryResults = {
   },
   "entries": [
     {
+      "model": "NVIDIA Auto-Ontology",
+      "systemModel": "Claude-Opus-5.5",
+      "dataset": "full",
+      "category": "query",
+      "testMode": "stress",
+      "interactionMode": "a-interact",
+      "simulator": "Claude-Opus-5.5",
+      "institute": "nvidia",
+      "date": "2026-11-11",
+      "verified": true,
+      "budget": "N/A",
+      "taskCount": 410,
+      "counts": {"p1": 172, "p2": 102},
+      "scores": {
+        "a-Phase1": 41.951219512195124,
+        "a-Phase2": 24.878048780487806,
+        "Reward*": 36.829268292682926
+      }
+    },
+    {
       "model": "Quick-BlendedIntelligence",
       "dataset": "full",
       "category": "query",
